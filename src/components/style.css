@@ -1,0 +1,81 @@
+/* Styling for RegistrationForm component */
+
+.registration-form-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.registration-form-container h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.registration-form-container .input-field {
+  margin-bottom: 10px;
+  width: 70%;
+  margin-left: 90px; 
+}
+
+.registration-form-container label {
+  margin-left: 90px;
+}
+
+.registration-form-container .submit-button {
+  margin-top: 20px;
+}
+
+/* Login form container */
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-form-container h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+
+
+.login-form-container .input-field {
+  margin-bottom: 10px;
+  
+ 
+}
+
+
+
+.login-form-container .submit-button {
+  margin-top: 20px;
+}
+/* Error messages */
+.error-message {
+  color: #dc3545;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Picture on the right side */
+.form-picture {
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
