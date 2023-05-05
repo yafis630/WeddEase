@@ -1,0 +1,41 @@
+.background-image {
+    background-image: url("weddease\ blk.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20%;
+  }
+  
+  .button-margin {
+    margin-right: 10px;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  @media (max-width: 767px) {
+    .body {
+        background-color: navy;
+    }
+    .background-image {
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    
+    .button-group {
+      justify-content: center;
+      margin-top: 10%;
+      margin-bottom: 10%;
+    }
+  }
+  

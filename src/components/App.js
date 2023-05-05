@@ -1,5 +1,5 @@
-import 'bulma/css/bulma.css';
-import Home from './Home';
+// import 'bulma/css/bulma.css';
+//import Home from './Home';
 
 function App() {
   return (
