@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Main from "./Main";
 import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
 
@@ -24,7 +25,7 @@ function StartPage() {
 
   return (
     <div>
-      <h1>Welcome to my website!</h1>
+      <Main />
       <button onClick={handleRegistrationButtonClick}>
         Register for an account
       </button>

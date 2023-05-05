@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 import {
   Container,
   Form,
@@ -9,6 +11,7 @@ import {
   Alert
 } from "reactstrap";
 import "./style.css";
+
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -80,6 +83,8 @@ const RegistrationForm = () => {
   const { name, email, phoneNumber, gender, password, confirmPassword, errors } = formData;
 
   return (
+    <div className="back">
+      <Header />
     <Container
       className="registration-form-container">
       <h2 className="mt-5 mb-4 text-center">Registration </h2>
@@ -174,6 +179,8 @@ const RegistrationForm = () => {
         </Button>
       </Form>
     </Container>
+    <Footer />
+    </div>
   );
 };
 

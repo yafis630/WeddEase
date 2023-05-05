@@ -1,32 +1,44 @@
-.background-image {
-    background-image: url("weddease\ blk.png");
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-  }
-  
-  .button-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-top: 20%;
-  }
-  
-  .button-margin {
-    margin-right: 10px;
-  }
-  
-  .footer {
+.body {
+    background:linear-gradient(rgba(23, 14, 59, 0.262),transparent);
+    background-color: rgb(12, 8, 37);
+}
+
+.header {
+    text-align: center; 
+}
+.footer {
     background-color: #333;
     color: #fff;
     padding: 10px 0;
     text-align: center;
   }
   
+.background-image {
+    background-image: url("weddease\ blk.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  min-height: 100vh;
+  
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    margin-top: 30%;
+    margin-right: 10%;
+  }
+  
+  .button-margin {
+    margin-right: 15px;
+  }
+  
+
   @media (max-width: 767px) {
-    .body {
-        background-color: navy;
-    }
+    
+    
     .background-image {
       background-size: contain;
       background-repeat: no-repeat;
@@ -34,8 +46,11 @@
     
     .button-group {
       justify-content: center;
-      margin-top: 10%;
-      margin-bottom: 10%;
+      flex-direction: row;
+      margin-top: 70%;
+      margin-bottom: 5%;
     }
-  }
+
+    
+}
   
