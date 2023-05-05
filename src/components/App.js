@@ -24,9 +24,6 @@ function App() {
         </nav>
 
       </div>
-      <div>
-        <Home />
-      </div>
       <footer className="footer">
         <div className="content has-text-centered">
           <p>
