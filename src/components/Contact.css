@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 }
 
-body {
+.contactbody {
 	background-image: url("./WeddEase.png");
 	background-size: cover;
 }

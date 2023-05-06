@@ -9,7 +9,7 @@ import Footer from './Footer';
 
 function Contact() {
   return (
-    <>
+    <div className='contactbody'>
     <Header />
     <section className="containers">
       <h2 className="title">
@@ -45,7 +45,7 @@ function Contact() {
       </div>
     </section>
     <Footer />
-    </>
+    </div>
   );
 }
 
