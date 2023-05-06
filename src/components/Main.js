@@ -6,6 +6,7 @@ import Header from "./Header";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import "./App.css"; // import your custom css for background image
 import Footer from "./Footer";
+import CarouselCard from "./CarouselCard";
 
 function Main() {
   return (
@@ -38,12 +39,14 @@ function Main() {
             </Col>
           </Row>
         </Container>
+        <Container><Row><CarouselCard /></Row></Container>
         <Routes>
         
         <Route path="/LoginForm" element={<LoginForm /> } />
         <Route path="/RegistrationForm" element={<RegistrationForm />} />
             
         </Routes>
+       
         <div>
             <Footer />
         </div>

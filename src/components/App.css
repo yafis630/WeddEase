@@ -3,6 +3,10 @@
     background-color: rgb(12, 8, 37);
 }
 
+.d-block, .w-100 {
+  height: 500px;
+}
+
 .header {
     text-align: center; 
 }
@@ -14,11 +18,11 @@
   }
   
 .background-image {
-    background-image: url("weddease\ blk.png");
+   background-image: url("weddease\ blk.png");
     background-repeat: no-repeat;
     background-size: cover;
-    
-  min-height: 100vh;
+    margin-bottom: 5%;
+    min-height: 100vh;
   
   }
   
