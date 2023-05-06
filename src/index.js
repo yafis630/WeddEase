@@ -9,4 +9,4 @@ import Contact from './components/Contact';
 //import "./styless.css";
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<LoginForm />);
+ReactDOM.createRoot(document.querySelector("#root")).render(<Main />);

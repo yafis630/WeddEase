@@ -7,8 +7,8 @@
 }
 
 body {
-	
-	background-color: #030315;
+	background-image: url("./WeddEase.png");
+	background-size: cover;
 }
 img {
 	display: block;

@@ -1,6 +1,6 @@
 /* Styling for RegistrationForm component */
 .back {
-  background-image: url("WeddEase\ \(1\).png");
+  background-image: url("wedding-cards.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 } 
@@ -10,8 +10,9 @@
   margin-bottom: 5%;
   padding: 20px;
   background-color: #185141;
-  color: #ffffff;
-  border-radius: 5px;
+  
+  font-size: 18px;
+  background-color: rgba(159, 154, 187, 0.7);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,7 +41,8 @@
   max-width: 400px;
   margin-top: 7%;
   margin-bottom: 30%;
-  padding: 30px;
+  padding: 50px;
+  font-size: 18px;
   background-color: rgba(159, 154, 187, 0.7);
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(115, 80, 80, 0.1);

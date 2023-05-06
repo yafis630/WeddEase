@@ -130,7 +130,7 @@ const RegistrationForm = () => {
         </FormGroup>
         {errors.gender && <Alert color="danger">{errors.gender}</Alert>}
         <FormGroup>
-          <Label for="gender">Email</Label>
+          <Label for="gender">Gender</Label>
           <Input
             type="select"
             name="gender"
