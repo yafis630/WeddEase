@@ -6,7 +6,8 @@ import StartPage from './components/StartPage';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 import Contact from './components/Contact';
+import Categories from './components/Categories';
 //import "./styless.css";
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<Main />);
+ReactDOM.createRoot(document.querySelector("#root")).render(<RegistrationForm />);

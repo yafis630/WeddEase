@@ -14,6 +14,7 @@ import "./style.css";
 
 
 const RegistrationForm = () => {
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,6 +46,10 @@ const RegistrationForm = () => {
         confirmPassword: "",
         errors: {}
       });
+
+      alert("Registration Successful");
+      
+      
     } else {
       setFormData({ ...formData, errors });
     }
@@ -81,6 +86,7 @@ const RegistrationForm = () => {
   };
 
   const { name, email, phoneNumber, gender, password, confirmPassword, errors } = formData;
+
 
   return (
     <div className="back">
