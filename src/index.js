@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import StartPage from './components/StartPage';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
+import Contact from './components/Contact';
 //import "./styless.css";
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<Main />);
+ReactDOM.createRoot(document.querySelector("#root")).render(<LoginForm />);

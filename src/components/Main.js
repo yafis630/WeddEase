@@ -8,6 +8,7 @@ import "./App.css"; // import your custom css for background image
 import Footer from "./Footer";
 import CarouselCard from "./CarouselCard";
 
+
 function Main() {
   return (
     <Router>
