@@ -10,4 +10,4 @@ import Categories from './components/Categories';
 //import "./styless.css";
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<RegistrationForm />);
+ReactDOM.createRoot(document.querySelector("#root")).render(<Main />);
