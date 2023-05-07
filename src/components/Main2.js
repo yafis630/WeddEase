@@ -1,24 +1,21 @@
 import React from "react";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
-import { Routes, Route, Link } from "react-router-dom";
-import Header from "./Header";
+
+import { Link } from "react-router-dom";
+
 import { Container, Button, Row, Col } from "react-bootstrap";
 import "./App.css";
-import Footer from "./Footer";
+
 import CarouselCard from "./CarouselCard";
-import Contact from "./Contact";
-import Categories from "./Categories";
+import Header from "./Header";
+import Footer from "./Footer";
 
 
 function Main() {
   return (
     
       <div className="body">
-        <div>
-        <Header />
-        </div>
         
+        <Header />
         <Container fluid className="background-image">
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
@@ -43,18 +40,9 @@ function Main() {
           </Row>
         </Container>
         <Container><Row><CarouselCard /></Row></Container>
-        <Routes>
         
-        <Route path="/LoginForm" element={<LoginForm /> } />
-        <Route path="/RegistrationForm" element={<RegistrationForm />} />
-        <Route path="/contact" element={<Contact />} exact />
-        <Route path="/categories" element={<Categories />} exact />
-            
-        </Routes>
-       
-        <div>
-            <Footer />
-        </div>
+       <Footer />
+        
       </div>
     
   );
