@@ -1,0 +1,16 @@
+.category {
+    text-align: center;
+}
+
+.card-img-custom {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .cat-body {
+    background-image: url("https://images.template.net/86919/free-wedding-powerpoint-background-boylo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
