@@ -12,7 +12,7 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import WorkerCategory from "./WorkerCategory";
+import CategoryButtons from "./CategoryButtons";
 
 
 const LoginForm = () => {
@@ -40,11 +40,11 @@ const LoginForm = () => {
     const {success,message} = await response.json();
     console.log(success);
     if (success) {
-     window.location.href = '/WorkerCategory';
+     window.location.href = '/CtegoryButtons';
     } else {
       alert(message);
     }
-    <Route path="/WorkerCategory" element={<WorkerCategory />} />
+    <Route path="/CategoryButtons" element={<CategoryButtons />} />
     
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
