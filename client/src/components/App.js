@@ -8,6 +8,8 @@ import Contact from "./Contact";
 import SellerButtons from "./SellerButtons";
 import WorkerCategory from "./WorkerCategory";
 import WorkerLogin from "./WorkerLogin";
+import WorkerHome from "./WorkerHome";
+import WorkerProfile from "./WorkerProfile";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/RegistrationForm" element={<RegistrationForm />} exact />
         <Route path="/contact" element={<Contact />} exact />
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
+        <Route path="/WorkerHome" element={<WorkerHome />} exact />
+        <Route path="/WorkerProfile" element={<WorkerProfile />} exact />
         
       </Routes>
       </div>

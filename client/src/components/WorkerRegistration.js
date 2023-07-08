@@ -10,7 +10,6 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import axios from "axios";
 import hiringCategories from "../data/hiringCategories";
 import "../styles/forms.css";
 
