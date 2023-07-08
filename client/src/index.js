@@ -14,4 +14,4 @@ import WorkerCategory from './components/WorkerCategory';
 import WorkerHome from './components/WorkerHome';
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter><App /></BrowserRouter>);
+ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter><WorkerHome /></BrowserRouter>);

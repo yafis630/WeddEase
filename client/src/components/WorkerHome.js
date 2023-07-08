@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Route, useParams } from "react-router-dom";
-import { Button, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import WorkerLogin from "./WorkerLogin";
+import "../styles/WorkerHome.css";
 
 const WorkerHome = () => {
-  const available = useParams().available;
+  const { available } = useParams();
 
   const [checked, setChecked] = useState(available === "true");
 
@@ -13,7 +14,6 @@ const WorkerHome = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-       
       },
       body: JSON.stringify({ checked: !checked }),
     });
@@ -24,38 +24,25 @@ const WorkerHome = () => {
   };
 
   const handleLogout = () => {
-    
     window.location.href = "/WorkerLogin";
-
-    <Route path="/WorkerLogin" element={<WorkerLogin />} />
   };
-  
 
   return (
-    <div>
-      <h3 className="name-heading">
-        Hello!
-        <Button variant="secondary" onClick={handleLogout}>
-          Logout
-        </Button>
-      </h3>
+    <div className="worker-home-container">
+      <Button variant="secondary" className="logout-button" onClick={handleLogout}>
+        Logout
+      </Button>
 
-      <div className="ui inverted compact segment">
+      <div className="toggle-container">
         <h3>Availability Toggle</h3>
-        <ToggleButtonGroup
-          type="checkbox"
-          className="mb-2"
-          value={checked ? ["1"] : []}
-        >
-          <ToggleButton
-            id="availability-toggle"
-            variant="outline-primary"
-            value="1"
-            onChange={handleChange}
-          >
-            {checked ? "Available" : "Unavailable"}
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Form.Check
+          type="switch"
+          id="availability-toggle"
+          className="toggle-switch"
+          checked={checked}
+          label={checked ? "Available" : "Unavailable"}
+          onChange={handleChange}
+        />
       </div>
     </div>
   );
