@@ -15,7 +15,7 @@ import {
 import WorkerCategory from "./WorkerCategory";
 
 
-const LoginForm = () => {
+const WorkerLogin = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -116,4 +116,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default WorkerLogin;

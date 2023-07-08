@@ -1,0 +1,49 @@
+/* WorkerCategory.css */
+
+.category-container {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .category-list {
+    flex-basis: 33.33%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .category-holder {
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .category-holder:hover {
+    transform: translateY(-5px);
+  }
+  
+  .category-holder img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .category-holder a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .name-heading {
+    text-align: center;
+    margin: 20px 0;
+  }
+  

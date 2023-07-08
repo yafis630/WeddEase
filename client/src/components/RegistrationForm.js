@@ -26,6 +26,7 @@ const RegistrationForm = () => {
   });
 
   const [form,setForm]=useState({});
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -36,7 +37,7 @@ const RegistrationForm = () => {
     })
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response= await fetch('http://localhost:8080/wedease/register',{
@@ -100,6 +101,9 @@ const RegistrationForm = () => {
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
+    if (!agreedToTerms.trim()) {
+      errors.agreed = "You need to agree terms and conditions";
+    }
     return errors;
   };
 
@@ -124,6 +128,7 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Enter your name"
             className="input-field"
+            required
           />
         </FormGroup>
         {errors.email && <Alert color="danger">{errors.email}</Alert>}
@@ -137,6 +142,7 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Enter your email"
             className="input-field"
+            required
           />
         </FormGroup>
         {errors.phoneNumber && <Alert color="danger">{errors.phoneNumber}</Alert>}
@@ -150,6 +156,7 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Enter your Mobile no."
             className="input-field"
+            required
           />
         </FormGroup>
         {errors.gender && <Alert color="danger">{errors.gender}</Alert>}
@@ -163,11 +170,12 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Enter your email"
             className="input-field"
+            required
           >
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="other">Prefer not to say</option>
         </Input>
         </FormGroup>
         {errors.password && <Alert color="danger">{errors.password}</Alert>}
@@ -181,6 +189,7 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Enter your password"
             className="input-field"
+            required
           />
         </FormGroup>
         {errors.confirmPassword && (
@@ -196,8 +205,20 @@ const RegistrationForm = () => {
             onChange={handleChange}
             placeholder="Confirm your password"
             className="input-field"
+            required
           />
         </FormGroup>
+          {errors.agreed && <Alert color="danger">{errors.agreed}</Alert>}
+          <FormGroup>
+            <Label check>
+              <Input
+                type="checkbox"
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                checked={agreedToTerms}
+              />{" "}
+              I agree to the terms and conditions
+            </Label>
+          </FormGroup>
         <Button color="primary" block className="submit-button">
           Register
         </Button>

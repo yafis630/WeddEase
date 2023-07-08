@@ -3,12 +3,13 @@ import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import { Routes, Route, Link } from "react-router-dom";
 import Header from "./Header";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Alert } from "react-bootstrap";
 import "../styles/Main.css";
 import Footer from "./Footer";
 import CarouselCard from "./CarouselCard";
 import Contact from "./Contact";
-import Categories from "./Categories";
+import WorkerCategory from "./WorkerCategory";
+import SellerButtons from "./SellerButtons";
 
 
 function Main() {
@@ -17,15 +18,19 @@ function Main() {
       <div className="body">
         <div>
         <Header />
+        
         </div>
         
         <Container fluid className="background-image">
+        <Alert variant="success" className="announcement-banner">
+          10% off for new users using code "newuser100"
+        </Alert>
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
               <div className="button-group">
-                <Link to="/seller" className="button-link">
+                <Link to="/SellerButtons" className="button-link">
                   <Button variant="outline-light" className="button-margin">
-                    Become a Seller
+                    Become a Seller/Worker
                   </Button>
                 </Link>
                 <Link to="/LoginForm" className="button-link">
@@ -44,11 +49,12 @@ function Main() {
         </Container>
         <Container><Row><CarouselCard /></Row></Container>
         <Routes>
-        
+
+        <Route path="/SellerButtons" element={<SellerButtons /> } />
         <Route path="/LoginForm" element={<LoginForm /> } />
         <Route path="/RegistrationForm" element={<RegistrationForm />} />
         <Route path="/contact" element={<Contact />} exact />
-        <Route path="/categories" element={<Categories />} exact />
+        <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
             
         </Routes>
        

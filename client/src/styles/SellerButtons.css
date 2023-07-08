@@ -1,0 +1,70 @@
+.home-page {
+    background-image: url('https://st4.depositphotos.com/17255484/38673/i/450/depositphotos_386735698-stock-photo-two-gold-rings-wooden-background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 83.5vh;
+    overflow: hidden;
+  }
+  
+  .content-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .welcome-text {
+    color: white;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .worker-button {
+    background-color: #369263;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .seller-button {
+    background-color: #5f1b4b;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .worker-button:hover, .seller-button:hover {
+    background-color: #c29543;
+  }
+  
+  .worker-button:active, .seller-button:active {
+    background-color: #1e7e34;
+  }
+  
+  .worker-button:focus, .seller-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media screen and (max-width: 767px) {
+    .home-page {
+      background-size: contain;
+    }
+  }
+  

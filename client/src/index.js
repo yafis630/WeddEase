@@ -10,6 +10,8 @@ import Categories from './components/Categories';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import Main from './components/Main';
+import WorkerCategory from './components/WorkerCategory';
+import WorkerHome from './components/WorkerHome';
 
 
-ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter><App /></BrowserRouter>);
+ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter><WorkerHome/></BrowserRouter>);
