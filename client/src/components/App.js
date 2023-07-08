@@ -10,6 +10,7 @@ import WorkerCategory from "./WorkerCategory";
 import WorkerLogin from "./WorkerLogin";
 import WorkerHome from "./WorkerHome";
 import WorkerProfile from "./WorkerProfile";
+import CategoryButtons from "./CategoryButtons";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/LoginForm" element={<LoginForm />} exact />
         <Route path="/RegistrationForm" element={<RegistrationForm />} exact />
         <Route path="/contact" element={<Contact />} exact />
+        <Route path="/CategoryButtons" element={<CategoryButtons />} />
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
         <Route path="/WorkerHome" element={<WorkerHome />} exact />
         <Route path="/WorkerProfile" element={<WorkerProfile />} exact />

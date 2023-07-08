@@ -8,8 +8,9 @@ import "../styles/Main.css";
 import Footer from "./Footer";
 import CarouselCard from "./CarouselCard";
 import Contact from "./Contact";
-import WorkerCategory from "./WorkerCategory";
 import SellerButtons from "./SellerButtons";
+import catHolder from "./CategoryButtons";
+import CategoryButtons from "./CategoryButtons";
 
 
 function Main() {
@@ -54,8 +55,7 @@ function Main() {
         <Route path="/LoginForm" element={<LoginForm /> } />
         <Route path="/RegistrationForm" element={<RegistrationForm />} />
         <Route path="/contact" element={<Contact />} exact />
-        <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
-            
+        <Route path="/CategoryButtons" element={<CategoryButtons />} exact />            
         </Routes>
        
         <div>

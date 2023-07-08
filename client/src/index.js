@@ -12,6 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Main from './components/Main';
 import WorkerCategory from './components/WorkerCategory';
 import WorkerHome from './components/WorkerHome';
-
+import catHolder from './components/CategoryButtons';
+import CategoryButtons from './components/CategoryButtons';
 
 ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter><App /></BrowserRouter>);
