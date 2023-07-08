@@ -19,15 +19,45 @@
 
 
 .announcement-banner {
-  background-color: #f8e5c1;
-  color: #333333;
-  font-size: 18px;
+  background-color: #ff5252;
+  color: #ffffff;
+  font-size: 24px;
   padding: 15px;
   text-align: center;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  position: relative;
 }
+
+.announcement-banner:before {
+  content: "";
+  position: absolute;
+  
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #ff5252;
+}
+
+.announcement-banner:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #ff5252;
+}
+
+.announcement-banner .sale-text {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.announcement-banner .sale-text span {
+  color: #fffb00;
+}
+
 
   
 .background-image {

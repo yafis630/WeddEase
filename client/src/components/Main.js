@@ -24,8 +24,8 @@ function Main() {
         
         <Container fluid className="background-image">
         <Alert variant="success" className="announcement-banner">
-          10% off for new users using code "newuser100"
-        </Alert>
+  <span className="sale-text">Sale! Sale! Sale!</span> Get 10% off for new users using code <span className="code">"newuser100"</span>
+</Alert>
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
               <div className="button-group">
