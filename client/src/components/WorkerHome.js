@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Route, useParams } from "react-router-dom";
 import { Button, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import Main from "./Main";
 import WorkerLogin from "./WorkerLogin";
 
 const WorkerHome = () => {
-  const name = useParams().fullName;
   const available = useParams().available;
 
   const [checked, setChecked] = useState(available === "true");
@@ -26,8 +24,7 @@ const WorkerHome = () => {
   };
 
   const handleLogout = () => {
-    // Add code to handle logout here
-    // For example, redirect to the homepage
+    
     window.location.href = "/WorkerLogin";
 
     <Route path="/WorkerLogin" element={<WorkerLogin />} />
