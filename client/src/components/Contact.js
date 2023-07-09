@@ -1,8 +1,8 @@
 import React from 'react';
 import "../styles/Contact.css";
-import MYK from '../images/Myk.jpg';
-import Jaisa from '../images/jasia.jpeg';
-import Moumina from '../images/momina.jpg';
+import MYK from '../assets/Myk.jpg';
+import Jaisa from '../assets/jasia.jpeg';
+import Moumina from '../assets/momina.jpg';
 import Header from './Header';
 import Footer from './Footer';
 

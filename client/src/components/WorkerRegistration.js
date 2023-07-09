@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   Container,
   Form,
@@ -12,7 +13,7 @@ import {
 } from "reactstrap";
 import hiringCategories from "../data/hiringCategories";
 import "../styles/forms.css";
-
+import WorkerLogin from "./WorkerLogin";
 
 const options = hiringCategories.map((category, i) => (
   <option value={category.name} key={i}>
@@ -31,11 +32,11 @@ const WorkerRegistration = () => {
     image: "",
     password: "",
     confirmPassword: "",
+    profession: "",
     errors: {}
   });
 
   const [form, setForm] = useState({});
-  const [profession, setProfession] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleChange = e => {
@@ -47,74 +48,78 @@ const WorkerRegistration = () => {
     })
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await fetch('http://localhost:8080/wedease/register', {
-      method: 'POST',
-      body: JSON.stringify(form),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const data = await response.json();
-    console.log(data);
-
+  
     const errors = validateForm();
+  
     if (Object.keys(errors).length === 0) {
-
-      console.log("Form data:", formData);
-
-      setFormData({
-        name: "",
-        email: "",
-        phoneNumber: "",
-        DOB: "",
-        gender: "",
-        bio: "",
-        image: "",
-        password: "",
-        confirmPassword: "",
-        errors: {}
+      const response = await fetch('http://localhost:8080/wedease/worker', {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {                
+          'Content-Type': 'application/json',
+        },
       });
-
-      alert("Registration Successful");
-
-
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        // Handle successful registration, such as showing a success message or redirecting to a new page.
+        alert('Registration Successful');
+        window.location.href = '/WorkerLogin';
+        <Route path="/WorkerLogin" element={<WorkerLogin />} />
+        setFormData({
+          name: '',
+          email: '',
+          phoneNumber: '',
+          DOB: '',
+          gender: '',
+          bio: '',
+          profession: '',
+          image: '',
+          password: '',
+          confirmPassword: '',
+          errors: {},
+        });
+      } else {
+        // Handle registration error, such as displaying an error message to the user.
+        alert('Registration Failed');
+      }
     } else {
       setFormData({ ...formData, errors });
     }
   };
+  
 
   const validateForm = () => {
     const errors = {};
-    const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword, } = formData;
+    const { name, email, phoneNumber, gender,profession, DOB, bio, image, password, confirmPassword, } = formData;
     if (!name.trim()) {
       errors.name = "Name is required";
     }
     if (!email.trim()) {
       errors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid";
+      errors.email = "Email is invalid ";
     }
     if (!phoneNumber.trim()) {
       errors.phoneNumber = "Mobile no. is required";
     } else if (!/^\d{10}$/.test(phoneNumber)) {
       errors.phoneNumber = "Mobile no. is invalid";
     }
-    if (!DOB.trim()) {
-      errors.DOB = "Please specify your Date of Birth";
-    }
+    if (!DOB) {
+     errors.DOB = "Please specify your Date of Birth";
+   }
     if (!gender.trim()) {
       errors.gender = "Please specify your gender";
     }
     if (!profession.trim()) {
-      errors.profession = "Please specify your profession";
+     errors.profession = "Please specify your profession";
     }
-    if (!image.trim()) {
-      errors.image = "Please upload your photo";
-    }
+   // if (!image.trim()) {
+  //    errors.image = "Please upload your photo";
+  //  }
     if (!bio.trim()) {
       errors.bio = "Please specify your bio";
     }
@@ -126,13 +131,13 @@ const WorkerRegistration = () => {
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
-    if (!agreedToTerms.trim()) {
+    if (!agreedToTerms) {
       errors.agreed = "You need to agree terms and conditions";
     }
     return errors;
   };
 
-  const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword, errors } = formData;
+  const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword,profession, errors } = formData;
 
 
   return (
@@ -238,10 +243,10 @@ const WorkerRegistration = () => {
               name="profession"
               id="profession"
               value={profession}
-              onChange={(e) => setProfession(e.target.value)}
+              onChange={handleChange}
               className="input-field"
               required
-            >
+              >
               <option value="" disabled>
                 -- select an option --
               </option>

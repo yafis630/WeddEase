@@ -1,0 +1,39 @@
+.worker-card {
+    width: 300px; 
+    margin: 20px;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .worker-button {
+    width: 100%;
+    margin-top: 10px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .worker-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .card-row {
+    display: flex; /* Display cards in a row */
+    justify-content: center; /* Center the cards horizontally */
+    flex-wrap: wrap; /* Wrap cards to the next row if necessary */
+  }
+  

@@ -40,7 +40,7 @@ const LoginForm = () => {
     const {success,message} = await response.json();
     console.log(success);
     if (success) {
-     window.location.href = '/CtegoryButtons';
+     window.location.href = '/CategoryButtons';
     } else {
       alert(message);
     }

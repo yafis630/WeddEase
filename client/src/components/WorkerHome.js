@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 import { Route, useParams } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import WorkerLogin from "./WorkerLogin";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import "../styles/WorkerHome.css";
 
 const WorkerHome = () => {
   const { available } = useParams();
 
-  const [checked, setChecked] = useState(available === "true");
+  const [selectedRange, setSelectedRange] = useState([
+    {
+      startDate: null,
+      endDate: null,
+      key: "selection",
+    },
+  ]);
 
-  const handleChange = async () => {
-    const response = await fetch("/update-worker-availability", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ checked: !checked }),
-    });
+  const handleRangeChange = (ranges) => {
+    setSelectedRange([ranges.selection]);
+  };
 
-    if (response.ok) {
-      setChecked(!checked);
+  const handleSubmit = async () => {
+    // Perform your submit logic with the selectedRange values
+    const { startDate, endDate } = selectedRange[0];
+    if (startDate && endDate) {
+      const response = await fetch("/update-worker-availability", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ startDate, endDate }),
+      });
+
+      if (response.ok) {
+        // Handle success
+      } else {
+        // Handle error
+      }
     }
   };
 
@@ -28,21 +46,22 @@ const WorkerHome = () => {
   };
 
   return (
+    
     <div className="worker-home-container">
       <Button variant="secondary" className="logout-button" onClick={handleLogout}>
         Logout
       </Button>
 
-      <div className="toggle-container">
-        <h3>Availability Toggle</h3>
-        <Form.Check
-          type="switch"
-          id="availability-toggle"
-          className="toggle-switch"
-          checked={checked}
-          label={checked ? "Available" : "Unavailable"}
-          onChange={handleChange}
+      <div className="date-range-picker-container">
+        <h4>Select Unavailable Date Range</h4>
+        <DateRangePicker
+          ranges={selectedRange}
+          onChange={handleRangeChange}
+          className="date-range-picker"
         />
+        <Button variant="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );

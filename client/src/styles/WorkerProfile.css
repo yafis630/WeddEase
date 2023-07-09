@@ -1,0 +1,39 @@
+.worker-details {
+  margin: auto;
+  margin-bottom: 20px;
+  color: white;
+  list-style: none;
+  width: 600px;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+  
+  .worker-picture-list {
+    height: 200px;
+    width: 200px;
+    float: right;
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+  
+  .worker-type {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+  }
+
+  .back-img {
+    background-image: url("https://img.freepik.com/free-vector/realistic-dynamic-fog-background_23-2149111508.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }

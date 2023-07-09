@@ -11,12 +11,12 @@ const hiringCategories = [
     },
   {
     id: 2,
-    name:'Makeup Artist',
+    name:'Makeup-Artist',
     image: 'https://images.pexels.com/photos/3756242/pexels-photo-3756242.jpeg?cs=srgb&dl=pexels-miguel-angel-guzman-tard%C3%ADo-3756242.jpg&fm=jpg',
     },
   {
     id: 3,
-    name:'Mehandi/Henna Artist',
+    name:'Mehandi-Artist',
     image: 'https://wp.missmalini.com/wp-content/uploads/2018/11/Mehendi-Artist.jpg',
     },
   {

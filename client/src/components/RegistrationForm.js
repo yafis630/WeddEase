@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   Container,
   Form,
@@ -11,6 +12,7 @@ import {
   Alert
 } from "reactstrap";
 import "../styles/forms.css";
+import LoginForm from "./LoginForm";
 
 
 const RegistrationForm = () => {
@@ -67,7 +69,8 @@ const RegistrationForm = () => {
       });
 
       alert("Registration Successful");
-      
+      window.location.href = '/LoginForm';
+      <Route path="/LoginForm" element={<LoginForm />} />
       
     } else {
       setFormData({ ...formData, errors });
@@ -101,7 +104,7 @@ const RegistrationForm = () => {
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
-    if (!agreedToTerms.trim()) {
+    if (!agreedToTerms) {
       errors.agreed = "You need to agree terms and conditions";
     }
     return errors;

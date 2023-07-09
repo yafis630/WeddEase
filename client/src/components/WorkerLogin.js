@@ -30,7 +30,7 @@ const WorkerLogin = () => {
   const handleSubmit =async  e => {
     e.preventDefault();
 
-    const response= await fetch('http://localhost:8080/wedease/login',{
+    const response= await fetch('http://localhost:8080/wedease/workerlogin',{
       method:'POST',
       body:JSON.stringify(formData),
       headers:{

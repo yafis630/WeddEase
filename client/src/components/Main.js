@@ -9,7 +9,6 @@ import Footer from "./Footer";
 import CarouselCard from "./CarouselCard";
 import Contact from "./Contact";
 import SellerButtons from "./SellerButtons";
-import catHolder from "./CategoryButtons";
 import CategoryButtons from "./CategoryButtons";
 
 

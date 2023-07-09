@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import "../styles/WorkerProfile.css";
 import profile from "../data/profile-placeholder.png";
 
 const WorkerProfile = () => {
@@ -10,12 +10,8 @@ const WorkerProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/workers/${category}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("auth")}`,
-          },
-        });
-        
+       const response=await fetch('http://localhost:8080/wedease/workers/' + new URLSearchParams({category }))
+
         if (response.ok) {
           const data = await response.json();
           const workerItems = data.map((worker, i) => (
@@ -49,10 +45,14 @@ const WorkerProfile = () => {
   }, [category]);
 
   return (
-    <div>
+    <div className="back-img">
       <br />
-      <h2 className="worker-type">{category}s</h2>
-      <ul>{workerList}</ul>
+      <h2 className="worker-type">{category}</h2>
+      {workerList.length > 0 ? (
+        <ul>{workerList}</ul>
+      ) : (
+        <p>No workers found in this category.</p>
+      )}
     </div>
   );
 };
