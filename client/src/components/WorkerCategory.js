@@ -13,12 +13,13 @@ const workers = hiringCategories.map((category, i) => (
 
 const WorkerCategory = () => {
   return (
-    <div>
+    <div >
       <Header />
+      <div className="back-img">
       <h1 className="name-heading">Who do you want to hire?</h1>
       <ul className="category-container">{workers}</ul>
-      <Footer />
-    </div>
+      
+    </div><Footer /></div>
   );
 };
 
