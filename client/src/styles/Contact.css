@@ -74,6 +74,7 @@ img {
 }
 .name {
 	font-size: 37px;
+	color: #d6d6e0;
 	background: linear-gradient(90deg, #f32d5b, #ff009b);
 	padding-inline: 10px;
 	transform: translateY(-10px);

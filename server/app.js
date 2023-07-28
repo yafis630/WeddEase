@@ -11,7 +11,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/wedease')
+mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log('Connected to the database');
     // Start the server after successfully connecting to the database
@@ -29,9 +32,13 @@ const loginRoutes = require('./routes/login');
 const workerRoutes= require('./routes/newworker');
 const workerloginRoutes= require('./routes/workerlogin');
 const fetchworkerRoutes= require('./routes/fworker')
+const addressRoutes = require('./routes/addressData');
+const paymentRoutes = require('./routes/paymentRoutes');
+
 app.use('/wedease', registerRoutes);
 app.use('/wedease', loginRoutes);
 app.use('/wedease', workerRoutes);
 app.use('/wedease', workerloginRoutes);
 app.use( fetchworkerRoutes);
-
+app.use('/wedease', addressRoutes);
+app.use('/payment', paymentRoutes);
