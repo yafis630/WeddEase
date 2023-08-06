@@ -14,8 +14,8 @@ const workers = hiringCategories.map((category, i) => (
 const WorkerCategory = () => {
   return (
     <div >
-      <Header />
-      <div className="back-img">
+      
+      <div className="back-img"> <Header />
       <h1 className="name-heading">Who do you want to hire?</h1>
       <ul className="category-container">{workers}</ul>
       

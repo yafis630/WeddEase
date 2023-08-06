@@ -78,6 +78,51 @@
   font-size: 14px;
 }
 
+@media screen and (max-width: 767px) {
+  .registration-form-container {
+    max-width: 90%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .registration-form-container .input-field {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .registration-form-container label {
+    margin-left: 0;
+  }
+
+  .login-form-container {
+    max-width: 90%;
+    margin-top: 12%;
+    margin-bottom: 20%;
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  .login-form-container h2 {
+    font-size: 22px;
+  }
+
+  .login-form-container .input-field {
+    width: 100%;
+  }
+
+  .error-message {
+    font-size: 12px;
+  }
+  .back {
+    background-size: cover;
+  }
+}
+
+
+
+
 
 
 

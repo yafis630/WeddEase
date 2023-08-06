@@ -1,10 +1,10 @@
 .worker-home-container {
   position: relative;
-  background-image: url("https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-image: url("../assets/sunset-g35e2ec6e8_1280.jpg");
   background-size: cover;
   background-position: center;
-  padding: 20px;
-  display: flex;
+  
+  
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -13,15 +13,30 @@
 
 .logout-button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 90px;
+  right: 65px;
 }
 
-h4 {
-  font-size: 30px;
+.date-range-picker-container {
+ 
+  margin-top: 30px;
+  font-size: 25px;
   color: azure;
 }
 
+.date-range-picker-container {
+  margin-top: 30px;
+  font-size: 25px;
+  color: azure;
+  max-width: 400px; /* Default width for larger screens */
 
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 
-
+  /* Adjustments for extra-small screens */
+  @media (max-width: 576px) {
+    max-width: 200px;
+  }
+}

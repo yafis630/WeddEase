@@ -16,7 +16,7 @@ function Main() {
   return (
     
       <div className="body">
-        <div>
+        <div >
         <Header />
         
         </div>

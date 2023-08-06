@@ -10,10 +10,12 @@ import WorkerCategory from "./WorkerCategory";
 import WorkerLogin from "./WorkerLogin";
 import WorkerHome from "./WorkerHome";
 import WorkerProfile from "./WorkerProfile";
+import WorkerDetails from "./WorkerDetails";
 import CategoryButtons from "./CategoryButtons";
 import CartPage from "./CartPage";
 import AddressPage from "./AddressPage";
 import PaymentGatewayPage from "./PaymentGatewayPage";
+import UpdateProfile from "./UpdateProfile";
 
 
 
@@ -32,9 +34,12 @@ function App() {
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
         <Route path="/WorkerHome" element={<WorkerHome />} exact />
         <Route path="/workers/:category" element={<WorkerProfile />} exact />
+        <Route path="/workers/:category/:workerId" element={<WorkerDetails/>} exact />
         <Route path="/CartPage" element={<CartPage />} exact />
         <Route path="/address" element={<AddressPage />} exact />
         <Route path="/PaymentGatewayPage" element={<PaymentGatewayPage/>} exact />
+        <Route path="/UpdateProfile" element={<UpdateProfile />} exact />
+        
       </Routes>
       </div>
   );

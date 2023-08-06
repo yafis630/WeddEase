@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require("path");
 
 const app = express();
 const port = 8080;
@@ -25,7 +26,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
   .catch((error) => {
     console.error('Error connecting to the database', error);
   });
-
+  app.use('/images',express.static("uploads"));
+  
 // Import and use the routes
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
@@ -42,3 +44,4 @@ app.use('/wedease', workerloginRoutes);
 app.use( fetchworkerRoutes);
 app.use('/wedease', addressRoutes);
 app.use('/payment', paymentRoutes);
+

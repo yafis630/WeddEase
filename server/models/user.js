@@ -1,4 +1,3 @@
-// models/user.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -9,10 +8,7 @@ const registrationSchema = new mongoose.Schema({
     trim: true,
     maxlength: 32,
   },
- //image: {
-   // type:String ,
-     
-  //},
+
   email: {
     type: String,
     required: true,

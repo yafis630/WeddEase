@@ -6,7 +6,7 @@ import '../styles/Header.css'; // Import your custom CSS file for styling
 function Header() {
     return (
         <div className="header">
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" variant="dark">
                 <Navbar.Brand href="/" className="brand-logo">
                     WeddEase
                 </Navbar.Brand>

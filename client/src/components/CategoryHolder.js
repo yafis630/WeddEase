@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 const CategoryHolder = (props) => {
   return (
     <div className="category-holder">
+      <Link to={`/workers/${props.name}`}>
       <img src={props.image} alt={props.name} />
-      <Link to={`/workers/${props.name}`}>{props.name}</Link>
+      <p>{props.name}</p>
+      </Link>
     </div>
   );
 };

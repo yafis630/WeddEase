@@ -2,9 +2,7 @@ import React, { useState , useRef} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import hiringCategories from "../data/hiringCategories";
 import "../styles/forms.css";
-import WorkerLogin from "./WorkerLogin";
 import {
   Container,
   Form,
@@ -14,14 +12,10 @@ import {
   Button,
   Alert
 } from "reactstrap";
+import WorkerHome from "./WorkerHome";
 
 
-const options = hiringCategories.map((category, i) => (
-  <option value={category.name} key={i}>
-    {category.name}
-  </option>
-));
-const WorkerRegistration = () => {
+const UpdateProfile = () => {
 
   const [formData, setFormData] = useState({
     name: "",
@@ -33,13 +27,11 @@ const WorkerRegistration = () => {
     image: "",
     password: "",
     confirmPassword: "",
-    profession: "",
     errors: {}
   });
 
   const [form, setForm] = useState({});
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -65,7 +57,6 @@ const WorkerRegistration = () => {
       formDataToSend.append('DOB', formData.DOB);
       formDataToSend.append('gender', formData.gender);
       formDataToSend.append('bio', formData.bio);
-      formDataToSend.append('profession', formData.profession);
       formDataToSend.append('password', formData.password);
       formDataToSend.append('confirmPassword', formData.confirmPassword);
       formDataToSend.append('image', fileInputRef.current.files[0]);
@@ -79,12 +70,12 @@ const WorkerRegistration = () => {
         const data = await response.json();
         console.log(data);
         // Handle successful registration, such as showing a success message or redirecting to a new page.
-        alert('Registration Successful');
-        window.location.href = '/WorkerLogin';
-        <Route path="/WorkerLogin" element={<WorkerLogin />} />
+        alert('Updated Successful');
+        window.location.href = '/WorkerHome';
+        <Route path="/WorkerHome" element={<WorkerHome />} />
       } else {
         // Handle registration error, such as displaying an error message to the user.
-        alert('Registration Failed');
+        alert('Update Failed');
       }
     } catch (error){
       console.error('Error uploading image:', error);
@@ -99,37 +90,10 @@ const WorkerRegistration = () => {
   }
 };
 
-  const validateForm = () => {
+const validateForm = () => {
     const errors = {};
-    const { name, email, phoneNumber, gender,profession, DOB, bio, image, password, confirmPassword, } = formData;
-    if (!name.trim()) {
-      errors.name = "Name is required";
-    }
-    if (!email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid ";
-    }
-    if (!phoneNumber.trim()) {
-      errors.phoneNumber = "Mobile no. is required";
-    } else if (!/^\d{10}$/.test(phoneNumber)) {
-      errors.phoneNumber = "Mobile no. is invalid";
-    }
-    if (!DOB) {
-     errors.DOB = "Please specify your Date of Birth";
-   }
-    if (!gender.trim()) {
-      errors.gender = "Please specify your gender";
-    }
-    if (!profession.trim()) {
-     errors.profession = "Please specify your profession";
-    }
-    if (!formData.image) {
-      errors.image = 'Please upload your photo';
-    }
-    if (!bio.trim()) {
-      errors.bio = "Please specify your bio";
-    }
+    const { password, confirmPassword, } = formData;
+
     if (!password) {
       errors.password = "Password is required";
     } else if (password.length < 6) {
@@ -138,13 +102,12 @@ const WorkerRegistration = () => {
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
-    if (!agreedToTerms) {
-      errors.agreed = "You need to agree terms and conditions";
-    }
+
     return errors;
   };
 
-  const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword,profession, errors } = formData;
+
+  const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword, errors } = formData;
 
 
   return (
@@ -152,9 +115,8 @@ const WorkerRegistration = () => {
       <Header />
       <Container
         className="registration-form-container">
-        <h2 className="mt-5 mb-4 text-center">Registration </h2>
+        <h2 className="mt-5 mb-4 text-center">Update Profile </h2>
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
-          {errors.name && <Alert color="danger">{errors.name}</Alert>}
           <FormGroup>
             <Label for="name">Name</Label>
             <Input
@@ -165,10 +127,10 @@ const WorkerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter your name"
               className="input-field"
-              required
+              
             />
           </FormGroup>
-          {errors.image && <Alert color="danger">{errors.image}</Alert>}
+          
           <FormGroup>
             <Label for="image">Upload your image</Label>
             <Input
@@ -183,7 +145,7 @@ const WorkerRegistration = () => {
             
           </FormGroup>
 
-          {errors.email && <Alert color="danger">{errors.email}</Alert>}
+          
           <FormGroup>
             <Label for="email">Email</Label>
             <Input
@@ -194,10 +156,10 @@ const WorkerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               className="input-field"
-              required
+              
             />
           </FormGroup>
-          {errors.phoneNumber && <Alert color="danger">{errors.phoneNumber}</Alert>}
+          
           <FormGroup>
             <Label for="phoneNumber">Mobile no.</Label>
             <Input
@@ -208,10 +170,10 @@ const WorkerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter your Mobile no."
               className="input-field"
-              required
+              
             />
           </FormGroup>
-          {errors.DOB && <Alert color="danger">{errors.DOB}</Alert>}
+          
           <FormGroup>
             <Label for="DOB">Date of Birth</Label>
             <Input
@@ -222,10 +184,10 @@ const WorkerRegistration = () => {
               value={DOB}
               placeholder="Enter your DOB"
               className="input-field"
-              required
+              
             />
           </FormGroup>
-          {errors.gender && <Alert color="danger">{errors.gender}</Alert>}
+         
           <FormGroup>
             <Label for="gender">Gender</Label>
             <Input
@@ -236,7 +198,7 @@ const WorkerRegistration = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               className="input-field"
-              required
+             
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -244,25 +206,7 @@ const WorkerRegistration = () => {
               <option value="other">Other</option>
             </Input>
           </FormGroup>
-          {errors.profession && <Alert color="danger">{errors.profession}</Alert>}
-          <FormGroup>
-            <Label for="profession">Profession</Label>
-            <Input
-              type="select"
-              name="profession"
-              id="profession"
-              value={profession}
-              onChange={handleChange}
-              className="input-field"
-              required
-              >
-              <option value="" disabled>
-                -- select an option --
-              </option>
-              {options}
-            </Input>
-          </FormGroup>
-          {errors.bio && <Alert color="danger">{errors.bio}</Alert>}
+          
           <FormGroup>
             <Label for="bio">Bio</Label>
             <Input
@@ -274,7 +218,7 @@ const WorkerRegistration = () => {
               placeholder="Tell us about yourself."
               rows="3"
               className="input-field"
-              required
+              
             />
           </FormGroup>
           {errors.password && <Alert color="danger">{errors.password}</Alert>}
@@ -307,19 +251,8 @@ const WorkerRegistration = () => {
               required
             />
           </FormGroup>
-          {errors.agreed && <Alert color="danger">{errors.agreed}</Alert>}
-          <FormGroup>
-            <Label check>
-              <Input
-                type="checkbox"
-                onChange={(e) => setAgreedToTerms(e.target.checked)}
-                checked={agreedToTerms}
-              />{" "}
-              I agree to the terms and conditions
-            </Label>
-          </FormGroup>
           <Button color="primary" block className="submit-button">
-            Register
+            Update Profile
           </Button>
         </Form>
       </Container>
@@ -328,4 +261,4 @@ const WorkerRegistration = () => {
   );
 };
 
-export default WorkerRegistration;
+export default UpdateProfile;

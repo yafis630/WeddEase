@@ -1,4 +1,3 @@
-// models/user.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -9,10 +8,10 @@ const workerSchema = new mongoose.Schema({
     trim: true,
     maxlength: 32,
   },
-  //imagePath: {
- //   type:String ,
-     
- // },
+  imagePath: {
+    type:String ,
+     required:true
+ },
   email: {
     type: String,
     required: true,

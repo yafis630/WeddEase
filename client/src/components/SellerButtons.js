@@ -2,14 +2,13 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Footer from './Footer';
 import '../styles/SellerButtons.css';
 
 const SellerButtons = () => {
   return (
     <div>
-      <Header />
       <div className="home-page">
+      <Header />
         <div className="content-container">
           <h2 className="welcome-text">Welcome Seller/Worker</h2>
           <h5>Please Login to your account to continue. If you don't have
@@ -28,7 +27,7 @@ const SellerButtons = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };
