@@ -118,7 +118,7 @@ const RegistrationForm = () => {
       <Header />
     <Container
       className="registration-form-container">
-      <h2 className="mt-5 mb-4 text-center">Registration </h2>
+      <h2 className="mt-5 mb-4 text-center">User Registration </h2>
       <Form onSubmit={handleSubmit}>
         {errors.name && <Alert color="danger">{errors.name}</Alert>}
         <FormGroup>

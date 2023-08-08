@@ -39,7 +39,7 @@ const WorkerRegistration = () => {
 
   const [form, setForm] = useState({});
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -101,7 +101,7 @@ const WorkerRegistration = () => {
 
   const validateForm = () => {
     const errors = {};
-    const { name, email, phoneNumber, gender,profession, DOB, bio, image, password, confirmPassword, } = formData;
+    const { name, email, phoneNumber, gender,profession, DOB, bio,  password, confirmPassword, } = formData;
     if (!name.trim()) {
       errors.name = "Name is required";
     }
@@ -152,7 +152,7 @@ const WorkerRegistration = () => {
       <Header />
       <Container
         className="registration-form-container">
-        <h2 className="mt-5 mb-4 text-center">Registration </h2>
+        <h2 className="mt-5 mb-4 text-center">Worker Registration </h2>
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           {errors.name && <Alert color="danger">{errors.name}</Alert>}
           <FormGroup>

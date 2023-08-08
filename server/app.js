@@ -43,5 +43,5 @@ app.use('/wedease', workerRoutes);
 app.use('/wedease', workerloginRoutes);
 app.use( fetchworkerRoutes);
 app.use('/wedease', addressRoutes);
-app.use('/payment', paymentRoutes);
+app.use('/wedease', paymentRoutes);
 

@@ -4,6 +4,7 @@ const stripe = require('stripe')('sk_test_51NYmPkSCfYsS3Tchht4Iy8CkgaTc7DpuNi1kw
 const Payment = require('../models/payment');
 
 router.post('/payment', async (req, res) => {
+  console.log('hi');
   const { amount, currency, name } = req.body;
 
   try {

@@ -78,7 +78,7 @@ const LoginForm = () => {
     <div className="back">
       <Header />
     <Container className="login-form-container">
-      <h2 className="mt-5 mb-4 text-center">Login </h2>
+      <h2 className="mt-5 mb-4 text-center">User Login </h2>
       <Form onSubmit={handleSubmit}>
         {errors.login && <Alert color="danger">{errors.login}</Alert>}
         <FormGroup>
