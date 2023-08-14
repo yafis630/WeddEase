@@ -13,7 +13,6 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import WorkerHome from "./WorkerHome";
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
 

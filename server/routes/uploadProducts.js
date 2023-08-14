@@ -34,7 +34,7 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
       return res.status(400).json({ error: 'No images provided' });
     }
 
-    const { name, price, description } = req.body;
+    const { name, price,category, description } = req.body;
 
     // Extract the file paths from the request files array
     const imagePaths = req.files.map(file => file.path);
