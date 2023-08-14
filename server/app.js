@@ -6,10 +6,11 @@ const mongoose = require('mongoose');
 const path = require("path");
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/images',express.static("uploads"));
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
@@ -26,22 +27,28 @@ mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
   .catch((error) => {
     console.error('Error connecting to the database', error);
   });
-  app.use('/images',express.static("uploads"));
+  
   
 // Import and use the routes
-const registerRoutes = require('./routes/register');
-const loginRoutes = require('./routes/login');
-const workerRoutes= require('./routes/newworker');
-const workerloginRoutes= require('./routes/workerlogin');
-const fetchworkerRoutes= require('./routes/fworker')
-const addressRoutes = require('./routes/addressData');
-const paymentRoutes = require('./routes/paymentRoutes');
+const routes = [
+  require('./routes/register'),
+  require('./routes/login'),
+  require('./routes/newworker'),
+  require('./routes/workerlogin'),
+  require('./routes/fworker'),
+  require('./routes/sellerRegistration'),
+  require('./routes/sellerLogin'),
+  require('./routes/uploadProducts'),
+  require('./routes/addressData'),
+  require('./routes/paymentRoutes'),
+];
 
-app.use('/wedease', registerRoutes);
-app.use('/wedease', loginRoutes);
-app.use('/wedease', workerRoutes);
-app.use('/wedease', workerloginRoutes);
-app.use( fetchworkerRoutes);
-app.use('/wedease', addressRoutes);
-app.use('/wedease', paymentRoutes);
+app.use('/wedease', routes);
+
+//app.delete('/logout', authenticateToken, async (req, res) => {
+ // const authHeader = req.headers['authorization'];
+  //const token = authHeader && authHeader.split(' ')[1];
+  //const del = await Token.deleteOne({ token });
+  //if (del) res.send(true);
+//});
 

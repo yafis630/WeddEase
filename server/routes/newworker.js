@@ -1,3 +1,4 @@
+// routes/register.js
 const express = require('express');
 const router = express.Router();
 const Worker = require('../models/worker');

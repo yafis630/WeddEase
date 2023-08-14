@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -48,6 +49,11 @@ const workerSchema = new mongoose.Schema({
 },
 salt: String,
 });
+
+workerSchema.path('email').validate(async(email)=>{
+ const emailcount=await mongoose.models.Worker.countDocuments({email})
+return !emailcount;
+},'email already exists')
 
 // Hash and set the password before saving the user
 workerSchema.pre('save', async function (next) {

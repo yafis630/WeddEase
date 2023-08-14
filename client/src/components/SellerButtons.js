@@ -22,12 +22,15 @@ const SellerButtons = () => {
             <Link to="/WorkerLogin">
               <Button variant="primary" className="worker-button">Login as Worker</Button>
             </Link>
+            <Link to = "/SellerRegistration">
             <Button variant="secondary" className="seller-button">Register as Seller</Button>
+            </Link>
+            <Link to="/SellerLogin">
             <Button variant="secondary" className="seller-button">Login as Seller</Button>
+            </Link>
           </div>
         </div>
       </div>
-     
     </div>
   );
 };

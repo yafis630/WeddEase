@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/forms.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import {
   Container,
   Form,
@@ -13,45 +13,77 @@ import {
   Alert
 } from "reactstrap";
 import CategoryButtons from "./CategoryButtons";
+import ReCAPTCHA from "react-google-recaptcha";
+import AuthContext from "../context/AuthProvider";
 
 
-const LoginForm = () => {
+const LoginForm = ({onLogin}) => {
+  const navigate = useNavigate();
+  
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    errors: {}
+    errors: {},
+    recaptchaValue: "",
   });
-
+  
+  const { setAuth, setIsAuth } = useContext(AuthContext);
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit =async  e => {
-    e.preventDefault();
+  const handleRecaptchaChange = value => {
+    setFormData({ ...formData, recaptchaValue: value });
+  };
 
+  const handleForgotPassword = () => {
+    const { email } = formData;
+    if (!email.trim()) {
+      alert("Please provide your email to reset password.");
+      return;
+    }
+
+    // Here you can add the logic to send a password reset email to the provided email.
+    // You might call an API endpoint to trigger the password reset process.
+    alert(`Password reset email sent to ${email}`);
+  };
+
+  const handleSubmit = async  e => {
+    e.preventDefault();
+    if (!formData.recaptchaValue) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
     const response= await fetch('http://localhost:8080/wedease/login',{
       method:'POST',
       body:JSON.stringify(formData),
       headers:{
         'Content-Type':'application/json'
       }
-    })
-    const {success,message} = await response.json();
-    console.log(success);
+    });
+    const {success,accessToken} = await response.json();
+    
     if (success) {
-     window.location.href = '/CategoryButtons';
+      console.log(accessToken);
+      setAuth(accessToken);
+      setIsAuth(true);
+      alert("login successfull")
+      localStorage.setItem("isLoggedIn", "true");
+      onLogin();
+      navigate('/CategoryButtons');
     } else {
-      alert(message);
+      alert("invalid usename and password");
     }
-    <Route path="/CategoryButtons" element={<CategoryButtons />} />
     
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
         setFormData({
           email: "",
           password: "",
-          errors: {}
+          errors: {},
+          recaptchaValue: "",
         });
       } else {
       setFormData({ ...formData, errors });
@@ -76,7 +108,7 @@ const LoginForm = () => {
 
   return (
     <div className="back">
-      <Header />
+      <Header  />
     <Container className="login-form-container">
       <h2 className="mt-5 mb-4 text-center">User Login </h2>
       <Form onSubmit={handleSubmit}>
@@ -106,10 +138,24 @@ const LoginForm = () => {
             className="input-field"
           />
         </FormGroup>
+        <FormGroup>
+            <ReCAPTCHA
+              sitekey="6LcbI5onAAAAAGTN06xLfE3CMmqCMd-zBqjTaXmn"
+              onChange={handleRecaptchaChange}
+            />
+          </FormGroup>
         <Button color="primary" block className="submit-button">
           Login
         </Button>
+        <p className="signup-link">
+          No account? <a href="/RegistrationForm">Register</a>
+        </p>
       </Form>
+      <div className="mt-3">
+          <Button color="link" onClick={handleForgotPassword}>
+            Forgot Password?
+          </Button>
+        </div>
     </Container>
     <Footer />
     </div>

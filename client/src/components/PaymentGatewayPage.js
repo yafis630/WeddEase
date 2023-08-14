@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
+import {
+    Elements,
+    useStripe,
+    useElements,
+    CardElement,
+  } from '@stripe/react-stripe-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import '../styles/PaymentGatewayPage.css';
 
 const stripePromise = loadStripe('pk_test_51NYmPkSCfYsS3TchcSObjNfzHWpWXIkcjrKAT9KNe5bxLD5PVAtcYQ2VtNDXpUMsqDNhBx075XhBhB8CD3NLC5XK00gzVu1aFf'); // Stripe public key
 
-const PaymentGatewayPage = ({ totalAmount }) => {
+const PaymentGatewayPage = () => {
+    const location = useLocation();
+    const { totalAmount } = location.state || {};
     const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
     const [cardDetails, setCardDetails] = useState({
         number: '',
         exp_month: '',
         exp_year: '',
         cvc: '',
-        name: '',
     });
+    const [cardholderName, setCardholderName] = useState('');
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -34,7 +43,7 @@ const PaymentGatewayPage = ({ totalAmount }) => {
                 body: JSON.stringify({
                     amount: totalAmount * 100, // Convert amount to smallest currency unit (e.g., paisa for INR)
                     currency: 'INR',
-                    name: cardDetails.name, 
+                    cardholderName: cardholderName, 
                 }),
             });
 
@@ -47,7 +56,7 @@ const PaymentGatewayPage = ({ totalAmount }) => {
             const result = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardDetails,
-                },
+                  },
             });
 
             if (result.error) {
@@ -82,8 +91,8 @@ const PaymentGatewayPage = ({ totalAmount }) => {
                             type="text"
                             name="name"
                             placeholder="Cardholder Name"
-                            value={cardDetails.name}
-                            onChange={handleInputChange}
+                            value={cardholderName}
+            onChange={(event) => setCardholderName(event.target.value)}
                         />
                         <div className="expiry">
                             <select

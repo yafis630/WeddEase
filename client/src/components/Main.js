@@ -16,15 +16,11 @@ function Main() {
   return (
     
       <div className="body">
-        <div >
-        <Header />
         
-        </div>
         
         <Container fluid className="background-image">
-        <Alert variant="success" className="announcement-banner">
-  <span className="sale-text">Sale! Sale! Sale!</span> Get 10% off for new users using code <span className="code">"newuser100"</span>
-</Alert>
+          <><Header /></>
+        
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
               <div className="button-group">

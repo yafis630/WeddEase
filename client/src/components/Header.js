@@ -1,9 +1,12 @@
+import React from "react";
 import { Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Header.css'; // Import your custom CSS file for styling
+import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
+import '../styles/Header.css';
 
-function Header() {
+function Header({ isLoggedIn, onLogout }) {
+    
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -27,17 +30,29 @@ function Header() {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/CartPage" className="cart-button">
+                        {isLoggedIn && (
+                            <>
+                                <NavLink to="/Dashboard" className="nav-link">
+                                    <FontAwesomeIcon icon={faUser} className="nav-icon" /> Dashboard
+                                </NavLink>
+                                <NavLink to="/" className="nav-link" onClick={onLogout}>
+                                    Logout
+                                </NavLink>
+                            </>
+                        )}
+                        {!isLoggedIn && (
+                            <NavLink to="/LoginForm" className="nav-link">
+                                
+                            </NavLink>
+                        )}
+                        <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart
-                        </Nav.Link>
+                        </NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         </div>
     );
 }
-
-
-
 
 export default Header;

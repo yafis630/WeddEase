@@ -5,17 +5,23 @@ const Payment = require('../models/payment');
 
 router.post('/payment', async (req, res) => {
   console.log('hi');
-  const { amount, currency, name } = req.body;
+  const { amount, currency, cardholderName } = req.body;
 
   try {
+    const amountInCents = Math.floor(amount * 100); // Convert amount to cents
+
+    if (amountInCents < 100) { // Minimum amount check
+      throw new Error('Amount must be at least 1 cent.');
+    }
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+      amount: amountInCents,
       currency,
       payment_method_types: ['card'],
+     
     });
 
     // Save payment details to the database
-    const payment = new Payment({ amount, currency, name });
+    const payment = new Payment({ amount: amountInCents, currency, name: cardholderName });
     await payment.save();
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });

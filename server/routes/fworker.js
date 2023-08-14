@@ -4,7 +4,7 @@ const router = express.Router();
 const Worker = require('../models/worker');
 
 // Fetch workers by category
-router.get('/wedease/workers/:category', async (req, res) => {
+router.get('/workers/:category', async (req, res) => {
   try {
     console.log('hello')
     let category = req.params.category;

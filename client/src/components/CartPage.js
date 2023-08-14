@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/CartPage.css';
 
-
 const CartPage = () => {
   const navigate = useNavigate();
   // Dummy cart data for demonstration
@@ -16,7 +15,7 @@ const CartPage = () => {
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const handleBuyNow = () => {
-    navigate('/address');
+    navigate('/PaymentGatewayPage', { state: { totalAmount: totalPrice } });
   };
 
   return (
@@ -31,7 +30,7 @@ const CartPage = () => {
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
                   <div className="cart-item-price-quantity">
-                    <span>${item.price}</span>
+                    <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
                     <span>Qty: {item.quantity}</span>
                   </div>
                 </div>
@@ -40,10 +39,9 @@ const CartPage = () => {
           </div>
           <div className="cart-total">
             <span>Total:</span>
-            <span>${totalPrice}</span>
+            <span>₹{totalPrice}</span> {/* Display total price in Indian Rupees */}
           </div>
-          <button className="buy-now-button" onClick={handleBuyNow}>Buy Now 
-    </button>
+          <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
         </>
       ) : (
         <p>Your cart is empty.</p>
@@ -53,3 +51,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+

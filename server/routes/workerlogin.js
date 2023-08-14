@@ -3,8 +3,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const Worker = require('../models/worker');
+const Token =require( "../models/token.js");
+const generateAccessToken=require('../helpers/generateAccessToken')
 
-// User login
+// worker login
 router.post('/workerlogin', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -12,11 +14,16 @@ router.post('/workerlogin', async (req, res) => {
     const worker = await Worker.findOne({ email });
 
     if (worker && await bcrypt.compare(password, worker.password)) {
-      console.log('Login successful');
-      return res.json({ success: true, message: 'Login successful' });
+      const accessToken = generateAccessToken(email);
+      const token = new Token({
+        token: accessToken,
+      });
+      await token.save();
+      res.send({accessToken,success:true});
+      console.log('worker Login successful');
     } else {
+      res.send({success: false});
       console.log('Invalid email or password');
-      return res.json({ success: false, message: 'Invalid email or password' });
     }
   } catch (error) {
     console.error('Error logging in', error);
