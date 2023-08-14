@@ -4,18 +4,9 @@ import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../styles/SellerPr.css";
 import SellerCat from "./SellerCat";
-import {
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,   
-  Button,
-  Alert
-} from "reactstrap";
 
 const SellerPr = () => {
-  const [formData, setFormData] = useState({
+  const [products, setproducts] = useState({
     name: "",
     price: "",
     description: "",
@@ -25,12 +16,12 @@ const SellerPr = () => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setproducts({ ...products, [name]: value });
   };
 
   const handleImageChange = e => {
     const files = Array.from(e.target.files);
-    setFormData({ ...formData, images:  [...files] });
+    setproducts({ ...products, images:  [...files] });
   };
 
   const handleSubmit = async e => {
@@ -40,13 +31,13 @@ const SellerPr = () => {
 
     if (Object.keys(errors).length === 0) {
       const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("price", formData.price);
-      formDataToSend.append("description", formData.description);
+      formDataToSend.append("name", products.name);
+      formDataToSend.append("price", products.price);
+      formDataToSend.append("description", products.description);
 
       // Append each image file to the FormData object
-      for (let i = 0; i < formData.images.length; i++) {
-        formDataToSend.append("images", formData.images[i]);
+      for (let i = 0; i < products.images.length; i++) {
+        formDataToSend.append("images", products.images[i]);
       }
 
       try {
@@ -69,7 +60,7 @@ const SellerPr = () => {
         alert("An error occurred.");
       }
     } else {
-      setFormData(prevFormData => ({
+      setproducts(prevFormData => ({
         ...prevFormData,
         errors
       }));
@@ -84,7 +75,7 @@ const SellerPr = () => {
 
   const validateForm = () => {
     const errors = {};
-    const { name,description,price } = formData;
+    const { name,description,price } = products;
     if (!name.trim()) {
       errors.name = "product Name is required";
     }
@@ -94,13 +85,13 @@ const SellerPr = () => {
     if (!description.trim()) {
      errors.description = "Please specify description";
     }
-    if (!formData.images) {
+    if (!products.images) {
       errors.images = 'Please upload your photo';
     }
     return errors;
   };
 
-  const { name, price,description,images, errors } = formData;
+  const { name, price,description,images, errors } = products;
 
   return (
     <div className="app-container">
@@ -112,7 +103,7 @@ const SellerPr = () => {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                name="productName"
+                name="name"
                 value={name}
                 onChange={handleChange}
                 placeholder="Product Name"
@@ -121,7 +112,7 @@ const SellerPr = () => {
                 <p className="error-message">{errors.name}</p>
               )}
               <textarea
-                name="productDescription"
+                name="description"
                 value={description}
                 onChange={handleChange}
                 placeholder="Product Description"
@@ -131,7 +122,7 @@ const SellerPr = () => {
               )}
               <input
                 type="number"
-                name="productPrice"
+                name="price"
                 value={price}
                 onChange={handleChange}
                 placeholder="Product Price  ₹"
@@ -152,7 +143,7 @@ const SellerPr = () => {
             </form>
           </div>
         
-          
+      
         </div>
       </div>
     </div>
