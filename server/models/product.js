@@ -23,6 +23,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim:true
   },
+  category:{
+    type: String,
+    required: true,
+    trim:true
+  }
 });
 
 module.exports = mongoose.model('Product', productSchema);
