@@ -13,7 +13,6 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import WorkerHome from "./WorkerHome";
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
 
@@ -67,7 +66,7 @@ const SellerLogin = () => {
       setAuth(accessToken);
       setIsAuth(true);
       alert("login successfull")
-      navigate('WorkerHome');
+      navigate('/SellerHome');
     } else {
       alert("invalid usename and password");
     }
