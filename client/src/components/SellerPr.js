@@ -11,6 +11,7 @@ const SellerPr = () => {
     price: "",
     description: "",
     category,
+    hello,
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
@@ -135,13 +136,6 @@ const SellerPr = () => {
               {errors.description && (
                 <p className="error-message">{errors.description}</p>
               )}
-              <input
-                type="number"
-                name="price"
-                value={price}
-                onChange={handleChange}
-                placeholder="Product Price  ₹"
-              />
               <input
                 type="number"
                 name="price"
