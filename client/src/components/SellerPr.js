@@ -69,11 +69,6 @@ const SellerPr = () => {
     }
   };
 
-  // Rest of your code remains the same...
-
-
-  // Rest of your code remains the same...
-
 
   const validateForm = () => {
     const errors = {};
