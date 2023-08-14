@@ -11,7 +11,6 @@ const SellerPr = () => {
     price: "",
     description: "",
     category,
-    hello,
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
@@ -153,8 +152,6 @@ const SellerPr = () => {
               <button type="submit">Upload Product</button>
             </form>
           </div>
-        
-      
         </div>
       </div>
     </div>
