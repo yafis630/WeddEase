@@ -69,11 +69,6 @@ const SellerPr = () => {
     }
   };
 
-  // Rest of your code remains the same...
-
-
-  // Rest of your code remains the same...
-
 
   const validateForm = () => {
     const errors = {};
@@ -135,13 +130,6 @@ const SellerPr = () => {
               {errors.description && (
                 <p className="error-message">{errors.description}</p>
               )}
-              <input
-                type="number"
-                name="price"
-                value={price}
-                onChange={handleChange}
-                placeholder="Product Price  ₹"
-              />
               <input
                 type="number"
                 name="price"
