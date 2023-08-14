@@ -67,7 +67,7 @@ const SellerLogin = () => {
       setAuth(accessToken);
       setIsAuth(true);
       alert("login successfull")
-      navigate('WorkerHome');
+      navigate('/SellerHome');
     } else {
       alert("invalid usename and password");
     }

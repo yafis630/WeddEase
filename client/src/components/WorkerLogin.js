@@ -67,7 +67,7 @@ const WorkerLogin = () => {
       setAuth(accessToken);
       setIsAuth(true);
       alert("login successfull")
-      navigate('WorkerHome');
+      navigate('/WorkerHome');
     } else {
       alert("invalid usename and password");
     }
