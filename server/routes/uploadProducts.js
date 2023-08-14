@@ -43,6 +43,7 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
       name,
       price,
       description,
+      category,
       imagePaths // Store the array of image paths in the database
     });
 

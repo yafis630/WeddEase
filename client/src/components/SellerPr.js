@@ -10,6 +10,7 @@ const SellerPr = () => {
     name: "",
     price: "",
     description: "",
+    category,
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
@@ -34,6 +35,7 @@ const SellerPr = () => {
       formDataToSend.append("name", products.name);
       formDataToSend.append("price", products.price);
       formDataToSend.append("description", products.description);
+      formDataToSend.append("category", products.category);
 
       // Append each image file to the FormData object
       for (let i = 0; i < products.images.length; i++) {
@@ -88,10 +90,13 @@ const SellerPr = () => {
     if (!products.images) {
       errors.images = 'Please upload your photo';
     }
+    if (!products.category) {
+      errors.category = 'product category is required';
+    }
     return errors;
   };
 
-  const { name, price,description,images, errors } = products;
+  const { name, price,description,category, errors } = products;
 
   return (
     <div className="app-container">
@@ -111,6 +116,16 @@ const SellerPr = () => {
               {errors.name && (
                 <p className="error-message">{errors.name}</p>
               )}
+              <input
+                type="text"
+                name="category"
+                value={category}
+                onChange={handleChange}
+                placeholder="Product category"
+              />
+               {errors.category && (
+                <p className="error-message">{errors.category}</p>
+               )}
               <textarea
                 name="description"
                 value={description}
