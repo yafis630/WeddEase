@@ -24,6 +24,7 @@ import SellerRegistration from "./SellerRegistration";
 import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
+import UploadProduct from './UploadProduct';
 
 
 
@@ -67,6 +68,7 @@ function App() {
         <Route path="/address" element={<AddressPage />} exact />
         <Route path="/PaymentGatewayPage" element={<PaymentGatewayPage/>} exact />
         <Route path="/UpdateProfile" element={<UpdateProfile />} exact />
+        <Route path="/UploadProduct" element={<UploadProduct />} exact />
         <Route path="/Dashboard" element={<Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />  
         <Route path="/AuthProvider" element={<AuthProvider/>} />                 
       </Routes>
