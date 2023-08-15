@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require("path");
+const authenticateToken=require('./middlewares/authenticateToken')
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -45,10 +46,10 @@ const routes = [
 
 app.use('/wedease', routes);
 
-//app.delete('/logout', authenticateToken, async (req, res) => {
- // const authHeader = req.headers['authorization'];
-  //const token = authHeader && authHeader.split(' ')[1];
-  //const del = await Token.deleteOne({ token });
-  //if (del) res.send(true);
-//});
+app.delete('/logout', authenticateToken, async (req, res) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  const del = await Token.deleteOne({ token });
+  if (del) res.send(true);
+});
 
