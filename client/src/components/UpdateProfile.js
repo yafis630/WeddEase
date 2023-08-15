@@ -19,10 +19,9 @@ const UpdateProfile = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+   
     phoneNumber: "",
-    DOB: "",
-    gender: "",
+   
     bio: "",
     image: "",
     password: "",
@@ -31,15 +30,15 @@ const UpdateProfile = () => {
   });
 
   const [form, setForm] = useState({});
-
-
-  const handleChange = e => {
+  const [editing, setEditing] = useState(false);
+  
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setForm({
       ...form,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   };
 
   const fileInputRef = useRef(null);
@@ -52,10 +51,9 @@ const UpdateProfile = () => {
     if (Object.keys(errors).length === 0) {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
+
       formDataToSend.append('phoneNumber', formData.phoneNumber);
-      formDataToSend.append('DOB', formData.DOB);
-      formDataToSend.append('gender', formData.gender);
+      
       formDataToSend.append('bio', formData.bio);
       formDataToSend.append('password', formData.password);
       formDataToSend.append('confirmPassword', formData.confirmPassword);
@@ -107,153 +105,107 @@ const validateForm = () => {
   };
 
 
-  const { name, email, phoneNumber, gender, DOB, bio, image, password, confirmPassword, errors } = formData;
+  const { name, phoneNumber, bio, image, password, confirmPassword, errors } = formData;
 
 
   return (
     <div className="back">
       <Header />
-      <Container
-        className="registration-form-container">
-        <h2 className="mt-5 mb-4 text-center">Update Profile </h2>
+      <Container className="registration-form-container">
+        <h2 className="mt-5 mb-4 text-center">Update Profile</h2>
+        <div className="text-center">
+          <div className="profile-pic-container">
+            <img
+              src={image || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1025px-Cat03.jpg"} // Provide a default profile pic image
+              alt="Profile"
+              className="profile-pic"
+            />
+            {editing && (
+              <>
+                <Input
+                  type="file"
+                  name="image"
+                  id="image"
+                  onChange={handleChange}
+                  innerRef={fileInputRef}
+                  className="input-field"
+                />
+                <Button className="update-pic-button">Update Profile Pic</Button>
+              </>
+            )}
+          </div>
+        </div>
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <FormGroup>
             <Label for="name">Name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              value={name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              className="input-field"
-              
-            />
+            <div className="input-container">
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                value={name}
+                onChange={handleChange}
+               
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
           </FormGroup>
-          
-          <FormGroup>
-            <Label for="image">Upload your image</Label>
-            <Input
-              type="file"
-              name="image"
-              id="image"
-              value={image}
-              onChange={handleChange}
-              innerRef={fileInputRef}
-              className="input-field"
-            />
-            
-          </FormGroup>
-
-          
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className="input-field"
-              
-            />
-          </FormGroup>
-          
           <FormGroup>
             <Label for="phoneNumber">Mobile no.</Label>
-            <Input
-              type="tel"
-              name="phoneNumber"
-              id="phoneNumber"
-              value={phoneNumber}
-              onChange={handleChange}
-              placeholder="Enter your Mobile no."
-              className="input-field"
-              
-            />
+            <div className="input-container">
+              <Input
+                type="tel"
+                name="phoneNumber"
+                id="phoneNumber"
+                value={phoneNumber}
+                onChange={handleChange}
+                
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
           </FormGroup>
-          
-          <FormGroup>
-            <Label for="DOB">Date of Birth</Label>
-            <Input
-              type="date"
-              name="DOB"
-              id="DOB"
-              onChange={handleChange}
-              value={DOB}
-              placeholder="Enter your DOB"
-              className="input-field"
-              
-            />
-          </FormGroup>
-         
-          <FormGroup>
-            <Label for="gender">Gender</Label>
-            <Input
-              type="select"
-              name="gender"
-              id="gender"
-              value={gender}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className="input-field"
-             
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </Input>
-          </FormGroup>
-          
           <FormGroup>
             <Label for="bio">Bio</Label>
-            <Input
-              type="textarea"
-              name="bio"
-              id="bio"
-              value={bio}
-              onChange={handleChange}
-              placeholder="Tell us about yourself."
-              rows="3"
-              className="input-field"
-              
-            />
+            <div className="input-container">
+              <Input
+                type="textarea"
+                name="bio"
+                id="bio"
+                value={bio}
+                onChange={handleChange}
+                
+                rows="3"
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
           </FormGroup>
-          {errors.password && <Alert color="danger">{errors.password}</Alert>}
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              className="input-field"
-              required
-            />
-          </FormGroup>
-          {errors.confirmPassword && (
-            <Alert color="danger">{errors.confirmPassword}</Alert>
+          {/* Rest of the form fields */}
+          {editing ? (
+            <>
+              <Button color="primary" block className="submit-button">
+                Update Profile
+              </Button>
+              <Button
+              color="danger"
+                className="cancel-button"
+                onClick={() => setEditing(false)}
+              >
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <Button
+              color="primary"
+              block
+              className="submit-button"
+              onClick={() => setEditing(true)}
+            >
+              Edit Profile
+            </Button>
           )}
-          <FormGroup>
-            <Label for="confirmPassword">Confirm Password</Label>
-            <Input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-              className="input-field"
-              required
-            />
-          </FormGroup>
-          <Button color="primary" block className="submit-button">
-            Update Profile
-          </Button>
         </Form>
       </Container>
       <Footer />

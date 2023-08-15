@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/forms.css";
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {
   Container,
   Form,
@@ -12,7 +12,6 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import CategoryButtons from "./CategoryButtons";
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
 
@@ -107,7 +106,7 @@ const LoginForm = () => {
 
   return (
     <div className="back">
-      <Header  />
+      <Header />
     <Container className="login-form-container">
       <h2 className="mt-5 mb-4 text-center">User Login </h2>
       <Form onSubmit={handleSubmit}>

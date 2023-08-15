@@ -33,6 +33,7 @@ function Header() {
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart
                         </NavLink>
+                        
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

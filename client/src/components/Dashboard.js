@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Header from './Header';
+import AuthContext from '../context/AuthProvider';
 
-const Dashboard = ({ isLoggedIn }) => {
+
+const Dashboard = () => {
+    const { isAuth } = useContext(AuthContext);
+
+    if (!isAuth) {
+      return null; // Don't display anything if the user is not logged in
+    }
     
     return (
         <div>
-           <Header isLoggedIn={isLoggedIn} />
+           <Header />
             <Container className="mt-5">
                 <h2>Welcome to Your Dashboard</h2>
                 <Row className="mt-4">
