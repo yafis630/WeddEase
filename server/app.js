@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require("path");
+const authenticateToken=require('./middlewares/authenticateToken')
 
 const Token = require('./models/token.js'); 
 const authenticateToken = require('./middlewares/authenticateToken.js');
