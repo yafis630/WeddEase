@@ -1,246 +1,69 @@
 import React, { useState } from "react";
+import { Container, Form, FormGroup, Label, Input, Button, Card, CardImg } from "reactstrap";
 import Header from "./Header";
 import Footer from "./Footer";
-import hiringCategories from "../data/hiringCategories";
 import "../styles/forms.css";
-import {
-    Container,
-    Form,
-    FormGroup,
-    Label,
-    Input,   
-    Button,
-    Alert,
-    Card,
-    CardBody,
-    CardTitle,
-    CardText,
-    CardImg,
-    CardFooter,
-} from "reactstrap";
-
-const options = hiringCategories.map((category, i) => (
-    <option value={category.name} key={i}>
-      {category.name}
-    </option>
-  ));
 
 const UploadProduct = () => {
-   
-  const [products, setproducts] = useState({
-    name: "",
-    price: "",
-    description: "",
-    category: "",
-    images: [],  // Change to an array to hold multiple images
-    errors: {}
-  });
+  const [uploadedImages, setUploadedImages] = useState([]);
 
-  const [uploadedProducts, setUploadedProducts] = useState([]);
-
-  const handleDeleteProduct = (index) => {
-    const newUploadedProducts = [...uploadedProducts];
-    newUploadedProducts.splice(index, 1);
-    setUploadedProducts(newUploadedProducts);
-  };
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setproducts({ ...products, [name]: value });
-  };
-
-  const handleImageChange = e => {
+  const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setproducts({ ...products, images:  [...files] });
+    setUploadedImages([...uploadedImages, ...files]);
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const errors = validateForm();
-
-    if (Object.keys(errors).length === 0) {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", products.name);
-      formDataToSend.append("price", products.price);
-      formDataToSend.append("description", products.description);
-      formDataToSend.append("category", products.category);
-
-      // Append each image file to the FormData object
-      for (let i = 0; i < products.images.length; i++) {
-        formDataToSend.append("images", products.images[i]);
-      }
-
-      try {
-        const response = await fetch("http://localhost:8080/wedease/uproduct", {
-          method: "POST",
-          body: formDataToSend
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setUploadedProducts([...uploadedProducts, data]);
-          alert("product uploaded");
-          
-        } else {
-          alert("product not uploaded");
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-        alert("An error occurred.");
-      }
-    } else {
-      setproducts(prevFormData => ({
-        ...prevFormData,
-        errors
-      }));
-      
-    }
+  const handleDeleteImage = (index) => {
+    const newUploadedImages = [...uploadedImages];
+    newUploadedImages.splice(index, 1);
+    setUploadedImages(newUploadedImages);
   };
-
-
-  const validateForm = () => {
-    const errors = {};
-    const { name,description,price, } = products;
-    if (!name.trim()) {
-      errors.name = "product Name is required";
-    }
-    if (!price) {
-     errors.price = "Please specify price";
-   }
-    if (!description.trim()) {
-     errors.description = "Please specify description";
-    }
-    if (!products.images) {
-      errors.images = 'Please upload your photo';
-    }
-    if (!products.category) {
-      errors.profession = 'product profession is required';
-    }
-    return errors;
-  };
-
-  const { name, price,description,category, errors } = products;
 
   return (
-    
-      <div className="back">
-        <Header />
-        <Container
-        className="registration-form-container">
-        <h2 className="mt-5 mb-4 text-center">Upload Product </h2>
-        <Form onSubmit={handleSubmit} >
-          {errors.name && <Alert color="danger">{errors.name}</Alert>}
-          <FormGroup>
-            <Label for="name">Product Name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              value={name}
-              onChange={handleChange}
-              placeholder="Product Name"
-              className="input-field"
-              required
-            />
-          </FormGroup>
-          {errors.category && <Alert color="danger">{errors.category}</Alert>}
-          <FormGroup>
-            <Label for="category">Category</Label>
-            <Input
-              type="select"
-              name="category"
-              id="category"
-              value={category}
-              onChange={handleChange}
-              className="input-field"
-              required
-              >
-              <option value="" disabled>
-                -- select an option --
-              </option>
-              {options}
-            </Input>
-          </FormGroup>
-          {errors.description && <Alert color="danger">{errors.description}</Alert>}
-          <FormGroup>
-            <Label for="description">Description</Label>
-            <Input
-              type="textarea"
-              name="description"
-              id="description"
-              value={description}
-              onChange={handleChange}
-              placeholder="Tell us about the Product."
-              rows="3"
-              className="input-field"
-              required
-            />
-          </FormGroup>
-          {errors.price && <Alert color="danger">{errors.price}</Alert>}
-          <FormGroup>
-            <Label for="price">Price </Label>
-            <Input
-              type="number"
-              name="price"
-              id="price"
-              value={price}
-              onChange={handleChange}
-              placeholder="Product Price"
-              className="input-field"
-              required
-            />
-          </FormGroup>
-          {errors.image && <Alert color="danger">{errors.image}</Alert>}
-          <FormGroup>
-            <Label for="image">Upload your image</Label>
-              <Input
-              multiple
-              type="file"
-              name="images"
-              id="images"
-              onChange={handleImageChange}
-             // innerRef={fileInputRef}
-             className="input-field"
-              />
-              </FormGroup>
-              <Button color="primary" block className="submit-button">
-            Upload Product
-          </Button>
-            </Form>
-          </Container>
+    <div className="back"> 
+    <Header />
+    <Container className="registration-form-container">
+      <h2 className="mt-5 mb-4 text-center">Upload Images</h2>
+      <Form>
+        <FormGroup>
+          <Label for="images"></Label>
+          <Input
+            multiple
+            type="file"
+            name="images"
+            id="images"
+            onChange={handleImageChange}
+          />
+        </FormGroup>
+        <Button color="primary" block className="submit-button">
+          Upload 
+        </Button>
+      </Form>
 
-          <Container className="mt-4">
-        <h2 className="text-center">Uploaded Products</h2>
-        <div className="product-cards">
-          {uploadedProducts.map((product, index) => (
-            <Card key={index} className="mb-3">
+      <Container className="mt-4">
+        <h2 className="text-center">Uploaded Images</h2>
+        <div className="uploaded-images">
+          {uploadedImages.map((image, index) => (
+            <Card key={index} className="uploaded-image-card">
               <CardImg
                 top
                 width="100%"
-               // src={product.images[0].name}  {/* Assuming images is an array of File objects */}
-                alt={product.name}
+                src={URL.createObjectURL(image)}
+                alt={`Uploaded Image ${index}`}
               />
-              <CardBody>
-                <CardTitle tag="h5">{product.name}</CardTitle>
-                <CardText>{product.description}</CardText>
-              </CardBody>
-              <CardFooter>
-                <Button
-                  color="danger"
-                  onClick={() => handleDeleteProduct(index)}
-                >
-                  Delete
-                </Button>
-              </CardFooter>
+              <Button
+                color="danger"
+                onClick={() => handleDeleteImage(index)}
+                className="delete-button"
+              >
+                Delete
+              </Button>
             </Card>
           ))}
         </div>
       </Container>
-
-          <Footer />
-        </div>
+    </Container>
+    <Footer />
+    </div>
   );
 };
 
