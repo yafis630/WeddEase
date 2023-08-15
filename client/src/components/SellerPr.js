@@ -152,8 +152,6 @@ const SellerPr = () => {
               <button type="submit">Upload Product</button>
             </form>
           </div>
-        
-      
         </div>
       </div>
     </div>

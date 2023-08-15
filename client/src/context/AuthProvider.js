@@ -5,10 +5,10 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState( {});
   const [isAuth, setIsAuth] = useState( false);
-  // useEffect(() => {
-  //   localStorage.setItem("auth", auth);
-  //   localStorage.setItem("isAuth", isAuth);
-  // }, [auth, isAuth]);
+  useEffect(() => {
+    localStorage.setItem("auth", auth);
+    localStorage.setItem("isAuth", isAuth);
+   }, [auth, isAuth]);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, isAuth, setIsAuth }}>
