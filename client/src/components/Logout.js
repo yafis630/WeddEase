@@ -3,24 +3,29 @@ import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../context/AuthProvider";
 
-import axios from "axios";
-
 const Logout = () => {
   const navigate = useNavigate();
   const { setAuth, setIsAuth, auth } = useContext(AuthContext);
   const handleLogout = async () => {
-    const res = await axios.delete("/logout", {
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    });
+    try {
+      const res = await fetch("/logout", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${auth}`,
+        },
+      });
 
-    if (res.data) {
-      setAuth({});
-      setIsAuth(false);
-      localStorage.clear();
-
-      navigate("/WorkerLogin");
+      if (res.ok) {
+        setAuth({});
+        setIsAuth(false);
+        localStorage.clear();
+        
+        navigate("/");
+      } else {
+        console.error("Logout request failed.");
+      }
+    } catch (error) {
+      console.error("An error occurred during logout:", error);
     }
   };
 
