@@ -10,7 +10,7 @@ const SellerPr = () => {
     name: "",
     price: "",
     description: "",
-    category,
+    category: "",
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });

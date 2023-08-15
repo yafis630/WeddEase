@@ -4,13 +4,19 @@ import Footer from "./Footer";
 import hiringCategories from "../data/hiringCategories";
 import "../styles/forms.css";
 import {
-  Container,
-  Form,
-  FormGroup,
-  Label,
-  Input,   
-  Button,
-  Alert
+    Container,
+    Form,
+    FormGroup,
+    Label,
+    Input,   
+    Button,
+    Alert,
+    Card,
+    CardBody,
+    CardTitle,
+    CardText,
+    CardImg,
+    CardFooter,
 } from "reactstrap";
 
 const options = hiringCategories.map((category, i) => (
@@ -29,6 +35,14 @@ const UploadProduct = () => {
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
+
+  const [uploadedProducts, setUploadedProducts] = useState([]);
+
+  const handleDeleteProduct = (index) => {
+    const newUploadedProducts = [...uploadedProducts];
+    newUploadedProducts.splice(index, 1);
+    setUploadedProducts(newUploadedProducts);
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -66,6 +80,7 @@ const UploadProduct = () => {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
+          setUploadedProducts([...uploadedProducts, data]);
           alert("product uploaded");
           
         } else {
@@ -80,6 +95,7 @@ const UploadProduct = () => {
         ...prevFormData,
         errors
       }));
+      
     }
   };
 
@@ -194,6 +210,35 @@ const UploadProduct = () => {
           </Button>
             </Form>
           </Container>
+
+          <Container className="mt-4">
+        <h2 className="text-center">Uploaded Products</h2>
+        <div className="product-cards">
+          {uploadedProducts.map((product, index) => (
+            <Card key={index} className="mb-3">
+              <CardImg
+                top
+                width="100%"
+               // src={product.images[0].name}  {/* Assuming images is an array of File objects */}
+                alt={product.name}
+              />
+              <CardBody>
+                <CardTitle tag="h5">{product.name}</CardTitle>
+                <CardText>{product.description}</CardText>
+              </CardBody>
+              <CardFooter>
+                <Button
+                  color="danger"
+                  onClick={() => handleDeleteProduct(index)}
+                >
+                  Delete
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </Container>
+
           <Footer />
         </div>
   );
