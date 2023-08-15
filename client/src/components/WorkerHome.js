@@ -7,8 +7,12 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "../styles/WorkerHome.css";
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
+import AuthContext from "../context/AuthProvider";
+import Logout from "./Logout";
 
 const WorkerHome = () => {
+  // const { auth } = useContext(AuthContext);
+
   const [workerList, setWorkerList] = useState([]);
   const { category } = useParams();
   const [selectedRange, setSelectedRange] = useState([
@@ -90,16 +94,14 @@ const WorkerHome = () => {
     }
   };
 
-  const handleLogout = () => {
-    window.location.href = "/WorkerLogin";
-  };
+ 
 
   return (
     <div className="worker-home-container">
       <Header />
-      <Button variant="secondary" className="logout-button" onClick={handleLogout}>
-        Logout
-      </Button>
+      
+        <Logout />
+      
       <div>
       <br />
       <h2 className="worker-type">{category}</h2>

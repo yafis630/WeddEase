@@ -17,7 +17,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
 
 
-const LoginForm = ({onLogin}) => {
+const LoginForm = () => {
   const navigate = useNavigate();
   
 
@@ -70,8 +70,7 @@ const LoginForm = ({onLogin}) => {
       setAuth(accessToken);
       setIsAuth(true);
       alert("login successfull")
-      localStorage.setItem("isLoggedIn", "true");
-      onLogin();
+      
       navigate('/CategoryButtons');
     } else {
       alert("invalid usename and password");
