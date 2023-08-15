@@ -5,7 +5,7 @@ import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } f
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
 
-function Header({ isLoggedIn, onLogout }) {
+function Header() {
     
     return (
         <div className="header">
@@ -30,24 +30,10 @@ function Header({ isLoggedIn, onLogout }) {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        {isLoggedIn && (
-                            <>
-                                <NavLink to="/Dashboard" className="nav-link">
-                                    <FontAwesomeIcon icon={faUser} className="nav-icon" /> Dashboard
-                                </NavLink>
-                                <NavLink to="/" className="nav-link" onClick={onLogout}>
-                                    Logout
-                                </NavLink>
-                            </>
-                        )}
-                        {!isLoggedIn && (
-                            <NavLink to="/LoginForm" className="nav-link">
-                                
-                            </NavLink>
-                        )}
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart
                         </NavLink>
+                        
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

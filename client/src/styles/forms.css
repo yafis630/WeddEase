@@ -80,6 +80,32 @@
   font-size: 14px;
 }
 
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.update-pic-button {
+  display: block;
+  margin-top: 10px;
+}
+
+.cancel-button {
+  margin-top: 10px;
+  font-size: large;
+}
+
 @media screen and (max-width: 767px) {
   .registration-form-container {
     max-width: 90%;
@@ -87,6 +113,11 @@
     margin-bottom: 10%;
     padding: 10px;
     font-size: 16px;
+  }
+
+  .profile-pic {
+    width: 120px;
+    height: 120px;
   }
 
   .registration-form-container .input-field {

@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const path = require("path");
 const authenticateToken=require('./middlewares/authenticateToken')
 
+const Token = require('./models/token.js'); 
+const authenticateToken = require('./middlewares/authenticateToken.js');
+
 const app = express();
 const port = process.env.PORT || 8080;
 
