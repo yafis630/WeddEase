@@ -2,9 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const Worker = require('../models/worker');
-const authenticateToken=require('../middlewares/authenticateToken')
+
 // Fetch workers by category
-router.get('/workers/:category',authenticateToken, async (req, res) => {
+router.get('/workers/:category', async (req, res) => {
   try {
     let category = req.params.category;
     category=category.substring(9)

@@ -4,8 +4,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require("path");
-const authenticateToken=require('./middlewares/authenticateToken')
-
 const Token = require('./models/token.js'); 
 const { Console } = require('console');
 const app = express();
@@ -44,6 +42,7 @@ const routes = [
   require('./routes/uploadProducts'),
   require('./routes/addressData'),
   require('./routes/paymentRoutes'),
+  require('./routes/workerAvailability')
 ];
 
 app.use('/wedease', routes);
