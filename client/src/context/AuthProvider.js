@@ -3,8 +3,8 @@ import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState( {});
-  const [isAuth, setIsAuth] = useState( false);
+  const [auth, setAuth] = useState(localStorage.getItem("auth") || {});
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth") || false);
   useEffect(() => {
     localStorage.setItem("auth", auth);
     localStorage.setItem("isAuth", isAuth);

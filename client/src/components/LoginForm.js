@@ -51,15 +51,15 @@ const LoginForm = () => {
 
   const handleSubmit = async  e => {
     e.preventDefault();
-    if (!formData.recaptchaValue) {
-      alert("Please complete the reCAPTCHA");
-      return;
-    }
+   // if (!formData.recaptchaValue) {
+    //  alert("Please complete the reCAPTCHA");
+   //   return;
+   // }
     const response= await fetch('http://localhost:8080/wedease/login',{
       method:'POST',
       body:JSON.stringify(formData),
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
       }
     });
     const {success,accessToken} = await response.json();

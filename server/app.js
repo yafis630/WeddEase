@@ -7,8 +7,7 @@ const path = require("path");
 const authenticateToken=require('./middlewares/authenticateToken')
 
 const Token = require('./models/token.js'); 
-const authenticateToken = require('./middlewares/authenticateToken.js');
-
+const { Console } = require('console');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -49,10 +48,12 @@ const routes = [
 
 app.use('/wedease', routes);
 
-app.delete('/logout', authenticateToken, async (req, res) => {
-  const authHeader = req.headers['authorization'];
+app.get('/wedease/log', authenticateToken, async (req, res) => {
+  const authHeader = req.headers['authentication'];
   const token = authHeader && authHeader.split(' ')[1];
   const del = await Token.deleteOne({ token });
-  if (del) res.send(true);
+  if (del.acknowledged) {
+    
+    res.send({loggedOut:true})};
 });
 

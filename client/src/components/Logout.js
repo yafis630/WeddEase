@@ -7,26 +7,16 @@ const Logout = () => {
   const navigate = useNavigate();
   const { setAuth, setIsAuth, auth } = useContext(AuthContext);
   const handleLogout = async () => {
-    try {
-      const res = await fetch("/logout", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${auth}`,
-        },
-      });
-
-      if (res.ok) {
+    
+      const res = await fetch('http://localhost:8080/wedease/log',
+      {headers: {Authentication: `Bearer ${auth}`}})
+      
         setAuth({});
         setIsAuth(false);
         localStorage.clear();
-        
+        console.log(res)
         navigate("/");
-      } else {
-        console.error("Logout request failed.");
-      }
-    } catch (error) {
-      console.error("An error occurred during logout:", error);
-    }
+     
   };
 
   return (
