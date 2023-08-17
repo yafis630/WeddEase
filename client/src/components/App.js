@@ -26,7 +26,7 @@ import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
 
-import ShoppingServices from "./SellerRegistration";
+import ShoppingServices from "./ShoppingServices";
 
 
 function App() {
