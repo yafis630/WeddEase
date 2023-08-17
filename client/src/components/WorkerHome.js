@@ -12,14 +12,8 @@ import Logout from "./Logout";
 
 const WorkerHome = () => {
   const [workerList, setWorkerList] = useState([]);
-  const { category } = useParams();
-  const [selectedRange, setSelectedRange] = useState([
-    {
-      startDate: null,
-      endDate: null,
-      key: "selection",
-    },
-  ]);
+  const { category, workerId } = useParams();
+  
   const [markedDates, setMarkedDates] = useState([]);
 
   const fetchData = async () => {
@@ -49,23 +43,28 @@ const WorkerHome = () => {
 
 
   const handleSubmit = async () => {
-    const { startDate, endDate } = selectedRange[0];
-    if (startDate && endDate) {
-      const response = await fetch("http://localhost:8080/wedease/update-worker-availability", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ startDate, endDate }),
-      });
-
-      if (response.ok) {
-        // Handle success
-      } else {
+    if (markedDates.length > 0) {
+      try {
+        const response = await fetch(`http://localhost:8080/wedease/workers/${workerId}/update-unavailable-dates`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ unavailableDates: markedDates }),
+        });
+  
+        if (response.ok) {
+          // Update the workerList or fetch updated data
+        } else {
+          // Handle error
+        }
+      } catch (error) {
+        console.error(error);
         // Handle error
       }
     }
   };
+  
 
   return (
     <div className="worker-home-container">
