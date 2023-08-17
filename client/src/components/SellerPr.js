@@ -3,7 +3,15 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../styles/SellerPr.css";
+import { Container, Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import SellerCat from "./SellerCat";
+import SellerCategories from "../data/sellerCategories";
+
+const categoryOptions = SellerCategories.map((category, i) => (
+  <option value={category.name} key={i}>
+    {category.name}
+  </option>
+));
 
 const SellerPr = () => {
   const [products, setproducts] = useState({
@@ -94,66 +102,96 @@ const SellerPr = () => {
   const { name, price,description,category, errors } = products;
 
   return (
-    <div className="app-container">
-      <div className="back">
-        <div className="seller-profile-container">
-          <h2>Seller Profile</h2>
-          <div className="product-upload-section">
-            <h3>Upload Product</h3>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={handleChange}
-                placeholder="Product Name"
-              />
-              {errors.name && (
-                <p className="error-message">{errors.name}</p>
-              )}
-              <input
-                type="text"
-                name="category"
-                value={category}
-                onChange={handleChange}
-                placeholder="Product category"
-              />
-               {errors.category && (
-                <p className="error-message">{errors.category}</p>
-               )}
-              <textarea
-                name="description"
-                value={description}
-                onChange={handleChange}
-                placeholder="Product Description"
-              />
-              {errors.description && (
-                <p className="error-message">{errors.description}</p>
-              )}
-              <input
-                type="number"
-                name="price"
-                value={price}
-                onChange={handleChange}
-                placeholder="Product Price  ₹"
-              />
-              {errors.price && (
-                <p className="error-message">{errors.price}</p>
-              )}
-              <input
-              multiple
-              type="file"
-              name="images"
-              id="images"
-              onChange={handleImageChange}
-             // innerRef={fileInputRef}
+    <div className="back">
+      <Header />
+      <Container className="registration-form-container">
+        <h2 className="mt-5 mb-4 text-center">Product upload</h2>
+        <Form onSubmit={handleSubmit} >
+          {errors.name && <Alert color="danger">{errors.name}</Alert>}
+          <FormGroup>
+            <Label for="name">Product Name</Label>
+            <Input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={handleChange}
+              placeholder="Enter the Product Name"
+              className="input-field"
+              required
+            />
+          </FormGroup>
+          {errors.image && <Alert color="danger">{errors.image}</Alert>}
+          <FormGroup>
+          <Label for="images">Product Image</Label>
+          <Input
+            multiple
+            type="file"
+            name="images"
+            id="images"
+            onChange={handleImageChange}
+            className="input-field"
+          />
+        </FormGroup>
 
-              />
-              <button type="submit">Upload Product</button>
-            </form>
-          </div>
-        </div>
-      </div>
+          {errors.price && (
+            <Alert color="danger">{errors.price}</Alert>
+          )}
+          <FormGroup>
+            <Label for="phoneNumber">Product Price</Label>
+            <Input
+              type="number"
+              name="price"
+              id="price"
+              value={price}
+              onChange={handleChange}
+              placeholder="Enter the product price."
+              className="input-field"
+              required
+            />
+          </FormGroup>
+         
+          {errors.description && <Alert color="danger">{errors.description}</Alert>}
+          <FormGroup>
+            <Label for="description">Product Description</Label>
+            <Input
+              type="textarea"
+              name="description"
+              id="description"
+              value={description}
+              onChange={handleChange}
+              placeholder="Tell us about the product."
+              rows="3"
+              className="input-field"
+              required
+            />
+          </FormGroup>
+          {errors.category && (
+              <Alert color="danger">{errors.category}</Alert>
+            )}
+          <FormGroup>
+            <Label for="category">Category</Label>
+            <Input
+              type="select"
+              name="category"
+              id="category"
+              value={category}
+              onChange={handleChange}
+              className="input-field"
+              required
+            >
+              <option value="" disabled>
+                -- Select a category --
+              </option>
+              {categoryOptions}
+            </Input>
+            </FormGroup>
+          <Button color="primary" block className="submit-button">
+            Upload 
+          </Button>
+        </Form>
+      </Container>
+      <Footer />
     </div>
   );
 };

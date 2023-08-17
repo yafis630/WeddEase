@@ -28,7 +28,6 @@ const upload=multer({
   }
 })
 
-
 // Register a new user
 router.post('/seller', upload.single('image'), async (req, res) => {
   try {
@@ -64,7 +63,7 @@ router.post('/seller', upload.single('image'), async (req, res) => {
   
 });
 
-router.put("/putchange",async(req,res)=>{
+router.put("/putseller",async(req,res)=>{
   const seller=await Seller.findOne({email:req.email.email})
   const update = { bio: req.body.bio };
   const changed = await Worker.findOneAndUpdate(filter, update, {
@@ -73,6 +72,5 @@ router.put("/putchange",async(req,res)=>{
   
     res.send(true);
   });
-
 
 module.exports = router;
