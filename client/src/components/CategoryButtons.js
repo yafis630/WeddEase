@@ -16,7 +16,7 @@ const CategoryButtons = () => {
 
           <div className="button-container">
           <div className="card-row">
-            <Link to="/Categories">
+            <Link to="/ShoppingServices">
               <Card className="button-card">
                 <Card.Img src= {ShoppingButton} />
               </Card>
