@@ -29,26 +29,17 @@ const { category , workerId} = useParams();
           const data = await response.json();
           console.log(data);
           const workerItems = data.map((worker) => (
-            <div className="worker-card" key={worker.id}>
-              <Link
-                to={`/workers/${category}/${worker.id}`}
-                className="worker-card-link"
-              
-              >
+            <div className="worker-home" key={worker.id}>
                 <img
-                  className="worker-picture-list"
+                  className="worker-profile-pic"
                   src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)}
                   alt="profile"
                 />
                 <h3>Name</h3>
                 <p>{worker.name}</p>
-                <h3>Email</h3>
-                <p>{worker.email}</p>
-                <h3>Phone Number</h3>
-                <p>{worker.phoneNumber}</p>
                 <h3>Bio</h3>
                 <p>{worker.bio}</p>
-              </Link>
+              
             </div>
 
           ));
@@ -99,18 +90,19 @@ const { category , workerId} = useParams();
   
 
   return (
+    <div className="back"><Header />
     <div className="worker-home-container">
-      <Header />
-      <div className="worker-card-container">{workerList}</div>
+      
+      <div className="worker-display">{workerList}</div>
       <Logout />
-      <Button variant="info" href="/UpdateProfile">
+      <Button className="update-btn" variant="info" href="/UpdateProfile">
         Update Profile
       </Button>
-      <Button variant="success" href="/UploadProduct">
+      <Button className="update-btn" variant="success" href="/UploadProduct">
         Upload Images
       </Button>
       <div className="calendar-container">
-        <h4>Select Unavailable Dates</h4>
+        <h4>Unavailable Dates</h4>
         <Calendar
           tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
           onChange={(date) => {
@@ -124,8 +116,9 @@ const { category , workerId} = useParams();
         
         
         
-      
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
