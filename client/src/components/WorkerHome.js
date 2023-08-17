@@ -6,7 +6,6 @@ import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns"; // Import addDays function
 import "../styles/WorkerHome.css";
 import Header from "./Header";
-import Footer from "./Footer";
 import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
@@ -117,7 +116,7 @@ const WorkerHome = () => {
           Submit
         </Button>
       </div>
-      <Footer />
+      
     </div>
   );
 };
