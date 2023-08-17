@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Calendar from "react-calendar"; 
 import "react-calendar/dist/Calendar.css";
@@ -12,6 +12,7 @@ import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 
 const WorkerHome = () => {
+  
 const[workerdata,setWorkerdata]=useState([]);
 const [workerList, setWorkerList] = useState([]);
 const { category , workerId} = useParams();
@@ -20,6 +21,7 @@ const { category , workerId} = useParams();
   const {auth}  = useContext(AuthContext)
   
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/workerHome`,
