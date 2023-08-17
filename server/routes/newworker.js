@@ -4,6 +4,7 @@ const router = express.Router();
 const Worker = require('../models/worker');
 const multer = require('multer');
 const path = require('path');
+const authenticateToken=require('../middlewares/authenticateToken');
 
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
@@ -60,5 +61,27 @@ router.post('/worker', upload.single('image'), async (req, res) => {
 }
   
 });
+
+router.put("/putworker",async(req,res)=>{
+  const seller=await Seller.findOne({email:req.email.email})
+  const update = { bio: req.body.bio };
+  const changed = await Worker.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+  
+    res.send(true);
+  });
+
+  router.get('/workerHome', authenticateToken ,async (req, res) => {
+    try {
+      const workers = await Worker.find({ email:req.email.email }); 
+      console.log(workers);
+      res.json(workers);
+  
+    } catch (error) {
+      console.error('Error fetching worker', error);
+      res.status(500).json({ error: 'Failed to fetch worker' });
+    }
+  });
 
 module.exports = router;
