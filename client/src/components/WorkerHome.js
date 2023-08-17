@@ -30,7 +30,7 @@ const WorkerHome = () => {
         const data = await response.json();
         setWorkerList(data);
       } else {
-        throw new Error("Error fetching worker data.");
+        throw new Error("Error fetching worker data..");
       }
     } catch (error) {
       console.log(error);
