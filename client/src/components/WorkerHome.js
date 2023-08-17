@@ -110,7 +110,6 @@ const { category , workerId} = useParams();
           Submit
         </Button>
       </div>
-      <Footer />
     </div>
   );
 };

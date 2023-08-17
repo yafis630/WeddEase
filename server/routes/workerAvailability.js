@@ -3,15 +3,7 @@ const router = express.Router();
 const Worker = require('../models/worker');
 
 // Update worker availability
-<<<<<<< HEAD
-router.post('/update-worker-availability', async (req, res) => {
-  console.log('hi')
-  const { startDate, endDate } = req.body;
-  
-  // Perform your update logic here, updating the worker's unavailableDates
-=======
 router.post('/:workerId/update-unavailable-dates', async (req, res) => {
->>>>>>> 604e4448cf7136f006ffcf25ca6a31ac69b2ef27
   try {
     const workerId = req.params.workerId;
     const { unavailableDates } = req.body;
