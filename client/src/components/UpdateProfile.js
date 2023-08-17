@@ -58,9 +58,10 @@ const UpdateProfile = () => {
       formDataToSend.append('password', formData.password);
       formDataToSend.append('confirmPassword', formData.confirmPassword);
       formDataToSend.append('image', fileInputRef.current.files[0]);
+      console.log(formData)
       try{
-      const response = await fetch('http://localhost:8080/wedease/worker', {
-        method: 'POST',
+      const response = await fetch('http://localhost:8080/wedease/putworker', {
+        method: 'PUT',
         body: formDataToSend,
       });
   
