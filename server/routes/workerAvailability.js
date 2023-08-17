@@ -3,26 +3,29 @@ const router = express.Router();
 const Worker = require('../models/worker');
 
 // Update worker availability
+<<<<<<< HEAD
 router.post('/update-worker-availability', async (req, res) => {
   console.log('hi')
   const { startDate, endDate } = req.body;
   
   // Perform your update logic here, updating the worker's unavailableDates
+=======
+router.post('/:workerId/update-unavailable-dates', async (req, res) => {
+>>>>>>> 604e4448cf7136f006ffcf25ca6a31ac69b2ef27
   try {
-    const workerId = req.params.workerId; // Assuming you have worker ID in URL parameters
-    const worker = await Worker.findById(workerId);
+    const workerId = req.params.workerId;
+    const { unavailableDates } = req.body;
+
+    const worker = await Worker.findByIdAndUpdate(workerId, { $addToSet: { unavailableDates } }, { new: true });
+
     if (!worker) {
       return res.status(404).json({ message: "Worker not found" });
     }
-    
-    // Update worker's unavailableDates
-    worker.unavailableDates.push(startDate, endDate);
-    await worker.save();
 
-    return res.status(200).json({ message: "Availability updated successfully" });
+    return res.status(200).json({ message: "Unavailable dates updated successfully", worker });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Error updating availability" });
+    return res.status(500).json({ message: "Error updating unavailable dates" });
   }
 });
 
