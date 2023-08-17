@@ -6,23 +6,17 @@ import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns"; // Import addDays function
 import "../styles/WorkerHome.css";
 import Header from "./Header";
+import Footer from "./Footer";
 import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 
 const WorkerHome = () => {
-  const[workerdata,setWorkerdata]=useState([]);
-  const [workerList, setWorkerList] = useState([]);
-  const { category } = useParams();
-  const [selectedRange, setSelectedRange] = useState([
-    {
-      startDate: null,
-      endDate: null,
-      key: "selection",
-    },
-  ]);
+const[workerdata,setWorkerdata]=useState([]);
+const [workerList, setWorkerList] = useState([]);
+const { category , workerId} = useParams();
+  
   const [markedDates, setMarkedDates] = useState([]);
-
   const {auth}  = useContext(AuthContext)
   useEffect(() => {
     const fetchData = async () => {
@@ -116,6 +110,7 @@ const WorkerHome = () => {
           Submit
         </Button>
       </div>
+      <Footer />
     </div>
   );
 };
