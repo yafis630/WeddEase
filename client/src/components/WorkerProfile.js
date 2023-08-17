@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../styles/WorkerProfile.css";
 import profile from "../data/profile-placeholder.png";
 import Header from "./Header";
 import Footer from "./Footer";
+import AuthContext from "../context/AuthProvider";
 
 const WorkerProfile = () => {
   const [workerList, setWorkerList] = useState([]);
   const { category } = useParams();
-
+  const {auth}  = useContext(AuthContext)
+ 
   const Handle = () => {
     alert("Hired");
 
@@ -18,7 +20,8 @@ const WorkerProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/wedease/workers/' + new URLSearchParams({ category }))
+        const response = await fetch('http://localhost:8080/wedease/workers/' + new URLSearchParams({ category }),
+        {headers: {Authentication: `Bearer ${auth}`}})
 
         if (response.ok) {
           const data = await response.json();
