@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { addDays } from "date-fns"; // Import addDays function
+import Calendar from "react-calendar"; 
+import "react-calendar/dist/Calendar.css";
+import { isSameDay } from "date-fns"; // Import addDays function
 import "../styles/WorkerHome.css";
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
@@ -30,7 +29,7 @@ const WorkerHome = () => {
         const data = await response.json();
         setWorkerList(data);
       } else {
-        throw new Error("Error fetching worker data..");
+        throw new Error("Error fetching worker data.");
       }
     } catch (error) {
       console.log(error);
@@ -44,22 +43,10 @@ const WorkerHome = () => {
   useEffect(() => {
     if (workerList.length > 0) {
       const unavailableDates = workerList.map((worker) => worker.unavailableDates).flat();
-      const markedUnavailableDates = convertDatesToMarkedFormat(unavailableDates);
-      setMarkedDates(markedUnavailableDates);
+      setMarkedDates(unavailableDates);
     }
   }, [workerList]);
 
-  const convertDatesToMarkedFormat = (dates) => {
-    return dates.map((date) => ({
-      startDate: new Date(date),
-      endDate: addDays(new Date(date), 1),
-      color: "#FF5733", // Red color for unavailable dates
-    }));
-  };
-
-  const handleRangeChange = (ranges) => {
-    setSelectedRange([ranges.selection]);
-  };
 
   const handleSubmit = async () => {
     const { startDate, endDate } = selectedRange[0];
@@ -105,13 +92,14 @@ const WorkerHome = () => {
       <Button variant="success" href="/UploadProduct">
         Upload Images
       </Button>
-      <div className="date-range-picker-container">
-        <h4>Select Unavailable Date Range</h4>
-        <DateRangePicker
-          ranges={selectedRange}
-          onChange={handleRangeChange}
-          markedDates={markedDates}
-          className="date-range-picker"
+      <div className="calendar-container">
+        <h4>Select Unavailable Dates</h4>
+        <Calendar
+          tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
+          onChange={(date) => {
+            const updatedMarkedDates = [...markedDates, date];
+            setMarkedDates(updatedMarkedDates);
+          }}
         />
         <Button variant="primary" onClick={handleSubmit}>
           Submit
