@@ -18,6 +18,7 @@ const { category , workerId} = useParams();
   
   const [markedDates, setMarkedDates] = useState([]);
   const {auth}  = useContext(AuthContext)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,9 +27,33 @@ const { category , workerId} = useParams();
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
-          setWorkerdata(data);
-          console.log(workerdata);
+          console.log(data);
+          const workerItems = data.map((worker) => (
+            <div className="worker-card" key={worker.id}>
+              <Link
+                to={`/workers/${category}/${worker.id}`}
+                className="worker-card-link"
+              
+              >
+                <img
+                  className="worker-picture-list"
+                  src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)}
+                  alt="profile"
+                />
+                <h3>Name</h3>
+                <p>{worker.name}</p>
+                <h3>Email</h3>
+                <p>{worker.email}</p>
+                <h3>Phone Number</h3>
+                <p>{worker.phoneNumber}</p>
+                <h3>Bio</h3>
+                <p>{worker.bio}</p>
+              </Link>
+            </div>
+
+          ));
+
+          setWorkerList(workerItems);
         } else {
           throw new Error("Error fetching worker data.");
         }
@@ -38,7 +63,8 @@ const { category , workerId} = useParams();
     };
 
     fetchData();
-  },[workerdata]);
+  }, [category]);
+
 
   useEffect(() => {
     if (workerList.length > 0) {
@@ -75,22 +101,8 @@ const { category , workerId} = useParams();
   return (
     <div className="worker-home-container">
       <Header />
+      <div className="worker-card-container">{workerList}</div>
       <Logout />
-      <div>
-                <img
-                  className="worker-picture-list"
-                  src={'http://localhost:8080/images/'+String(workerdata.imagePath).substring(8)}
-                  alt="profile"
-                />
-                <h3>Name</h3>
-                <p>{workerdata.name}</p>
-                <h3>Email</h3>
-                <p>{workerdata.email}</p>
-                <h3>Bio</h3>
-                <p>{workerdata.bio}</p>
-
-              
-            </div>
       <Button variant="info" href="/UpdateProfile">
         Update Profile
       </Button>
@@ -109,6 +121,10 @@ const { category , workerId} = useParams();
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
+        
+        
+        
+      
       </div>
     </div>
   );

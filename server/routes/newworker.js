@@ -73,15 +73,6 @@ router.put("/putchange",async(req,res)=>{
 
 
 
-router.put("/putworker",async(req,res)=>{
-  const seller=await Seller.findOne({email:req.email.email})
-  const update = { bio: req.body.bio };
-  const changed = await Worker.findOneAndUpdate(filter, update, {
-      new: true,
-    });
-  
-    res.send(true);
-  });
 
   router.get('/workerHome', authenticateToken ,async (req, res) => {
     try {
