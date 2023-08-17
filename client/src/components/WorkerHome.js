@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { DateRangePicker } from "react-date-range";
@@ -14,6 +14,8 @@ import Logout from "./Logout";
 const WorkerHome = () => {
   const [workerList, setWorkerList] = useState([]);
   const { category } = useParams();
+  const { auth } = useContext(AuthContext);
+  const [workerdata, setWorkerdata] = useState([]);
   const [selectedRange, setSelectedRange] = useState([
     {
       startDate: null,
@@ -23,23 +25,27 @@ const WorkerHome = () => {
   ]);
   const [markedDates, setMarkedDates] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`http://localhost:8080/wedease/workers/${category}`);
-      if (response.ok) {
-        const data = await response.json();
-        setWorkerList(data);
-      } else {
-        throw new Error("Error fetching worker data.");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/wedease/workerHome`,
+          {headers: {Authentication: `Bearer ${auth}`}})
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data)
+          setWorkerdata(data);
+          console.log(workerdata);
+        } else {
+          throw new Error("Error fetching worker data.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchData();
-  }, [category]);
+  },[workerdata]);
 
   useEffect(() => {
     if (workerList.length > 0) {
@@ -85,20 +91,20 @@ const WorkerHome = () => {
       <Header />
       <Logout />
       <div>
-        <br />
-        <h2 className="worker-type">{category}</h2>
-        <div className="worker-card-container">
-          {workerList.map((worker) => (
-            <div className="worker-card" key={worker.id}>
-              <Link to={`/workers/${category}/${worker.id}`} className="worker-card-link">
-                <img className="worker-picture-list" src={profile} alt="profile" />
-                <h3>{worker.name}</h3>
-                <p>{worker.bio}</p>
-              </Link>
+                <img
+                  className="worker-picture-list"
+                  src={'http://localhost:8080/images/'+String(workerdata.imagePath).substring(8)}
+                  alt="profile"
+                />
+                <h3>Name</h3>
+                <p>{workerdata.name}</p>
+                <h3>Email</h3>
+                <p>{workerdata.email}</p>
+                <h3>Bio</h3>
+                <p>{workerdata.bio}</p>
+
+              
             </div>
-          ))}
-        </div>
-      </div>
       <Button variant="info" href="/UpdateProfile">
         Update Profile
       </Button>

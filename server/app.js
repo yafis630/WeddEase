@@ -9,9 +9,11 @@ const { Console } = require('console');
 const app = express();
 const port = process.env.PORT || 8080;
 const authenticateToken=require('./middlewares/authenticateToken');
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images',express.static("uploads"));
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
