@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Calendar from "react-calendar"; 
 import "react-calendar/dist/Calendar.css";
@@ -12,13 +12,16 @@ import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 
 const WorkerHome = () => {
+  
 const[workerdata,setWorkerdata]=useState([]);
 const [workerList, setWorkerList] = useState([]);
 const { category , workerId} = useParams();
   
   const [markedDates, setMarkedDates] = useState([]);
   const {auth}  = useContext(AuthContext)
+  
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/workerHome`,
@@ -26,9 +29,24 @@ const { category , workerId} = useParams();
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
-          setWorkerdata(data);
-          console.log(workerdata);
+          console.log(data);
+          const workerItems = data.map((worker) => (
+            <div className="worker-home" key={worker.id}>
+                <img
+                  className="worker-profile-pic"
+                  src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)}
+                  alt="profile"
+                />
+                <h3>Name</h3>
+                <p>{worker.name}</p>
+                <h3>Bio</h3>
+                <p>{worker.bio}</p>
+              
+            </div>
+
+          ));
+
+          setWorkerList(workerItems);
         } else {
           throw new Error("Error fetching worker data.");
         }
@@ -38,7 +56,8 @@ const { category , workerId} = useParams();
     };
 
     fetchData();
-  },[workerdata]);
+  }, [category]);
+
 
   useEffect(() => {
     if (workerList.length > 0) {
@@ -73,32 +92,19 @@ const { category , workerId} = useParams();
   
 
   return (
+    <div className="back"><Header />
     <div className="worker-home-container">
-      <Header />
+      
+      <div className="worker-display">{workerList}</div>
       <Logout />
-      <div>
-                <img
-                  className="worker-picture-list"
-                  src={'http://localhost:8080/images/'+String(workerdata.imagePath).substring(8)}
-                  alt="profile"
-                />
-                <h3>Name</h3>
-                <p>{workerdata.name}</p>
-                <h3>Email</h3>
-                <p>{workerdata.email}</p>
-                <h3>Bio</h3>
-                <p>{workerdata.bio}</p>
-
-              
-            </div>
-      <Button variant="info" href="/UpdateProfile">
+      <Button className="update-btn" variant="info" href="/UpdateProfile">
         Update Profile
       </Button>
-      <Button variant="success" href="/UploadProduct">
+      <Button className="update-btn" variant="success" href="/UploadProduct">
         Upload Images
       </Button>
       <div className="calendar-container">
-        <h4>Select Unavailable Dates</h4>
+        <h4>Unavailable Dates</h4>
         <Calendar
           tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
           onChange={(date) => {
@@ -109,7 +115,12 @@ const { category , workerId} = useParams();
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
+        
+        
+        
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
