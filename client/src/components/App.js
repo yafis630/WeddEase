@@ -25,6 +25,7 @@ import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
+import PrivateRoute from "./PrivateRoute";
 
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
@@ -72,7 +73,8 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />  
         <Route path="/AuthProvider" element={<AuthProvider/>} />   
         <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
-        <Route path="/catelog/:product_category" element={<Catelog />} />             
+        <Route path="/catelog/:product_category" element={<Catelog />} /> 
+        
       </Routes>
       </AuthProvider>
       </div>
