@@ -41,18 +41,6 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response= await fetch('http://localhost:8080/wedease/register',{
-      method:'POST',
-      body:JSON.stringify(form),
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
-
-    const data= await response.json();
-   console.log(data);
-
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
       // Submit form data
@@ -67,12 +55,30 @@ const RegistrationForm = () => {
         confirmPassword: "",
         errors: {}
       });
+try{
+    const response= await fetch('http://localhost:8080/wedease/register',{
+      method:'POST',
+      body:JSON.stringify(form),
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    if (response.ok) {
+    const data= await response.json();
+    console.log(data);
 
       alert("Registration Successful");
       window.location.href = '/LoginForm';
       <Route path="/LoginForm" element={<LoginForm />} />
       
     } else {
+      alert('Registration Failed');
+    }
+  }catch(error){
+    console.error('Error uploading image:', error);
+      alert('Error uploading image. Please try again.');
+  }
+}else{
       setFormData({ ...formData, errors });
     }
   };

@@ -29,7 +29,6 @@ const { category , workerId} = useParams();
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           const workerItems = data.map((worker) => (
             <div className="worker-home" key={worker.id}>
                 <img

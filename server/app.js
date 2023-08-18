@@ -9,7 +9,7 @@ const { Console } = require('console');
 const app = express();
 const port = process.env.PORT || 8080;
 const authenticateToken=require('./middlewares/authenticateToken');
-
+app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images',express.static("uploads"));

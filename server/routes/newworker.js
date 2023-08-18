@@ -11,7 +11,6 @@ const storage=multer.diskStorage({
     cb(null,'uploads/')
   },
   filename:(req,file,cb)=>{
-    console.log(file)
     cb(null,Date.now() + path.extname(file.originalname))
   }
 })
@@ -61,30 +60,42 @@ router.post('/worker', upload.single('image'), async (req, res) => {
 }
   
 });
-router.put("/putworker",async(req,res)=>{
-  const seller=await Seller.findOne({email:req.email.email})
-  console.log(seller);
-  const update = req.body;
-  const changed = await Worker.findOneAndUpdate(filter, update, {
-      new: true,
-    });
-  
-    res.send(true);
-  });
-
-
 
 
   router.get('/workerHome', authenticateToken ,async (req, res) => {
     try {
       const workers = await Worker.find({ email:req.email.email }); 
-      console.log(workers);
       res.json(workers);
-  
+   
     } catch (error) {
       console.error('Error fetching worker', error);
       res.status(500).json({ error: 'Failed to fetch worker' });
     }
   });
+
+  router.post("/putworker",authenticateToken, upload.single('image'),async(req,res)=>{
+    console.log(req.body)
+      if (!req.file) {
+        return res.status(400).json({ error: 'No image provided' });
+      }
+      const { name, phoneNumber, bio } = req.body;
+      const imagePath = req.file.path;
+
+    const filter={email:req.email.email};
+    const update = {
+      $set: {
+        name: name,
+        bio: bio,
+        phoneNumber: phoneNumber,
+        imagePath: imagePath
+      }
+    };
+    const changed = await Worker.updateOne(filter,update ,{
+      new:true
+     }
+      );
+      console.log(changed);
+      res.send(true);
+    });
 
 module.exports = router;
