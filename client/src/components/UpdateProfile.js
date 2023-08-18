@@ -53,9 +53,7 @@ const UpdateProfile = () => {
     if (Object.keys(errors).length === 0) {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
-
       formDataToSend.append('phoneNumber', formData.phoneNumber);
-      
       formDataToSend.append('bio', formData.bio);
       formDataToSend.append('password', formData.password);
       formDataToSend.append('confirmPassword', formData.confirmPassword);
@@ -108,7 +106,7 @@ const validateForm = () => {
   };
 
 
-  const { name, phoneNumber, bio, image, password, confirmPassword, errors } = formData;
+  const { name, phoneNumber, bio, image, errors } = formData;
 
 
   return (
@@ -117,16 +115,11 @@ const validateForm = () => {
       <Container className="registration-form-container">
         <h2 className="mt-5 mb-4 text-center">Update Profile</h2>
 
-        <div className="worker-card-container">{workerList}</div>
-        
         <div className="text-center">
           <div className="profile-pic-container">
             <img
-              src={image || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1025px-Cat03.jpg"} // Provide a default profile pic image
-              alt="Profile"
               className="profile-pic"
             />
-            {editing && (
               <>
                 <Input
                   type="file"
@@ -136,9 +129,7 @@ const validateForm = () => {
                   innerRef={fileInputRef}
                   className="input-field"
                 />
-                <Button className="update-pic-button">Update Profile Pic</Button>
-              </>
-            )}
+                 </>
           </div>
         </div>
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -153,7 +144,7 @@ const validateForm = () => {
                 onChange={handleChange}
                
                 className="input-field"
-                disabled={!editing}
+           
               />
             </div>
           </FormGroup>
@@ -168,7 +159,7 @@ const validateForm = () => {
                 onChange={handleChange}
                 
                 className="input-field"
-                disabled={!editing}
+       
               />
             </div>
           </FormGroup>
@@ -184,34 +175,13 @@ const validateForm = () => {
                 
                 rows="3"
                 className="input-field"
-                disabled={!editing}
+         
               />
             </div>
           </FormGroup>
           {/* Rest of the form fields */}
-          {editing ? (
-            <>
-              <Button color="primary" block className="submit-button">
-                Update Profile
-              </Button>
-              <Button
-              color="danger"
-                className="cancel-button"
-                onClick={() => setEditing(false)}
-              >
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button
-              color="primary"
-              block
-              className="submit-button"
-              onClick={() => setEditing(true)}
-            >
-              Edit Profile
-            </Button>
-          )}
+          <Button className="update-pic-button">Update Profile </Button>
+             
         </Form>
       </Container>
       <Footer />
