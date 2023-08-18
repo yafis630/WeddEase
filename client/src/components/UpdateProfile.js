@@ -1,7 +1,7 @@
 import React, { useState,useContext, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/forms.css";
 import AuthContext from "../context/AuthProvider";
 import {
@@ -11,7 +11,6 @@ import {
   Label,
   Input,
   Button,
-  Alert
 } from "reactstrap";
 
 const UpdateProfile = () => {
@@ -30,6 +29,12 @@ const UpdateProfile = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setFormData({ ...formData, image: imageUrl });
   };
 
   const fileInputRef = useRef(null);
@@ -80,7 +85,7 @@ const UpdateProfile = () => {
           <FormGroup>
             <div className="profile-pic-container">
               <img
-                src={image || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1025px-Cat03.jpg"} // Provide a default profile pic image
+                src={image}
                 alt="Profile"
                 className="profile-pic"
               />
@@ -88,9 +93,9 @@ const UpdateProfile = () => {
                 type="file"
                 name="image"
                 id="image"
-                onChange={handleChange}
+                onChange={handleImageChange}
                 innerRef={fileInputRef}
-                className="input-field"
+                className="inputs-field"
               />
             </div>
           </FormGroup>
