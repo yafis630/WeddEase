@@ -111,13 +111,16 @@ const { category , workerId} = useParams();
       
       <div className="calendar-container">
         <h4>Unavailable Dates</h4>
+        <div className="calendar-wrapper">
         <Calendar
+        className="react-calendar"
           tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
           onChange={(date) => {
             const updatedMarkedDates = [...markedDates, date];
             setMarkedDates(updatedMarkedDates);
           }}
         />
+        </div>
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
