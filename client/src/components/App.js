@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Routes, Route, Outlet } from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import WorkerRegistration from "./WorkerRegistration";
@@ -24,13 +24,11 @@ import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
-
-
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
 
 function App() {
-  
+
   return (
     <div>
        <AuthProvider>
@@ -42,6 +40,8 @@ function App() {
         <Route path="/SellerRegistration" element={<SellerRegistration />} exact />
         <Route path="/SellerLogin" element={<SellerLogin />} exact />
         <Route path="/SellerHome" element={<SellerHome />} exact />
+
+
         <Route path="/UpdateProfileSeller" element={<UpdateProfileSeller />} exact />
         <Route path="/SellerPr" element={<SellerPr />} exact />
         <Route path="/SellerCat" element={<SellerCat />} exact />
@@ -52,6 +52,8 @@ function App() {
         <Route path="/CategoryButtons" element={<CategoryButtons />} />
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
         <Route path="/WorkerHome" element={<WorkerHome />} exact />
+
+
         <Route path="/workers/:category" element={<WorkerProfile />} exact />
         <Route path="/workers/:category/:workerId" element={<WorkerDetails/>} exact />
         <Route path="/CartPage" element={<CartPage />} exact />

@@ -33,13 +33,7 @@ function Header() {
                         </Nav.Link>
                     </Nav>
                     <Nav className="ml-auto"> {/* Use ml-auto to push items to the right */}
-                        {/* Conditionally render the Worker Home button */}
-                        {isAuth && (
-                            <NavLink to={isSeller ? "/SellerHome" : "/WorkerHome"} className="home-button">
-                                <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                {isSeller ? "Dashboard" : "Dashboard"}
-                            </NavLink>
-                        )}
+                        
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart
                         </NavLink>
