@@ -33,7 +33,7 @@ const { category , workerId} = useParams();
               <Link
                 to={`/workers/${category}/${worker.id}`}
                 className="worker-card-link"
-              
+
               >
                 <img
                   className="worker-picture-list"
@@ -63,7 +63,7 @@ const { category , workerId} = useParams();
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
 
   useEffect(() => {
@@ -101,7 +101,9 @@ const { category , workerId} = useParams();
   return (
     <div className="worker-home-container">
       <Header />
+
       <div className="worker-card-container">{workerList}</div>
+      
       <Logout />
       <Button variant="info" href="/UpdateProfile">
         Update Profile
@@ -121,8 +123,6 @@ const { category , workerId} = useParams();
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
-        
-        
         
       
       </div>

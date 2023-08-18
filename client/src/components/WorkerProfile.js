@@ -10,7 +10,7 @@ import AuthContext from "../context/AuthProvider";
 const WorkerProfile = () => {
   const [workerList, setWorkerList] = useState([]);
   const { category } = useParams();
-  const {auth}  = useContext(AuthContext)
+  const {auth}  = useContext(AuthContext);
  
   const Handle = () => {
     alert("Hired");
@@ -41,8 +41,6 @@ const WorkerProfile = () => {
                 <p>{worker.name}</p>
                 <h3>Email</h3>
                 <p>{worker.email}</p>
-                <h3>Phone Number</h3>
-                <p>{worker.phoneNumber}</p>
                 <h3>Bio</h3>
                 <p>{worker.bio}</p>
               </Link>
