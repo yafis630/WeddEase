@@ -1,7 +1,7 @@
-import React, { useState ,useEffect,useContext, useRef} from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { BrowserRouter as Router, Routes, Route,useParams, Link } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import "../styles/forms.css";
 import AuthContext from "../context/AuthProvider";
 import {
@@ -9,15 +9,13 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,   
+  Input,
   Button,
   Alert
 } from "reactstrap";
-import WorkerHome from "./WorkerHome";
-
 
 const UpdateProfile = () => {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -27,33 +25,26 @@ const UpdateProfile = () => {
     confirmPassword: "",
     errors: {}
   });
-  const {auth}  = useContext(AuthContext);
-  const [form, setForm] = useState({});
-  const [editing, setEditing] = useState(false);
-  const { category , workerId} = useParams();
-  const [workerList, setWorkerList] = useState([]);
 
- 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
   };
 
   const fileInputRef = useRef(null);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const errors = validateForm();
+
   
     if (Object.keys(errors).length === 0) {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
+
       formDataToSend.append('phoneNumber', formData.phoneNumber);
+      
       formDataToSend.append('bio', formData.bio);
       formDataToSend.append('password', formData.password);
       formDataToSend.append('confirmPassword', formData.confirmPassword);
@@ -64,49 +55,25 @@ const UpdateProfile = () => {
         method: 'PUT',
         body: formDataToSend,
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log(data);
         // Handle successful registration, such as showing a success message or redirecting to a new page.
         alert('Updated Successful');
-        window.location.href = '/WorkerHome';
-        <Route path="/WorkerHome" element={<WorkerHome />} />
+        navigate('/WorkerHome');
       } else {
         // Handle registration error, such as displaying an error message to the user.
         alert('Update Failed');
       }
-    } catch (error){
+    } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image. Please try again.');
     }
-  }
-  else {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      errors,
-    })); 
-  }
-};
-
-const validateForm = () => {
-    const errors = {};
-    const { password, confirmPassword, } = formData;
-
-    if (!password) {
-      errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    }
-    if (password !== confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-
-    return errors;
   };
 
 
-  const { name, phoneNumber, bio, image, errors } = formData;
+  const { name, phoneNumber, bio, image, password, confirmPassword, errors } = formData;
 
 
   return (
@@ -115,11 +82,16 @@ const validateForm = () => {
       <Container className="registration-form-container">
         <h2 className="mt-5 mb-4 text-center">Update Profile</h2>
 
+        <div className="worker-card-container">{workerList}</div>
+        
         <div className="text-center">
           <div className="profile-pic-container">
             <img
+              src={image || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1025px-Cat03.jpg"} // Provide a default profile pic image
+              alt="Profile"
               className="profile-pic"
             />
+            {editing && (
               <>
                 <Input
                   type="file"
@@ -129,7 +101,9 @@ const validateForm = () => {
                   innerRef={fileInputRef}
                   className="input-field"
                 />
-                 </>
+                <Button className="update-pic-button">Update Profile Pic</Button>
+              </>
+            )}
           </div>
         </div>
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -144,7 +118,7 @@ const validateForm = () => {
                 onChange={handleChange}
                
                 className="input-field"
-           
+                disabled={!editing}
               />
             </div>
           </FormGroup>
@@ -159,7 +133,7 @@ const validateForm = () => {
                 onChange={handleChange}
                 
                 className="input-field"
-       
+                disabled={!editing}
               />
             </div>
           </FormGroup>
@@ -175,13 +149,34 @@ const validateForm = () => {
                 
                 rows="3"
                 className="input-field"
-         
+                disabled={!editing}
               />
             </div>
           </FormGroup>
           {/* Rest of the form fields */}
-          <Button className="update-pic-button">Update Profile </Button>
-             
+          {editing ? (
+            <>
+              <Button color="primary" block className="submit-button">
+                Update Profile
+              </Button>
+              <Button
+              color="danger"
+                className="cancel-button"
+                onClick={() => setEditing(false)}
+              >
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <Button
+              color="primary"
+              block
+              className="submit-button"
+              onClick={() => setEditing(true)}
+            >
+              Edit Profile
+            </Button>
+          )}
         </Form>
       </Container>
       <Footer />
