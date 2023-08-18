@@ -60,6 +60,18 @@ router.post('/seller', upload.single('image'), async (req, res) => {
   console.error('Error registering seller', error);
   res.status(500).json({ error: 'Failed to register seller' });
 }
+
+router.get('/sellerhome', authenticateToken ,async (req, res) => {
+  try {
+    const sellers = await Seller.find({ email:req.email.email }); 
+    console.log(sellers);
+    res.json(sellers);
+
+  } catch (error) {
+    console.error('Error fetching seller', error);
+    res.status(500).json({ error: 'Failed to fetch seller' });
+  }
+});
   
 });
 

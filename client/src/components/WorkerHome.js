@@ -7,7 +7,6 @@ import { isSameDay } from "date-fns"; // Import addDays function
 import "../styles/WorkerHome.css";
 import Header from "./Header";
 import Footer from "./Footer";
-import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 
@@ -39,9 +38,21 @@ const { category , workerId} = useParams();
                 />
                 <h3>Name</h3>
                 <p>{worker.name}</p>
+                <h3>Email</h3>
+                <p>{worker.email}</p>
+                <h3>Phone Number</h3>
+                <p>{worker.phoneNumber}</p>
+                <h3>DOB</h3>
+                <p>{worker.DOB}</p>
+                <h3>Profession</h3>
+                <p>{worker.profession}</p>
+                <h3>Gender</h3>
+                <p>{worker.gender}</p>
                 <h3>Bio</h3>
                 <p>{worker.bio}</p>
-              
+                <Button className="update-btn" variant="info" href="/UpdateProfile">
+        Update Profile
+      </Button>
             </div>
 
           ));
@@ -97,21 +108,19 @@ const { category , workerId} = useParams();
       
       <div className="worker-display">{workerList}</div>
       <Logout />
-      <Button className="update-btn" variant="info" href="/UpdateProfile">
-        Update Profile
-      </Button>
-      <Button className="update-btn" variant="success" href="/UploadProduct">
-        Upload Images
-      </Button>
+      
       <div className="calendar-container">
         <h4>Unavailable Dates</h4>
+        <div className="calendar-wrapper">
         <Calendar
+        className="react-calendar"
           tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
           onChange={(date) => {
             const updatedMarkedDates = [...markedDates, date];
             setMarkedDates(updatedMarkedDates);
           }}
         />
+        </div>
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
