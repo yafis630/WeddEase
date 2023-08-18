@@ -66,7 +66,7 @@ const { category , workerId} = useParams();
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
 
   useEffect(() => {
