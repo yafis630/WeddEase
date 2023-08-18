@@ -22,7 +22,6 @@ async function authenticateToken(req, res, next) {
       return res.sendStatus(403);
     }
     req.email = email;
-    console.log(email)
     next();
   });
 }

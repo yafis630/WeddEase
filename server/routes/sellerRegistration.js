@@ -4,6 +4,7 @@ const router = express.Router();
 const Seller = require('../models/seller');
 const multer = require('multer');
 const path = require('path');
+const authenticateToken=require('../middlewares/authenticateToken');
 
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
@@ -60,6 +61,7 @@ router.post('/seller', upload.single('image'), async (req, res) => {
   console.error('Error registering seller', error);
   res.status(500).json({ error: 'Failed to register seller' });
 }
+});
 
 router.get('/sellerhome', authenticateToken ,async (req, res) => {
   try {
@@ -71,17 +73,31 @@ router.get('/sellerhome', authenticateToken ,async (req, res) => {
     console.error('Error fetching seller', error);
     res.status(500).json({ error: 'Failed to fetch seller' });
   }
-});
   
 });
 
-router.put("/putseller",async(req,res)=>{
-  const seller=await Seller.findOne({email:req.email.email})
-  const update = { bio: req.body.bio };
-  const changed = await Worker.findOneAndUpdate(filter, update, {
-      new: true,
-    });
-  
+router.post("/putseller",authenticateToken, upload.single('image'),async(req,res)=>{
+  console.log(req.body)
+    if (!req.file) {
+      return res.status(400).json({ error: 'No image provided' });
+    }
+    const { name, phoneNumber, bio } = req.body;
+    const imagePath = req.file.path;
+
+  const filter={email:req.email.email};
+  const update = {
+    $set: {
+      name: name,
+      bio: bio,
+      phoneNumber: phoneNumber,
+      imagePath: imagePath
+    }
+  };
+  const changed = await Seller.updateOne(filter,update ,{
+    new:true
+   }
+    );
+    console.log(changed);
     res.send(true);
   });
 

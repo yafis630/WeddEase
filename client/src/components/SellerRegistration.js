@@ -72,7 +72,7 @@ const SellerRegistration = () => {
           const data = await response.json();
           console.log(data);
           // Handle successful registration, such as showing a success message or redirecting to a new page.
-          alert("Registration Successful");
+         // alert("Registration Successful");
           window.location.href = "/SellerLogin";
         } else {
           // Handle registration error, such as displaying an error message to the user.

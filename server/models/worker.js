@@ -5,46 +5,36 @@ const bcrypt = require('bcrypt');
 const workerSchema = new mongoose.Schema({
   name: {
     type: String,
-    
-    trim: true,
     maxlength: 32,
   },
   imagePath: {
     type:String ,
-     
  },
   email: {
     type: String,
-    
     trim: true,
     unique: true,
   },
   phoneNumber: {
     type: Number,
-    
     min: 10,
   },
   DOB:{
     type: String,
-    
     trim: true,
   },
   gender: {
     type: String,
-    
   },
   profession:{
     type: String,
-    
   },
   bio:{
     type: String,
-    
     trim: true,
   },
   password:{
   type: String,
-  
   min: 6,
 },
 unavailableDates: [Date],

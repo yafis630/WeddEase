@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState,useContext, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
+  const {auth}  = useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -50,8 +51,10 @@ const UpdateProfile = () => {
 
     try {
       const response = await fetch('http://localhost:8080/wedease/putworker', {
-        method: 'PUT',
+        method: 'POST',
         body: formDataToSend,
+        headers: {Authentication: `Bearer ${auth}`,
+      }
       });
 
       if (response.ok) {

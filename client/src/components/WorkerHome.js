@@ -27,7 +27,6 @@ const WorkerHome = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           const workerItems = data.map((worker) => (
             <div className="worker-home" key={worker.id}>
               <img
@@ -66,7 +65,7 @@ const WorkerHome = () => {
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
 
   useEffect(() => {
