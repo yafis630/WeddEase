@@ -31,12 +31,7 @@ const { category , workerId} = useParams();
           const data = await response.json();
           console.log(data);
           const workerItems = data.map((worker) => (
-            <div className="worker-card" key={worker.id}>
-              <Link
-                to={`/workers/${category}/${worker.id}`}
-                className="worker-card-link"
-              
-              >
+            <div className="worker-home" key={worker.id}>
                 <img
                   className="worker-profile-pic"
                   src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)}
@@ -61,7 +56,7 @@ const { category , workerId} = useParams();
     };
 
     fetchData();
-  }, []);
+  }, [category]);
 
 
   useEffect(() => {
@@ -99,8 +94,8 @@ const { category , workerId} = useParams();
   return (
     <div className="back"><Header />
     <div className="worker-home-container">
-      <Header />
-      <div className="worker-card-container">{workerList}</div>
+      
+      <div className="worker-display">{workerList}</div>
       <Logout />
       <Button className="update-btn" variant="info" href="/UpdateProfile">
         Update Profile
@@ -123,7 +118,7 @@ const { category , workerId} = useParams();
         
         
         
-      
+        </div>
       </div>
       <Footer />
     </div>
