@@ -61,9 +61,10 @@ router.post('/worker', upload.single('image'), async (req, res) => {
 }
   
 });
-router.put("/putchange",async(req,res)=>{
+router.put("/putworker",async(req,res)=>{
   const seller=await Seller.findOne({email:req.email.email})
-  const update = { bio: req.body.bio };
+  console.log(seller);
+  const update = req.body;
   const changed = await Worker.findOneAndUpdate(filter, update, {
       new: true,
     });
