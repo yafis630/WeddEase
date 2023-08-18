@@ -56,4 +56,22 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
   }
 });
 
+
+// Fetch products by category
+router.get('/fproduct/:category', async (req, res) => {
+  try {
+    let category = req.params.category;
+    category=category.substring(9)
+    const product = await Product.find({ category:category }); 
+    console.log(product);
+    res.json(product);
+  
+  }catch (error) {
+    console.error('Error fetching products', error);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+});
+
+module.exports = router;
+
 module.exports = router;

@@ -11,7 +11,7 @@ const sellerCategories = [
       },
       {
         id: 2,
-        name:'Bridal/Groom-Footwear',
+        name:'Bridal & Groom-Footwear',
         image: 'https://i.pinimg.com/564x/e5/8d/43/e58d43922e699ad24b4977f0166f1d44.jpg',
         },
         {

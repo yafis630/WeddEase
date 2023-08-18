@@ -1,8 +1,9 @@
-import React, { useState , useRef} from "react";
+import React, { useState ,useEffect,useContext, useRef} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,useParams, Link } from "react-router-dom";
 import "../styles/forms.css";
+import AuthContext from "../context/AuthProvider";
 import {
   Container,
   Form,
@@ -28,9 +29,129 @@ const UpdateProfile = () => {
     confirmPassword: "",
     errors: {}
   });
-
+  const {auth}  = useContext(AuthContext);
   const [form, setForm] = useState({});
   const [editing, setEditing] = useState(false);
+  const { category , workerId} = useParams();
+  const [workerList, setWorkerList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/wedease/workerHome`,
+          {headers: {Authentication: `Bearer ${auth}`}})
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          const workerItems = data.map((worker) => (
+            <div key={worker.id}>
+                
+            <div className="profile-pic-container">
+            <img
+              src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)} // Provide a default profile pic image
+              alt="Profile"
+              className="profile-pic"
+            />
+            {editing && (
+              <>
+                <Input
+                  type="file"
+                  name="image"
+                  id="image"
+                  onChange={handleChange}
+                  innerRef={fileInputRef}
+                  className="input-field"
+                />
+                <Button className="update-pic-button">Update Profile Pic</Button>
+              </>
+            )}
+          </div>
+            <FormGroup>
+            <Label for="name">Name</Label>
+            <div className="input-container">
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                value={worker.name}
+                onChange={handleChange}
+               
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
+            </FormGroup>
+           <FormGroup>
+            <Label for="phoneNumber">Mobile no.</Label>
+            <div className="input-container">
+              <Input
+                type="tel"
+                name="phoneNumber"
+                id="phoneNumber"
+                value={worker.phoneNumber}
+                onChange={handleChange}
+                
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
+          </FormGroup>
+          <FormGroup>
+            <Label for="bio">Bio</Label>
+            <div className="input-container">
+              <Input
+                type="textarea"
+                name="bio"
+                id="bio"
+                value={worker.bio}
+                onChange={handleChange}
+                
+                rows="3"
+                className="input-field"
+                disabled={!editing}
+              />
+            </div>
+          </FormGroup>
+          {editing ? (
+            <>
+              <Button color="primary" block className="submit-button">
+                Update Profile
+              </Button>
+              <Button
+              color="danger"
+                className="cancel-button"
+                onClick={() => setEditing(false)}
+              >
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <Button
+              color="primary"
+              block
+              className="submit-button"
+              onClick={() => setEditing(true)}
+            >
+              Edit Profile
+            </Button>
+          )}
+                
+            </div>
+
+          ));
+
+          setWorkerList(workerItems);
+        } else {
+          throw new Error("Error fetching worker data.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,6 +235,9 @@ const validateForm = () => {
       <Header />
       <Container className="registration-form-container">
         <h2 className="mt-5 mb-4 text-center">Update Profile</h2>
+
+        <div>{workerList}</div>
+        
         <div className="text-center">
           <div className="profile-pic-container">
             <img
@@ -135,8 +259,8 @@ const validateForm = () => {
               </>
             )}
           </div>
-        </div>
-        <Form onSubmit={handleSubmit} encType="multipart/form-data">
+         </div>
+         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <FormGroup>
             <Label for="name">Name</Label>
             <div className="input-container">
