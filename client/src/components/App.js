@@ -27,7 +27,7 @@ import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
 
 import ShoppingServices from "./ShoppingServices";
-
+import Catelog from "./Catelog";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
@@ -71,7 +71,8 @@ function App() {
         <Route path="/UploadProduct" element={<UploadProduct />} exact />
         <Route path="/Dashboard" element={<Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />  
         <Route path="/AuthProvider" element={<AuthProvider/>} />   
-        <Route path="/ShoppingServices" element={<ShoppingServices/>} />                 
+        <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
+        <Route path="/catelog/:product_category" element={<Catelog />} />             
       </Routes>
       </AuthProvider>
       </div>

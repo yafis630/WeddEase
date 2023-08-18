@@ -1,42 +1,94 @@
-.worker-home-container {
-  position: relative;
-  background-image: url("../assets/sunset-g35e2ec6e8_1280.jpg");
-  background-size: cover;
-  background-position: center;
-  
-  
+.worker-home-container {  
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  
 }
 
 .logout-button {
   position: absolute;
-  top: 90px;
-  right: 65px;
+  top: 60px;
+  right: 25px;
+  background-color: #f44336; /* Red color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.date-range-picker-container {
- 
-  margin-top: 30px;
-  font-size: 25px;
-  color: azure;
+.logout-button:hover {
+  background-color: #d32f2f;
 }
 
-.date-range-picker-container {
-  margin-top: 30px;
-  font-size: 25px;
-  color: azure;
-  max-width: 400px; /* Default width for larger screens */
+.worker-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 290px;
+  
+}
 
-  /* Adjustments for smaller screens */
-  @media (max-width: 768px) {
-    max-width: 300px;
-  }
+.worker-profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
 
-  /* Adjustments for extra-small screens */
-  @media (max-width: 576px) {
-    max-width: 200px;
-  }
+.worker-profile h3 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.worker-profile p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Update and Upload Buttons Styling */
+.update-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+
+
+/* Calendar Styling */
+.calendar-container {
+  margin: 20px 5px;
+  text-align: center;
+  color:rgb(26, 18, 141);
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile--active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background-color: #45a049;
 }
