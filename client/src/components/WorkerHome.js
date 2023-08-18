@@ -110,9 +110,6 @@ const { category , workerId} = useParams();
       <Button className="update-btn" variant="info" href="/UpdateProfile">
         Update Profile
       </Button>
-      <Button className="update-btn" variant="success" href="/UploadProduct">
-        Upload Images
-      </Button>
       <div className="calendar-container">
         <h4>Unavailable Dates</h4>
         <Calendar
