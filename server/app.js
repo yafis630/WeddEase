@@ -13,10 +13,6 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images',express.static("uploads"));
-<<<<<<< HEAD
-=======
-
->>>>>>> f019cca3a6a37dce1a1e4adf6c975ec96623d842
 app.use('/pimages',express.static("products"));
 
 // Connect to MongoDB
