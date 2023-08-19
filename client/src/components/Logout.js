@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthProvider";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { setAuth, setIsAuth, auth } = useContext(AuthContext);
+  const { setAuth, setIsAuth, auth, isAuth } = useContext(AuthContext);
   const handleLogout = async () => {
     
       const res = await fetch('http://localhost:8080/wedease/log',
@@ -18,12 +18,16 @@ const Logout = () => {
         navigate("/");
      
   };
-
+  let flag = true;
+  if (typeof(isAuth)==="boolean") flag = isAuth;
+  else {
+     flag = (isAuth  === "true"? true:false);
+  }
   return (
     <div>
-      <button className="logout-button" onClick={handleLogout}>
+      {flag && (<button className="logout-button" onClick={handleLogout}>
         Logout
-      </button>
+      </button>)}
     </div>
   );
 };

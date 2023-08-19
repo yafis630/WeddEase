@@ -44,9 +44,9 @@ const Catelog = () => {
                
                 <h3>Name</h3>
                 <p>{product.name}</p>
-                <h3>Email</h3>
+                <h3>Description</h3>
                 <p>{product.description}</p>
-                <h3>Bio</h3>
+                <h3>Price</h3>
                 <p>{product.price}</p>
             
               <Button variant="primary" size="lg" onClick={Handle} className="hire-button">

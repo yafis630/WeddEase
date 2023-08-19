@@ -27,7 +27,7 @@ const WorkerLogin = () => {
     recaptchaValue: "",
   });
 
-  const { setAuth, setIsAuth } = useContext(AuthContext);
+  const { setAuth, setIsAuth, setRole } = useContext(AuthContext);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -60,12 +60,13 @@ const WorkerLogin = () => {
         'Content-Type':'application/json'
       }
     })
-    const {success,accessToken} = await response.json();
+    const {success,accessToken, role} = await response.json();
     
     if (success) {
       console.log(accessToken);
       setAuth(accessToken);
       setIsAuth(true);
+      setRole(role)
       alert("login successfull")
       navigate('/WorkerHome');
     } else {

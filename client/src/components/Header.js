@@ -4,9 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
+import AuthContext from "../context/AuthProvider";
+
 
 function Header() {
-
+    const { isAuth, auth, role } = useContext(AuthContext); 
+    const isSeller = role === 'seller';
+    const isWorker = role === 'worker';
+    const isRegularUser = false;
+    let flag = true;
+    if (typeof(isAuth)==="boolean") flag = isAuth;
+    else {
+       flag = (isAuth  === "true"? true:false);
+    }
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -30,6 +40,28 @@ function Header() {
                         </Nav.Link>
                     </Nav>
                     <Nav className="ml-auto"> {/* Use ml-auto to push items to the right */}
+                    {flag && (
+                            <>
+                                {isSeller && (
+                                    <NavLink to="/SellerHome" className="home-button">
+                                        <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                                       Seller Dashboard
+                                    </NavLink>
+                                )}
+                                {isWorker && (
+                                    <NavLink to="/WorkerHome" className="home-button">
+                                        <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                                        Worker Dashboard
+                                    </NavLink>
+                                )}
+                                {isRegularUser && (
+                                    <NavLink to="/UserHome" className="home-button">
+                                        <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                                        User Dashboard
+                                    </NavLink>
+                                )}
+                            </>
+                        )}
                         
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart

@@ -17,7 +17,11 @@ const Sellercategory = () => {
     <div >
       
       <div className="back-img"> <Header />
+<<<<<<< HEAD
       <h1 className="name-heading">Explore your shopping</h1>
+=======
+      <h1 className="name-heading">Shopping Categories</h1>
+>>>>>>> 948db975ca0abc5e8cbab611bbcc47bbbdaf9065
       <ul className="category-container">{sellers}</ul>
       
     </div><Footer /></div>
