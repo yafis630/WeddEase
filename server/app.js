@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images',express.static("uploads"));
-app.use('/pimage',express.static("products"));
+app.use('/pimages',express.static("products"));
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/wedease', {
