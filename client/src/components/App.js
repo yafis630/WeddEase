@@ -24,11 +24,6 @@ import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
-<<<<<<< HEAD
-
-
-=======
->>>>>>> ab3c3393ad5c20701ed743583c0adfcbf08a2519
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
 
@@ -68,13 +63,9 @@ function App() {
         <Route path="/UploadProduct" element={<UploadProduct />} exact />
         <Route path="/AuthProvider" element={<AuthProvider/>} />   
         <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
-<<<<<<< HEAD
-        <Route path="/catelog/:product_category" element={<Catelog />} />
-                     
-=======
         <Route path="/catelog/:product_category" element={<Catelog />} /> 
         
->>>>>>> ab3c3393ad5c20701ed743583c0adfcbf08a2519
+
       </Routes>
       </AuthProvider>
       </div>
