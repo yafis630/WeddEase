@@ -28,7 +28,7 @@ const sellerCategories = [
     {
       id: 5,
       name:'MakeUP',
-      image: 'https://i.pinimg.com/564x/b4/63/9e/b4639e28545e2ab813a5f47dfdeae3f3.jpg',
+      image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80.jpg',
       },
     {
       id: 6,
