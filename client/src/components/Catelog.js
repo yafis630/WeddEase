@@ -50,7 +50,7 @@ const Catelog = () => {
 
           setproductList(productItems);
         } else {
-          throw new Error("Error fetching worker data.");
+          throw new Error("Error fetching seller data.");
         }
       } catch (error) {
         console.log(error);
