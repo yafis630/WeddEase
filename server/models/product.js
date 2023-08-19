@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim:true
   },
-  category:{
+  Category:{
     type: String,
     required: true,
     trim:true

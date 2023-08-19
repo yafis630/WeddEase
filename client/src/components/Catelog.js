@@ -1,41 +1,81 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
-import ProductCard from "./ProductCard";
-import classes from "../styles/catelog_page.module.css";
-
-import dummy_products from "../data/dummy_products";
+import { Button } from "react-bootstrap";
+import "../styles/WorkerProfile.css";
+import Header from "./Header";
+import Footer from "./Footer";
+import AuthContext from "../context/AuthProvider";
 
 const Catelog = () => {
-  const { product_category } = useParams();
+  const [productList, setproductList] = useState([]);
+  const { category } = useParams();
+  const {auth}  = useContext(AuthContext);
+ 
+  const Handle = () => {
+    alert("Hired");
 
-  const [products, setProducts] = useState(dummy_products);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+   
+      try {
+        const response = await fetch('http://localhost:8080/wedease/catelog/' + new URLSearchParams({ category }),
+        {headers: {Authentication: `Bearer ${auth}`}})
+
+        if (response.ok) {
+          const data = await response.json();
+          const productItems = data.map((product) => (
+            <div className="worker-card" key={product.id}>
+              
+              
+                <img
+                  className="worker-picture-list"
+                  src={'http://localhost:8080/pimages/'+String(product.imagePath).substring(9)}
+                  alt="profile"
+                />
+                <h3>Name</h3>
+                <p>{product.name}</p>
+                <h3>Email</h3>
+                <p>{product.description}</p>
+                <h3>Bio</h3>
+                <p>{product.price}</p>
+            
+              <Button variant="primary" size="lg" onClick={Handle} className="hire-button">
+                cart
+              </Button>
+            </div>
+
+          ));
+
+          setproductList(productItems);
+        } else {
+          throw new Error("Error fetching worker data.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
 
   return (
-    <main className={classes["catelog__page"]}>
-      <div className={classes["catelog__cards-container"]}>
-        <Link to="/" className={classes["catelog__backlink"]}>
-          Home
-        </Link>
-        <h1 className={classes["catelog__heading"]}>
-          Catelog: {product_category}
-        </h1>
-
-        {products.length !== 0 &&
-          products.map((cur) => {
-            return <ProductCard product_details={cur} />;
-          })}
-      </div>
-    </main>
+    <>
+    
+    <div className="back-img">
+    <Header />
+      <br />
+      <h2 className="worker-type">{category}</h2>
+      {productList.length > 0 ? (
+         <div className="worker-card-container">{productList}</div>
+      ) : (
+        <p className="para">No products found in this category.</p>
+      )}
+    </div>
+    <Footer />
+    </>
   );
 };
-
-/**
- * title
- * description
- * image
- * price
- * details link
- */
 
 export default Catelog;

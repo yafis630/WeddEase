@@ -1,9 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const Worker = require('../models/worker');
+const authenticateToken=require('../middlewares/authenticateToken');
+
+
+
+router.post("/update-unavailable-dates",authenticateToken,async(req,res)=>{
+  
+  console.log(req.body)
+   
+    const  unavailableDates  = req.body;
+
+  const filter={email:req.email.email};
+  const update = {
+    $set: {
+      unavailableDates: unavailableDates,
+    }
+  };
+  const changed = await Worker.updateOne(filter,update ,{
+    new:true
+   }
+    );
+    console.log(changed);
+    res.send(true);
+  });
+
+module.exports = router;
 
 // Update worker availability
-router.post('/:workerId/update-unavailable-dates', async (req, res) => {
+router.post('/:workerId/update-unavailable-date', async (req, res) => {
   try {
     const workerId = req.params.workerId;
     const { unavailableDates } = req.body;
