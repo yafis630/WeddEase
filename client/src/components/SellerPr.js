@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../styles/SellerPr.css";
 import { Container, Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
-import SellerCat from "./SellerCat";
+import ShoppingServices from "./ShoppingServices";
 import SellerCategories from "../data/sellerCategories";
 
 const categoryOptions = SellerCategories.map((category, i) => (
@@ -18,7 +18,7 @@ const SellerPr = () => {
     name: "",
     price: "",
     description: "",
-    category: "",
+    Category: "",
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
@@ -43,7 +43,7 @@ const SellerPr = () => {
       formDataToSend.append("name", products.name);
       formDataToSend.append("price", products.price);
       formDataToSend.append("description", products.description);
-      formDataToSend.append("category", products.category);
+      formDataToSend.append("Category", products.Category);
 
       // Append each image file to the FormData object
       for (let i = 0; i < products.images.length; i++) {
@@ -60,8 +60,8 @@ const SellerPr = () => {
           const data = await response.json();
           console.log(data);
           alert("product uploaded");
-          window.location.href = '/SellerCat';
-          <Route path="/SellerCat" element={<SellerCat />} ></Route>
+          window.location.href = '/ShoppingServices';
+          //<Route path="/ShoppingServices" element={<ShoppingServices />} ></Route>
         } else {
           alert("product not uploaded");
         }
@@ -93,13 +93,13 @@ const SellerPr = () => {
     if (!products.images) {
       errors.images = 'Please upload your photo';
     }
-    if (!products.category) {
-      errors.category = 'product category is required';
+    if (!products.Category) {
+      errors.Category = 'product category is required';
     }
     return errors;
   };
 
-  const { name, price,description,category, errors } = products;
+  const { name, price,description,Category, errors } = products;
 
   return (
     <div className="back">
@@ -166,16 +166,16 @@ const SellerPr = () => {
               required
             />
           </FormGroup>
-          {errors.category && (
-              <Alert color="danger">{errors.category}</Alert>
+          {errors.Category && (
+              <Alert color="danger">{errors.Category}</Alert>
             )}
           <FormGroup>
-            <Label for="category">Category</Label>
+            <Label for="Category">Category</Label>
             <Input
               type="select"
-              name="category"
-              id="category"
-              value={category}
+              name="Category"
+              id="Category"
+              value={Category}
               onChange={handleChange}
               className="input-field"
               required

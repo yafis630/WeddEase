@@ -65,6 +65,7 @@ function App() {
         <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
         <Route path="/catelog/:product_category" element={<Catelog />} /> 
         
+
       </Routes>
       </AuthProvider>
       </div>

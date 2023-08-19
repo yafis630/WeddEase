@@ -5,7 +5,7 @@ import "../styles/SellerHome.css"; // Create a CSS file for styling SellerHome
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
-//import seller from "../../../server/models/seller";
+
 
 const SellerHome = () => {
   const handleLogout = () => {

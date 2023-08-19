@@ -18,6 +18,7 @@ const WorkerProfile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+
       try {
         const response = await fetch('http://localhost:8080/wedease/workers/' + new URLSearchParams({ category }),
         {headers: {Authentication: `Bearer ${auth}`}})

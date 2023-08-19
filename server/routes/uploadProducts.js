@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require('../models/product');
 const multer = require('multer');
 const path = require('path');
+const { log, Console } = require('console');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,7 +35,7 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
       return res.status(400).json({ error: 'No images provided' });
     }
 
-    const { name, price,category, description } = req.body;
+    const { name, price,Category, description } = req.body;
 
     // Extract the file paths from the request files array
     const imagePaths = req.files.map(file => file.path);
@@ -43,7 +44,7 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
       name,
       price,
       description,
-      category,
+      Category,
       imagePaths // Store the array of image paths in the database
     });
 
@@ -58,13 +59,15 @@ router.post('/uproduct', upload.array('images', 5), async (req, res) => {
 
 
 // Fetch products by category
-router.get('/fproduct/:category', async (req, res) => {
+router.get('/catelog/:category', async (req, res) => {
+  console.log("ji");
   try {
     let category = req.params.category;
     category=category.substring(9)
-    const product = await Product.find({ category:category }); 
-    console.log(product);
-    res.json(product);
+    const products = await Product.find({Category:category}); 
+ 
+    console.log(products);
+    res.json(products);
   
   }catch (error) {
     console.error('Error fetching products', error);
@@ -74,4 +77,3 @@ router.get('/fproduct/:category', async (req, res) => {
 
 module.exports = router;
 
-module.exports = router;
