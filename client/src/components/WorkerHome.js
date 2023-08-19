@@ -92,7 +92,6 @@ const WorkerHome = () => {
           headers: {
             "Content-Type": "application/json",
             Authentication: `Bearer ${auth}`}});
-
         if (response.ok) {
           // Update the workerList or fetch updated data
         } else {
