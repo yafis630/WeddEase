@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
+import WorkerLogin from "./WorkerLogin";
 
 const WorkerHome = () => {
 
@@ -16,7 +17,8 @@ const WorkerHome = () => {
   const { category, workerId } = useParams();
 
   const [markedDates, setMarkedDates] = useState([]);
-  const { auth } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext);
+  
 
   useEffect(() => {
 
@@ -103,8 +105,7 @@ const WorkerHome = () => {
       }
     }
   };
-
-
+ 
   return (
     <div className="back"><Header />
       <div className="worker-home-container">

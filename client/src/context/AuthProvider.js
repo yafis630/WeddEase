@@ -4,7 +4,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(localStorage.getItem("auth") || {});
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth") || false);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth") === "true" || false);
   useEffect(() => {
     localStorage.setItem("auth", auth);
     localStorage.setItem("isAuth", isAuth);

@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
+import AuthContext from "../context/AuthProvider";
+
 
 function Header() {
-
+    const { isAuth, auth } = useContext(AuthContext); 
+    const isSeller = auth.role === 'seller';
+    
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -30,6 +34,12 @@ function Header() {
                         </Nav.Link>
                     </Nav>
                     <Nav className="ml-auto"> {/* Use ml-auto to push items to the right */}
+                    {isAuth && (
+                            <NavLink to={isSeller ? "/SellerHome" : "/WorkerHome"} className="home-button">
+                                <FontAwesomeIcon icon={faUser} className="nav-icon" />
+                                {isSeller ? "SellerHome" : "WorkerHome"}
+                            </NavLink>
+                        )}
                         
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart

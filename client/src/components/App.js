@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {Routes, Route} from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
@@ -22,13 +22,13 @@ import SellerPr from "./SellerPr";
 import SellerRegistration from "./SellerRegistration";
 import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
-import {AuthProvider}  from "../context/AuthProvider";
+import  { AuthProvider } from '../context/AuthProvider';
 import UploadProduct from './UploadProduct';
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
 
 function App() {
-
+  
   return (
     <div>
        <AuthProvider>
@@ -36,7 +36,7 @@ function App() {
         <Route path="/" element={<Main />} exact />
         <Route path="/SellerButtons" element={<SellerButtons />} exact />
         <Route path="/WorkerRegistration" element={<WorkerRegistration />} exact />
-        <Route path="/WorkerLogin" element={<WorkerLogin />} exact />
+        
         <Route path="/SellerRegistration" element={<SellerRegistration />} exact />
         <Route path="/SellerLogin" element={<SellerLogin />} exact />
         <Route path="/SellerHome" element={<SellerHome />} exact />
@@ -51,8 +51,12 @@ function App() {
         <Route path="/contact" element={<Contact />} exact />
         <Route path="/CategoryButtons" element={<CategoryButtons />} />
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
-        <Route path="/WorkerHome" element={<WorkerHome />} exact />
-
+        
+         
+          <Route path="/WorkerHome" element={<WorkerHome />} exact />
+        
+          <Route path="/WorkerLogin" element={<WorkerLogin />} exact />
+        
 
         <Route path="/workers/:category" element={<WorkerProfile />} exact />
         <Route path="/workers/:category/:workerId" element={<WorkerDetails/>} exact />
@@ -69,7 +73,7 @@ function App() {
       </Routes>
       </AuthProvider>
       </div>
-    
+      
   );
 }
 
