@@ -25,21 +25,21 @@ const Catelog = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const productItems = data.map((seller) => (
-            <div className="worker-card" key={seller.id}>
+          const productItems = data.map((product) => (
+            <div className="worker-card" key={product.id}>
               
               
                 <img
                   className="worker-picture-list"
-                  src={'http://localhost:8080/pimages/'+String(seller.imagePath).substring(9)}
+                  src={'http://localhost:8080/pimages/'+String(product.imagePath).substring(9)}
                   alt="profile"
                 />
                 <h3>Name</h3>
-                <p>{seller.name}</p>
+                <p>{product.name}</p>
                 <h3>Email</h3>
-                <p>{seller.description}</p>
+                <p>{product.description}</p>
                 <h3>Bio</h3>
-                <p>{seller.price}</p>
+                <p>{product.price}</p>
             
               <Button variant="primary" size="lg" onClick={Handle} className="hire-button">
                 cart
