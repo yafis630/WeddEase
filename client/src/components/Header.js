@@ -4,12 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
-import AuthContext from "../context/AuthProvider";
 
 function Header() {
-    const { isAuth, auth } = useContext(AuthContext);
 
-    const isSeller = auth.role === 'seller';
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
