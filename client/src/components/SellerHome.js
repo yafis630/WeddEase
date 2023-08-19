@@ -10,6 +10,7 @@ import Logout from "./Logout";
 
 const SellerHome = () => {
   
+
 const [sellerList, setsellerList] = useState([]);
 const {auth}  = useContext(AuthContext);
 const { category , sellerId} = useParams();

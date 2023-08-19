@@ -12,16 +12,28 @@ import Logout from "./Logout";
 import WorkerLogin from "./WorkerLogin";
 
 const WorkerHome = () => {
-
+const navigate = useNavigate();
   const [workerList, setWorkerList] = useState([]);
   const { category, workerId } = useParams();
 
   const [markedDates, setMarkedDates] = useState([]);
-  const { auth } = useContext(AuthContext);
+  const { auth, isAuth } = useContext(AuthContext);
+  let flag = true;
+  if (typeof(isAuth)==="boolean") flag = isAuth;
+  else {
+     flag = (isAuth  === "true"? true:false);
+  }
   
+  console.log(isAuth);
+  console.log(flag);
+  console.log(typeof(isAuth));
 
   useEffect(() => {
-
+    if(!flag){
+      navigate("/WorkerLogin");
+      console.log("hi");
+    }
+    else{
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/workerHome`,
@@ -66,7 +78,7 @@ const WorkerHome = () => {
       }
     };
 
-    fetchData();
+    fetchData();}
   }, []);
 
 
