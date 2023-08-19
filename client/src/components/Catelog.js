@@ -5,6 +5,8 @@ import "../styles/WorkerProfile.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import AuthContext from "../context/AuthProvider";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import { Carousel } from "react-responsive-carousel";
 
 const Catelog = () => {
   const [productList, setproductList] = useState([]);
@@ -28,12 +30,18 @@ const Catelog = () => {
           const productItems = data.map((product) => (
             <div className="worker-card" key={product.id}>
               
-              
-                <img
-                  className="worker-picture-list"
-                  src={'http://localhost:8080/pimages/'+String(product.imagePath).substring(9)}
-                  alt="profile"
-                />
+              <Carousel showThumbs={false} infiniteLoop>
+                {product.imagePaths.map((imagePath, index) => (
+                  <div key={`image-carousel-${index}`}>
+                    <img
+                      className="worker-picture-list"
+                      src={`http://localhost:8080/pimages/${String(imagePath).substring(9)}`}
+                        alt={`profile-${index}`}
+                    />
+                  </div>
+                ))}
+              </Carousel>
+               
                 <h3>Name</h3>
                 <p>{product.name}</p>
                 <h3>Email</h3>

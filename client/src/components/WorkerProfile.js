@@ -28,9 +28,6 @@ const WorkerProfile = () => {
           const workerItems = data.map((worker) => (
             <div className="worker-card" key={worker.id}>
               
-               
-              
-              
                 <img
                   className="worker-picture-list"
                   src={'http://localhost:8080/images/'+String(worker.imagePath).substring(8)}
@@ -42,6 +39,7 @@ const WorkerProfile = () => {
                 <p>{worker.email}</p>
                 <h3>Bio</h3>
                 <p>{worker.bio}</p>
+               
               
               <Button variant="primary" size="lg" onClick={Handle} className="hire-button">
                 Hire
