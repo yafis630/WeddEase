@@ -18,7 +18,7 @@ import PaymentGatewayPage from "./PaymentGatewayPage";
 import UpdateProfile from "./UpdateProfile";
 import UpdateProfileSeller from "./UpdateProfileSeller";
 import SellerPr from "./SellerPr";
-import SellerCat from './SellerCat';
+
 import SellerRegistration from "./SellerRegistration";
 import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
@@ -44,7 +44,7 @@ function App() {
 
         <Route path="/UpdateProfileSeller" element={<UpdateProfileSeller />} exact />
         <Route path="/SellerPr" element={<SellerPr />} exact />
-        <Route path="/SellerCat" element={<SellerCat />} exact />
+        
         <Route path="/SellerHome" element={<SellerHome />} exact />
         <Route path="/LoginForm" element={<LoginForm />} />
         <Route path="/RegistrationForm" element={<RegistrationForm />} exact />
