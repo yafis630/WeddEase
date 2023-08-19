@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthProvider";
 
 const Catelog = () => {
   const [productList, setproductList] = useState([]);
-  const { pcategory } = useParams();
+  const { category } = useParams();
   const {auth}  = useContext(AuthContext);
  
   const Handle = () => {
@@ -20,7 +20,7 @@ const Catelog = () => {
     const fetchData = async () => {
    
       try {
-        const response = await fetch('http://localhost:8080/wedease/catelog/' + new URLSearchParams({ pcategory }),
+        const response = await fetch('http://localhost:8080/wedease/catelog/' + new URLSearchParams({ category }),
         {headers: {Authentication: `Bearer ${auth}`}})
 
         if (response.ok) {
@@ -58,7 +58,7 @@ const Catelog = () => {
     };
 
     fetchData();
-  }, [pcategory]);
+  }, [category]);
 
   return (
     <>
@@ -66,7 +66,7 @@ const Catelog = () => {
     <div className="back-img">
     <Header />
       <br />
-      <h2 className="worker-type">{pcategory}</h2>
+      <h2 className="worker-type">{category}</h2>
       {productList.length > 0 ? (
          <div className="worker-card-container">{productList}</div>
       ) : (
