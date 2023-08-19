@@ -27,18 +27,16 @@ const Catelog = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
           const productItems = data.map((product) => (
             <div className="worker-card" key={product.id}>
+              
               <Carousel showThumbs={false} infiniteLoop>
                 {product.imagePaths.map((imagePath, index) => (
                   <div key={`image-carousel-${index}`}>
                     <img
                       className="worker-picture-list"
-                      src={`http://localhost:8080/pimages/${String(
-                        imagePath
-                      ).substring(9)}`}
-                      alt={`profile-${index}`}
+                      src={`http://localhost:8080/pimages/${String(imagePath).substring(9)}`}
+                        alt={`profile-${index}`}
                     />
                   </div>
                 ))}
