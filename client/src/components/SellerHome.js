@@ -9,14 +9,23 @@ import Logout from "./Logout";
 
 
 const SellerHome = () => {
-  
+  const navigate = useNavigate();
 
 const [sellerList, setsellerList] = useState([]);
-const {auth}  = useContext(AuthContext);
+const {auth, isAuth}  = useContext(AuthContext);
+let flag = true;
+  if (typeof(isAuth)==="boolean") flag = isAuth;
+  else {
+     flag = (isAuth  === "true"? true:false);
+  }
 const { category , sellerId} = useParams();
 
 useEffect(() => {
-    
+  if(!flag){
+    navigate("/SellerLogin");
+    console.log("hi");
+  }
+  else{
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/sellerhome`,
@@ -62,7 +71,7 @@ useEffect(() => {
       }
     };
 
-    fetchData();
+    fetchData();}
   }, []);
 
   return (
