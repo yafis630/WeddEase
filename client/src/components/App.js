@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Routes, Route } from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import WorkerRegistration from "./WorkerRegistration";
@@ -19,29 +19,21 @@ import UpdateProfile from "./UpdateProfile";
 import UpdateProfileSeller from "./UpdateProfileSeller";
 import SellerPr from "./SellerPr";
 import SellerCat from './SellerCat';
-import Dashboard from "./Dashboard";
 import SellerRegistration from "./SellerRegistration";
 import SellerLogin from './SellerLogin';
 import SellerHome from './SellerHome';
 import {AuthProvider}  from "../context/AuthProvider";
 import UploadProduct from './UploadProduct';
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ab3c3393ad5c20701ed743583c0adfcbf08a2519
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    window.location.href = '/LoginForm'; // Redirect to the login page after logout
-  };
   return (
     <div>
        <AuthProvider>
@@ -53,16 +45,20 @@ function App() {
         <Route path="/SellerRegistration" element={<SellerRegistration />} exact />
         <Route path="/SellerLogin" element={<SellerLogin />} exact />
         <Route path="/SellerHome" element={<SellerHome />} exact />
+
+
         <Route path="/UpdateProfileSeller" element={<UpdateProfileSeller />} exact />
         <Route path="/SellerPr" element={<SellerPr />} exact />
         <Route path="/SellerCat" element={<SellerCat />} exact />
         <Route path="/SellerHome" element={<SellerHome />} exact />
-        <Route path="/LoginForm" element={<LoginForm onLogin={handleLogin} />} />
+        <Route path="/LoginForm" element={<LoginForm />} />
         <Route path="/RegistrationForm" element={<RegistrationForm />} exact />
         <Route path="/contact" element={<Contact />} exact />
         <Route path="/CategoryButtons" element={<CategoryButtons />} />
         <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
         <Route path="/WorkerHome" element={<WorkerHome />} exact />
+
+
         <Route path="/workers/:category" element={<WorkerProfile />} exact />
         <Route path="/workers/:category/:workerId" element={<WorkerDetails/>} exact />
         <Route path="/CartPage" element={<CartPage />} exact />
@@ -70,11 +66,15 @@ function App() {
         <Route path="/PaymentGatewayPage" element={<PaymentGatewayPage/>} exact />
         <Route path="/UpdateProfile" element={<UpdateProfile />} exact />
         <Route path="/UploadProduct" element={<UploadProduct />} exact />
-        <Route path="/Dashboard" element={<Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />  
         <Route path="/AuthProvider" element={<AuthProvider/>} />   
         <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
+<<<<<<< HEAD
         <Route path="/catelog/:product_category" element={<Catelog />} />
                      
+=======
+        <Route path="/catelog/:product_category" element={<Catelog />} /> 
+        
+>>>>>>> ab3c3393ad5c20701ed743583c0adfcbf08a2519
       </Routes>
       </AuthProvider>
       </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -48,7 +47,7 @@ useEffect(() => {
                 <p>{seller.gender}</p>
                 <h3>Bio</h3>
                 <p>{seller.bio}</p>
-                <Button className="update-btn" variant="info" href="/UpdateProfile">
+                <Button className="update-btn" variant="info" href="/UpdateProfileSeller">
         Update Profile
       </Button>
             </div>

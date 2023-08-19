@@ -39,6 +39,9 @@ const UpdateProfile = () => {
 
   const fileInputRef = useRef(null);
   
+  const handleCancel = async e => {
+    navigate("/WorkerHome")
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,7 +139,7 @@ const UpdateProfile = () => {
           <Button color="primary" block className="submit-button">
             Update Profile
           </Button>
-          <Button color="danger" className="cancel-button">
+          <Button color="danger" className="cancel-button" onClick={handleCancel}>
             Cancel
           </Button>
         </Form>
