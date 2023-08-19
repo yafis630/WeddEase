@@ -63,7 +63,7 @@ function App() {
         <Route path="/UploadProduct" element={<UploadProduct />} exact />
         <Route path="/AuthProvider" element={<AuthProvider/>} />   
         <Route path="/ShoppingServices" element={<ShoppingServices/>} />    
-        <Route path="/catelog/:product_category" element={<Catelog />} /> 
+        <Route path="/sellers/:pcategory" element={<Catelog />} /> 
         
 
       </Routes>

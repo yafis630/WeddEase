@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthProvider";
 
 const Catelog = () => {
   const [productList, setproductList] = useState([]);
-  const { category } = useParams();
+  const { pcategory } = useParams();
   const {auth}  = useContext(AuthContext);
  
   const Handle = () => {
@@ -20,26 +20,26 @@ const Catelog = () => {
     const fetchData = async () => {
    
       try {
-        const response = await fetch('http://localhost:8080/wedease/catelog/' + new URLSearchParams({ category }),
+        const response = await fetch('http://localhost:8080/wedease/catelog/' + new URLSearchParams({ pcategory }),
         {headers: {Authentication: `Bearer ${auth}`}})
 
         if (response.ok) {
           const data = await response.json();
-          const productItems = data.map((product) => (
-            <div className="worker-card" key={product.id}>
+          const productItems = data.map((seller) => (
+            <div className="worker-card" key={seller.id}>
               
               
                 <img
                   className="worker-picture-list"
-                  src={'http://localhost:8080/pimages/'+String(product.imagePath).substring(9)}
+                  src={'http://localhost:8080/pimages/'+String(seller.imagePath).substring(9)}
                   alt="profile"
                 />
                 <h3>Name</h3>
-                <p>{product.name}</p>
+                <p>{seller.name}</p>
                 <h3>Email</h3>
-                <p>{product.description}</p>
+                <p>{seller.description}</p>
                 <h3>Bio</h3>
-                <p>{product.price}</p>
+                <p>{seller.price}</p>
             
               <Button variant="primary" size="lg" onClick={Handle} className="hire-button">
                 cart
@@ -50,7 +50,7 @@ const Catelog = () => {
 
           setproductList(productItems);
         } else {
-          throw new Error("Error fetching worker data.");
+          throw new Error("Error fetching seller data.");
         }
       } catch (error) {
         console.log(error);
@@ -58,7 +58,7 @@ const Catelog = () => {
     };
 
     fetchData();
-  }, [category]);
+  }, [pcategory]);
 
   return (
     <>
@@ -66,7 +66,7 @@ const Catelog = () => {
     <div className="back-img">
     <Header />
       <br />
-      <h2 className="worker-type">{category}</h2>
+      <h2 className="worker-type">{pcategory}</h2>
       {productList.length > 0 ? (
          <div className="worker-card-container">{productList}</div>
       ) : (

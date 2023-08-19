@@ -1,14 +1,14 @@
 import React from "react";
 import Header from './Header';
 import Footer from './Footer';
-import Sellerholder from "./CategoryHolder";
+import Sellerholder from "./Sellerholder";
 import "../styles/workerCategory.css"; 
 import sellerCategories from "../data/sellerCategories"
 
 
-const sellers = sellerCategories.map((category, i) => (
+const sellers = sellerCategories.map((pcategory, i) => (
   <li className="category-list" key={i}>
-    <Sellerholder name={category.name} image={category.image} />
+    <Sellerholder name={pcategory.name} image={pcategory.image} />
   </li>
 ));
 
