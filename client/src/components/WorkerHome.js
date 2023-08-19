@@ -91,15 +91,8 @@ const WorkerHome = () => {
           body: JSON.stringify({ unavailableDates: markedDates }),
           headers: {
             "Content-Type": "application/json",
-<<<<<<< HEAD
             Authentication: `Bearer ${auth}`}});
-  
-=======
-          },
-          body: JSON.stringify({ unavailableDates: markedDates }),
-        });
 
->>>>>>> ab3c3393ad5c20701ed743583c0adfcbf08a2519
         if (response.ok) {
           // Update the workerList or fetch updated data
         } else {
