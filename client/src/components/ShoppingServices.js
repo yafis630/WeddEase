@@ -2,7 +2,7 @@ import React from "react";
 import Header from './Header';
 import Footer from './Footer';
 import Sellerholder from "./Sellerholder";
-import "../styles/workerCategory.css"; 
+import "../styles/sellerCategory.css"; 
 import sellerCategories from "../data/sellerCategories"
 
 
@@ -17,7 +17,7 @@ const Sellercategory = () => {
     <div >
       
       <div className="back-img"> <Header />
-      <h1 className="name-heading">Who do you want to hire?</h1>
+      <h1 className="name-heading">Explore your shopping</h1>
       <ul className="category-container">{sellers}</ul>
       
     </div><Footer /></div>
