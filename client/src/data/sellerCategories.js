@@ -21,13 +21,13 @@ const sellerCategories = [
             },
     {
       id: 4,
-      name:'Cards & Gifts',
+      name:'Cards&Gifts',
       image: 'https://i.pinimg.com/564x/90/6d/30/906d30e440bc9607d1fc3ab44f0a27f5.jpg',
       },
     
     {
       id: 5,
-      name:'Catering-Services',
+      name:'MakeUP',
       image: 'https://i.pinimg.com/564x/b4/63/9e/b4639e28545e2ab813a5f47dfdeae3f3.jpg',
       },
     {
