@@ -1,0 +1,118 @@
+/* ProductDetail.module.css */
+
+.product_details {
+  
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.product_detail__container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.product_detail__image_container {
+  flex: 1;
+  padding-right: 400px;
+  align-self: center;
+  
+}
+
+.product__image {
+  max-width: 100%;
+  height: auto;
+ 
+}
+
+.product_detail__details_container {
+  flex: 2;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.product__title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product__description {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.product__info-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.product__info-table th {
+  text-align: left;
+  padding-right: 10px;
+}
+
+.button--primary,
+.button--secondary {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button--primary {
+  background-color: #f0c14b;
+  color: #111;
+}
+
+.button--secondary {
+  background-color: #111;
+  color: #fff;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #007185;
+  font-size: 14px;
+}
+
+.right-card {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.right-card .button--secondary {
+  background-color: #ff9900;
+}
+
+.right-card .button--primary {
+  background-color: #f08800;
+}
+
+.right-card .wishlist-button {
+  background-color: #f0c14b;
+  color: #111;
+}
+
+.right-card .wishlist-button:hover {
+  background-color: #f08800;
+}
+
+/* Add more styles as needed */
