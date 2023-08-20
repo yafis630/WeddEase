@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import { Routes, Route, Link } from "react-router-dom";
@@ -10,15 +10,9 @@ import CarouselCard from "./CarouselCard";
 import Contact from "./Contact";
 import SellerButtons from "./SellerButtons";
 import CategoryButtons from "./CategoryButtons";
-import AuthContext from "../context/AuthProvider";
+
 
 function Main() {
-  const { isAuth } = useContext(AuthContext);
-  let flag = true;
-    if (typeof(isAuth)==="boolean") flag = isAuth;
-    else {
-       flag = (isAuth  === "true"? true:false);
-    }
   return (
     
       <div className="body">
@@ -26,8 +20,7 @@ function Main() {
         
         <Container fluid className="background-image">
           <><Header /></>
-          {!flag && (
-                            <>
+        
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
               <div className="button-group">
@@ -48,8 +41,7 @@ function Main() {
                 </Link>
               </div>
             </Col>
-          </Row></>
-                        )}
+          </Row>
         </Container>
         <Container><Row><CarouselCard /></Row></Container>
         <Routes>

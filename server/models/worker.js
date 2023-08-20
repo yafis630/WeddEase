@@ -37,10 +37,7 @@ const workerSchema = new mongoose.Schema({
   type: String,
   min: 6,
 },
-unavailableDates:{
-type:[String]
-},
-
+unavailableDates: [Date],
 salt: String,
 });
 

@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthProvider";
 
 
 function Header() {
-    const { isAuth,  role } = useContext(AuthContext); 
+    const { isAuth, auth, role } = useContext(AuthContext); 
     const isSeller = role === 'seller';
     const isWorker = role === 'worker';
     const isRegularUser = false;

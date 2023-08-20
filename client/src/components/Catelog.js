@@ -8,7 +8,6 @@ import AuthContext from "../context/AuthProvider";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel";
 
-
 const Catelog = () => {
   const [productList, setproductList] = useState([]);
   const { category } = useParams();
@@ -37,7 +36,7 @@ const Catelog = () => {
                   {product.imagePaths.map((imagePath, index) => (
                     <div key={`image-carousel-${index}`}>
                       <img
-                        className=".worker-picture-list-P"
+                        className="worker-picture-list-P"
                         src={`http://localhost:8080/pimages/${String(
                           imagePath
                         ).substring(9)}`}
@@ -51,11 +50,10 @@ const Catelog = () => {
                 <p>{product.name}</p>
                 <h6>Description</h6>
                 <p>{product.description}</p>
-                <h6>Price </h6>
-                <p>₹ {product.price} </p>
+                <h6>Price</h6>
+                <p>₹ {product.price}</p>
 
-                <Link to={`/ProductDetail/${product._id}`}> 
-                
+                <Link to={`/ProductDetail/${product._id}`}>
                   <Button
                     variant="primary"
                     size="lg"
@@ -63,7 +61,7 @@ const Catelog = () => {
                     className="hire-button"
                   >
                     View Details
-                  </Button>s
+                  </Button>
                 </Link>
               </div>
             );

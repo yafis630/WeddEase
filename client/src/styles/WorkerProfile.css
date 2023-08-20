@@ -1,10 +1,10 @@
 .worker-card {
   margin: auto;
   margin-bottom: 20px;
-  color: white;
+  color: rgb(0, 0, 0);
   list-style: none;
   width: 600px;
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+  background-color: rgba(227, 227, 44, 0.152); /* Transparent black */
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 20px;
@@ -15,6 +15,7 @@
 .worker-card:hover {
   background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add a subtle box-shadow on hover */
+  color: white;
 }
 
 .worker-picture-list {
@@ -26,10 +27,22 @@
   border-radius: 20px;
 }
 
+.worker-picture-list-P {
+  height: 500px;
+  width: 200px;
+  float: right;
+  margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
 .worker-type {
   text-align: center;
-  color: rgb(184, 193, 214);
-  font-size: 30px;
+  color: rgb(7, 24, 59);
+  font-size: 50px;
+ 
+font-family: 'Lobster', cursive;
+font-weight:bolder;
   margin-top: 15px;
 }
 
@@ -50,10 +63,17 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+  color:black;
+  background-color: rgba(196, 179, 112, 0.745);
+  border: none;
+}
+.hire-button:hover{
+  background-color:rgb(190, 120, 7);
+  color:white;
 }
 
 .back-img {
-  background-image: url("../assets/sunset-g35e2ec6e8_1280.jpg");
+  background-image: url("../assets/blue-abstract.jpg");
   background-size: cover;
   background-position: center;
   
