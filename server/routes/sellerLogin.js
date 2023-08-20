@@ -19,7 +19,7 @@ router.post('/sellerlogin', async (req, res) => {
         token: accessToken,
       });
       await token.save();
-      res.send({accessToken,success:true});
+      res.send({accessToken,success:true, role:"seller"});
       console.log('seller Login successful');
 
     } else {

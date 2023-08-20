@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/CartPage.css';
+import Header from './Header';
+import Footer from './Footer';
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -19,6 +21,8 @@ const CartPage = () => {
   };
 
   return (
+    <div className='back-img'>
+      <Header />
     <div className="cart-page">
       <h2>Your Cart</h2>
       {cartItems.length > 0 ? (
@@ -46,6 +50,8 @@ const CartPage = () => {
       ) : (
         <p>Your cart is empty.</p>
       )}
+    </div>
+    
     </div>
   );
 };

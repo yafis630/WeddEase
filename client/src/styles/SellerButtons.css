@@ -1,5 +1,5 @@
 .home-page {
-    background-image: url('../assets/sunset-g35e2ec6e8_1280.jpg');
+    background-image: url('../assets/blue-abstract.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,24 +31,24 @@
   }
   
   .worker-button {
-    background-color: rgba(45, 158, 184, 0.5);
+    background-color: rgba(86, 21, 124, 0.4);
     color: white;
     font-weight: bold;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 20px 70px;
     margin-bottom: 30px;
-    margin-left: 150px;
+    
     transition: background-color 0.3s ease-in-out;
   }
   
   .seller-button {
-    background-color: rgba(23, 42, 149, 0.4);
+    background-color: rgba(196, 44, 196, 0.4);
     color: white;
     font-weight: bold;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 20px 70px;
     margin-bottom: 30px;
-    margin-left: 150px;
+   
     transition: background-color 0.3s ease-in-out;
   }
   

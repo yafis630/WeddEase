@@ -28,7 +28,7 @@
 
 .worker-type {
   text-align: center;
-  color: rgb(184, 193, 214);
+  color: rgb(242, 243, 245);
   font-size: 30px;
   margin-top: 15px;
 }
@@ -53,7 +53,7 @@
 }
 
 .back-img {
-  background-image: url("../assets/sunset-g35e2ec6e8_1280.jpg");
+  background-image: url("../assets/blue-abstract.jpg");
   background-size: cover;
   background-position: center;
   

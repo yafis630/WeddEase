@@ -38,19 +38,19 @@
 }
 
 .category-holder a {
-  color: #f8f7fb;
+  color: #fcfbfe;
   font-size: 22px;
   text-decoration: none;
   font-weight: bold;
   
 }
 
-.name-heading {
+.name-headings {
   text-align: center;
   margin: 20px 0;
   font-size: 30px;
-  color: rgb(204, 204, 227);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(243, 243, 248);
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-weight: bold;
 }
 

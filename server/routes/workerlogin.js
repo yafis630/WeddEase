@@ -19,7 +19,7 @@ router.post('/workerlogin', async (req, res) => {
         token: accessToken,
       });
       await token.save();
-      res.send({accessToken,success:true});
+      res.send({accessToken,success:true, role:"worker" });
       console.log('worker Login successful');
     } else {
       res.send({success: false});

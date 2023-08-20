@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 import '../styles/SellerButtons.css';
 
 const SellerButtons = () => {
@@ -31,6 +32,7 @@ const SellerButtons = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

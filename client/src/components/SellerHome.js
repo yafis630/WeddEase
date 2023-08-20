@@ -1,22 +1,31 @@
 import React, { useState, useEffect,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import "../styles/SellerHome.css"; // Create a CSS file for styling SellerHome
+import "../styles/WorkerHome.css"; // Create a CSS file for styling SellerHome
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
+import Logout from "./Logout";
 
 
 const SellerHome = () => {
-  const handleLogout = () => {
-    window.location.href = "/SellerLogin";
-  };
+  const navigate = useNavigate();
+
 const [sellerList, setsellerList] = useState([]);
-const {auth}  = useContext(AuthContext);
+const {auth, isAuth}  = useContext(AuthContext);
+let flag = true;
+  if (typeof(isAuth)==="boolean") flag = isAuth;
+  else {
+     flag = (isAuth  === "true"? true:false);
+  }
 const { category , sellerId} = useParams();
 
 useEffect(() => {
-    
+  if(!flag){
+    navigate("/SellerLogin");
+    console.log("hi");
+  }
+  else{
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/sellerhome`,
@@ -62,19 +71,21 @@ useEffect(() => {
       }
     };
 
-    fetchData();
+    fetchData();}
   }, []);
 
   return (
+    <div className="back"> <Header />
     <div className="seller-home-container">
-      <Header />
-      <Button variant="secondary" className="logout-button" onClick={handleLogout}>
-        Logout
-      </Button>
+      
+     
+        <Logout />
+      
      < div className="worker-display">{sellerList}</div>
       <Button variant="success" className="update-product-button" href="/SellerPr">
         Upload Product
       </Button>
+    </div>
     </div>
   );
 };
