@@ -2,7 +2,7 @@ import React from "react";
 import Header from './Header';
 import Footer from './Footer';
 import Sellerholder from "./Sellerholder";
-import "../styles/workerCategory.css"; 
+import "../styles/sellerCategory.css"; 
 import sellerCategories from "../data/sellerCategories"
 
 
