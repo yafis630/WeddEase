@@ -7,7 +7,7 @@ const authenticateToken=require('../middlewares/authenticateToken');
 
 router.post("/update-unavailable-dates",authenticateToken,async(req,res)=>{
   
-  console.log(req.body)
+  console.log("hi",req.body)
    
     const  unavailableDates  = req.body;
 
@@ -30,10 +30,13 @@ module.exports = router;
 // Update worker availability
 router.post('/:workerId/update-unavailable-date', async (req, res) => {
   try {
-    const workerId = req.params.workerId;
-    const { unavailableDates } = req.body;
+    
+    const filter={email:req.email.email};
+    const  unavailableDates = req.body;
 
-    const worker = await Worker.findByIdAndUpdate(workerId, { $addToSet: { unavailableDates } }, { new: true });
+    const worker = await Worker.findByIdAndUpdate(filter, {
+       $addToSet: { unavailableDates } 
+      }, { new: true });
 
     if (!worker) {
       return res.status(404).json({ message: "Worker not found" });
