@@ -16,7 +16,7 @@ const WorkerCategory = () => {
     <div >
       
       <div className="back-img"> <Header />
-      <h1 className="name-heading">Who do you want to hire?</h1>
+      <h1 className="name-headings">Who do you want to hire?</h1>
       <ul className="category-container">{workers}</ul>
       
     </div><Footer /></div>
