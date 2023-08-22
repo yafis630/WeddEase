@@ -53,7 +53,7 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
     });
 
     await product.save();
-    console.log(product);
+   // console.log(product);
     res.json(product);
   } catch (error) {
     console.error("Error uploading product", error);
@@ -62,10 +62,9 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
 });
 
 // Fetch products by category
-router.get('/catelog/:category', async (req, res) => {
 
 router.get("/catelog/:category", async (req, res) => {
-  console.log("ji");
+ 
   try {
     let category = req.params.category;
     category = category.substring(9);
@@ -78,7 +77,7 @@ router.get("/catelog/:category", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
-})
+
 /////
 const mongoose = require("mongoose");
 
