@@ -99,6 +99,7 @@ const UpdateProfile = () => {
                 onChange={handleImageChange}
                 innerRef={fileInputRef}
                 className="inputs-field"
+                required
               />
             </div>
           </FormGroup>
@@ -111,6 +112,7 @@ const UpdateProfile = () => {
               value={name}
               onChange={handleChange}
               className="input-field"
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -122,6 +124,7 @@ const UpdateProfile = () => {
               value={phoneNumber}
               onChange={handleChange}
               className="input-field"
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -134,6 +137,7 @@ const UpdateProfile = () => {
               onChange={handleChange}
               rows="3"
               className="input-field"
+              required
             />
           </FormGroup>
           <Button color="primary" block className="submit-button">
