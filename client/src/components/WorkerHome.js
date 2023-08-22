@@ -24,8 +24,11 @@ const navigate = useNavigate();
      flag = (isAuth  === "true"? true:false);
   }
   
-
+  
   useEffect(() => {
+    if(!flag){
+      navigate("/WorkerLogin");
+    }
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/wedease/workerHome`, {
@@ -66,11 +69,7 @@ const navigate = useNavigate();
             "Content-Type": "application/json",
             Authentication: `Bearer ${auth}`}});
         if (response.ok) {
-
-       alert("dates pushed")
-
-          // Update the workerList or fetch updated data
-
+            alert("dates pushed")
         } else {
          
         }
@@ -111,11 +110,6 @@ const navigate = useNavigate();
            </Button>
           </div>
           ))};
-
-
-
-        <div className="worker-display">{workerList}</div>
-
 
         <Logout />
 
