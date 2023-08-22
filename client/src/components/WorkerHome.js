@@ -29,40 +29,37 @@ const navigate = useNavigate();
   console.log(typeof(isAuth));
 
   useEffect(() => {
-    if(!flag){
-      navigate("/WorkerLogin");
-    }
-    else{
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/wedease/workerHome`,
-          { headers: { Authentication: `Bearer ${auth}`}})
+        const response = await fetch(`http://localhost:8080/wedease/workerHome`, {
+          headers: { Authentication: `Bearer ${auth}` },
+        });
 
-          if (response.ok) {
-            const data = await response.json();
-            setWorkerList(data); // Set the worker data in the state
-          } else {
-            throw new Error("Error fetching worker data.");
-          }
-        } catch (error) {
-          console.log(error);
+        if (response.ok) {
+          const data = await response.json();
+          setWorkerList(data); // Set the worker data in the state
+        } else {
+          throw new Error("Error fetching worker data.");
         }
-      };
-  
-      fetchData();
-    }
-  }, []);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
 
   useEffect(() => {
-
-   if (workerList.length > 0) {
-     const unavailableDates = workerList.map((worker) => worker.unavailableDates).flat();
-     setMarkedDates(unavailableDates);
+    if (workerList.length > 0) {
+      const unavailableDates = workerList.map((worker) => worker.unavailableDates).flat();
+      setMarkedDates(unavailableDates);
     }
   }, [workerList]);
 
+
   const handleSubmit = async () => {
-   // console.log(markedDates)
+    console.log(markedDates)
     if (markedDates.length > 0) {
       try {
         const response = await fetch(`http://localhost:8080/wedease/update-unavailable-dates`, {
@@ -72,7 +69,7 @@ const navigate = useNavigate();
             "Content-Type": "application/json",
             Authentication: `Bearer ${auth}`}});
         if (response.ok) {
-          alert("dates pushed")
+          // Update the workerList or fetch updated data
         } else {
           // Handle error
         }
@@ -113,14 +110,18 @@ const navigate = useNavigate();
            </Button>
           </div>
           ))};
+
+
+        <div className="worker-display">{workerList}</div>
+
         <Logout />
+
         <div className="calendar-container">
           <h4>Select Unavailable Dates</h4>
           <div className="calendar-wrapper">
             <Calendar
               className="react-calendar"
               tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
-
               onChange={(date) => {
                 const updatedMarkedDates = [...markedDates, date];
                 setMarkedDates(updatedMarkedDates);
@@ -131,12 +132,14 @@ const navigate = useNavigate();
             Submit
           </Button>
 
+
+
         </div>
-        </div>
-        <Footer />
+      </div>
+      <Footer />
     </div>
-);
-      }
+  );
+};
 
 export default WorkerHome;
 

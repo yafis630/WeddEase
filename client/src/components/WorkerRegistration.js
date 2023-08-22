@@ -116,8 +116,21 @@ const WorkerRegistration = () => {
       errors.phoneNumber = "Mobile no. is invalid";
     }
     if (!DOB) {
-     errors.DOB = "Please specify your Date of Birth";
-   }
+      errors.DOB = "Please specify your Date of Birth";
+    } else {
+      const currentDate = new Date();
+      const birthDate = new Date(DOB);
+  
+      // Calculate age based on the difference between birthDate and currentDate
+      const age = currentDate.getFullYear() - birthDate.getFullYear() - 1 +
+        ((currentDate.getMonth() > birthDate.getMonth() || (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() >= birthDate.getDate())) ? 1 : 0);
+  
+      // Check if age is less than a reasonable minimum (e.g., 18)
+      const minimumAge = 18;
+      if (age < minimumAge) {
+        errors.DOB = `You must be at least ${minimumAge} years old`;
+      }
+    }
     if (!gender.trim()) {
       errors.gender = "Please specify your gender";
     }

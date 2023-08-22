@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require("path");
 const Token = require('./models/token.js'); 
-const { Console } = require('console');
+
 const app = express();
 const port = process.env.PORT || 8080;
 const authenticateToken=require('./middlewares/authenticateToken');
