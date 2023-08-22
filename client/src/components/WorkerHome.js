@@ -24,9 +24,6 @@ const navigate = useNavigate();
      flag = (isAuth  === "true"? true:false);
   }
   
-  console.log(isAuth);
-  console.log(flag);
-  console.log(typeof(isAuth));
 
   useEffect(() => {
     if(!flag){
