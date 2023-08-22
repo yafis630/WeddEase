@@ -4,6 +4,7 @@ const Product = require("../models/product");
 const multer = require("multer");
 const path = require("path");
 const { log, Console } = require("console");
+const mongoose = require("mongoose");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -66,7 +67,6 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
 
 router.get("/catelog/:category", async (req, res) => {
 
-
   try {
     let category = req.params.category;
     category = category.substring(9);
@@ -79,10 +79,6 @@ router.get("/catelog/:category", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
-
-
-/////
-const mongoose = require("mongoose");
 
 router.get("/catelog/product/:productID", async (req, res) => {
   try {

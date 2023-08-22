@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-
 import AuthContext from "../context/AuthProvider";
 import Header from "./Header";
-
 import classes from "../styles/ProductDetail.module.css";
-import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel";
 const ProductDetails = (props) => {
@@ -24,12 +21,8 @@ const ProductDetails = (props) => {
         );
         if (response.ok) {
           const data = await response.json();
-
-          // const product = data.find((product) => product._id === productID);
-
           setProductDetails(data);
           setCategory(() => data.Category);
-          // setproductList(productItems);
         } else {
           throw new Error("Error fetching seller data.");
         }
@@ -43,19 +36,10 @@ const ProductDetails = (props) => {
 
   return (
     <section className={classes["product_details"]}>
-      {/*<nav>
-        <div className={classes["u-margin-right-medium"]}>
-         
-        </div>
-        <div>
-          <Link to="/">Home</Link>
-        </div>
-      </nav>*/}
       <Header />
       {productDetails && (
         <div className={classes["product_detail__container"]}>
           {/* Section for product image */}
-          
           <div className={classes["product_detail__image_container"]}>
           <Carousel showThumbs={true} infiniteLoop>
                   {productDetails.imagePaths.map((imagePath, index) => (
@@ -87,7 +71,6 @@ const ProductDetails = (props) => {
                 <td> {productDetails.qty}</td>
                 
               </tr>
-
               <tr>
                 <th>price:</th>
                 <td>₹ {productDetails.price}</td>
@@ -106,6 +89,5 @@ const ProductDetails = (props) => {
     
   );
 };
-
 
 export default ProductDetails;
