@@ -35,7 +35,7 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
       return res.status(400).json({ error: "No images provided" });
     }
 
-    const { name, price, Category, description } = req.body;
+    const { name, price, Category, description,brand,colour,qty,material } = req.body;
 
     // Extract the file paths from the request files array
     const imagePaths = req.files.map((file) => file.path);
@@ -45,6 +45,10 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
       price,
       description,
       Category,
+      brand,
+      colour,
+      material,
+      qty,
       imagePaths, // Store the array of image paths in the database
     });
 
@@ -72,7 +76,7 @@ router.get("/catelog/:category", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
-//
+/////
 const mongoose = require("mongoose");
 
 router.get("/catelog/product/:productID", async (req, res) => {

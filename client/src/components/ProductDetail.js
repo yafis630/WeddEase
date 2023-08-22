@@ -6,7 +6,8 @@ import Header from "./Header";
 
 import classes from "../styles/ProductDetail.module.css";
 import { Link } from "react-router-dom";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import { Carousel } from "react-responsive-carousel";
 const ProductDetails = (props) => {
   const { productID } = useParams();
   const { auth } = useContext(AuthContext);
@@ -55,15 +56,23 @@ const ProductDetails = (props) => {
       {productDetails && (
         <div className={classes["product_detail__container"]}>
           {/* Section for product image */}
+          
           <div className={classes["product_detail__image_container"]}>
-            <img
-              alt="Product Image"
-              className={classes["product__image"]}
-              src={`http://localhost:8080/pimages/${
-                productDetails.imagePaths[0].split("/")[1]
-              }`}
-            />
-          </div>
+          <Carousel showThumbs={true} infiniteLoop>
+                  {productDetails.imagePaths.map((imagePath, index) => (
+                    <div key={`image-carousel-${index}`}>
+                      <img
+                        className="worker-picture-list-P"
+                        src={`http://localhost:8080/pimages/${String(
+                          imagePath
+                        ).substring(9)}`}
+                        alt={`profile-${index}`}
+                      />
+                    </div>
+
+                  ))}
+                </Carousel>
+                </div>
 
           {/* Section for product details */}
           <div className={classes["product_detail__details_container"]}>
@@ -76,7 +85,8 @@ const ProductDetails = (props) => {
             <table className={classes["product__info-table"]}>
               <tr>
                 <th>Qty:</th>
-                <td>24</td>
+                <td> {productDetails.qty}</td>
+                
               </tr>
 
               <tr>
