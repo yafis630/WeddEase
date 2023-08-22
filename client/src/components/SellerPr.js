@@ -18,6 +18,10 @@ const SellerPr = () => {
     name: "",
     price: "",
     description: "",
+    qty:"",
+    brand:"",
+    material:"",
+    colour:"",
     Category: "",
     images: [],  // Change to an array to hold multiple images
     errors: {}
@@ -44,6 +48,11 @@ const SellerPr = () => {
       formDataToSend.append("price", products.price);
       formDataToSend.append("description", products.description);
       formDataToSend.append("Category", products.Category);
+      formDataToSend.append("qty", products.qty);
+      formDataToSend.append("brand", products.brand);
+      formDataToSend.append("material", products.material);
+      formDataToSend.append("colour", products.colour);
+
 
       // Append each image file to the FormData object
       for (let i = 0; i < products.images.length; i++) {
@@ -61,7 +70,7 @@ const SellerPr = () => {
           console.log(data);
           alert("product uploaded");
           window.location.href = '/ShoppingServices';
-          //<Route path="/ShoppingServices" element={<ShoppingServices />} ></Route>
+      
         } else {
           alert("product not uploaded");
         }
@@ -80,7 +89,7 @@ const SellerPr = () => {
 
   const validateForm = () => {
     const errors = {};
-    const { name,description,price } = products;
+    const { name,description,price,colour,brand,qty,material } = products;
     if (!name.trim()) {
       errors.name = "product Name is required";
     }
@@ -96,10 +105,24 @@ const SellerPr = () => {
     if (!products.Category) {
       errors.Category = 'product category is required';
     }
+    if (!products.colour) {
+      errors.colour = 'product colour is required';
+    }
+    if (!products.qty) {
+      errors.qty = 'choose atleast one product';
+    }
+    if (!products.material) {
+      errors.material = 'Tell us about the product material';
+    }
+    if (!products.brand) {
+      errors.qty = 'Brand name of your product ';
+    }
+
+
     return errors;
   };
 
-  const { name, price,description,Category, errors } = products;
+  const { name, price,description,Category,colour,qty,brand,material, errors } = products;
 
   return (
     <div className="back">
@@ -138,7 +161,7 @@ const SellerPr = () => {
             <Alert color="danger">{errors.price}</Alert>
           )}
           <FormGroup>
-            <Label for="phoneNumber">Product Price</Label>
+            <Label for="Number">Product Price</Label>
             <Input
               type="number"
               name="price"
@@ -150,6 +173,7 @@ const SellerPr = () => {
               required
             />
           </FormGroup>
+
          
           {errors.description && <Alert color="danger">{errors.description}</Alert>}
           <FormGroup>
@@ -166,6 +190,74 @@ const SellerPr = () => {
               required
             />
           </FormGroup>
+
+          {errors.colour && <Alert color="danger">{errors.colour}</Alert>}
+          <FormGroup>
+            <Label for="colour">Product colour</Label>
+            <Input
+              type="text"
+              name="colour"
+              id="colour"
+              value={colour}
+              onChange={handleChange}
+              placeholder="enter your products colour."
+              className="input-field"
+              required
+            />
+          </FormGroup>
+
+ {errors.qty && (
+            <Alert color="danger">{errors.qty}</Alert>
+          )}
+          <FormGroup>
+            <Label for="qty">Quantity </Label>
+            <Input
+              type="number"
+              name="qty"
+              id="qty"
+              value={qty}
+              onChange={handleChange}
+              placeholder="Enter the product quantity."
+              className="input-field"
+              required 
+              min={1}
+            />
+          </FormGroup>
+
+          {errors.brand && <Alert color="danger">{errors.colour}</Alert>}
+          <FormGroup>
+            <Label for="brand">Brand Name</Label>
+            <Input
+              type="text"
+              name="brand"
+              id="brand"
+              value={brand}
+              onChange={handleChange}
+              placeholder="enter your products brand."
+              className="input-field"
+              required
+            />
+          </FormGroup>
+          
+ {errors.material && (
+            <Alert color="danger">{errors.material}</Alert>
+          )}
+          <FormGroup>
+            <Label for="material">Product material </Label>
+            <Input
+              type="text"
+              name="material"
+              id="material"
+              value={material}
+              onChange={handleChange}
+              placeholder="Enter the product material."
+              className="input-field"
+              required 
+            />
+          </FormGroup>
+
+
+
           {errors.Category && (
               <Alert color="danger">{errors.Category}</Alert>
             )}
