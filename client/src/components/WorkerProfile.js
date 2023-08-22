@@ -91,7 +91,7 @@ const WorkerProfile = () => {
         }}
       >
         <div className="calendar-container">
-          <h4>Select hiring dates</h4>
+          <h4>Select Hiring Dates</h4>
           <div className="calendar-wrapper">
             <Calendar
               className="react-calendar"
