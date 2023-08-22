@@ -97,7 +97,7 @@ const navigate = useNavigate();
           <h3>Name</h3>
           <p>{worker.name}</p>
           <h3>Email</h3>
-          <p>{worker.email}</p>
+          <p>{worker.email}</p>           
           <h3>Phone Number</h3>
           <p>{worker.phoneNumber}</p>
           <h3>DOB</h3>
@@ -139,3 +139,6 @@ const navigate = useNavigate();
       }
 
 export default WorkerHome;
+
+
+
