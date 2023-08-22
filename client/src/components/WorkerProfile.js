@@ -34,7 +34,7 @@ const WorkerProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/wedease/workerHome`, {
+        const response = await fetch(`http://localhost:8080/wedease/workers/`+ new URLSearchParams({ category }), {
           headers: { Authentication: `Bearer ${auth}` },
         });
 
@@ -53,11 +53,12 @@ const WorkerProfile = () => {
   }, [category]);
 
   return (
+    <>
     <div className="back-img">
       <Header />
       <br />
       <h2 className="worker-type">{category}</h2>
-
+      
       {workerList.map((worker) => (
         <div className="worker-card" key={worker.id}>
           <img
@@ -67,8 +68,8 @@ const WorkerProfile = () => {
           />
           <h3>Name</h3>
           <p>{worker.name}</p>
-          <h3>Profession</h3>
-          <p>{worker.profession}</p>
+          <h3>Email</h3>
+          <p>{worker.email}</p>
           <h3>Bio</h3>
           <p>{worker.bio}</p>
         
@@ -109,10 +110,10 @@ const WorkerProfile = () => {
           </Button>
         </div>
       </Modal>
-
       <Logout />
-      <Footer />
     </div>
+    <Footer />
+    </>
   );
 };
 
