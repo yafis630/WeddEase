@@ -85,40 +85,39 @@ const WorkerProfile = () => {
           </div>
         ))}
 
-      <Modal // Define the modal
-        isOpen={isCalendarModalOpen}
-        onRequestClose={() => setIsCalendarModalOpen(false)} // Close the modal when the overlay is clicked
-        contentLabel="Calendar Modal"
-        style={{
-          content: {
-            width: '650px', // Set the width to your desired value
-            height: '450px', // Set the height to your desired value
-            margin: 'auto', // Center the modal horizontally
-          },
-        }}
-      >
-        <div className="calendar-container">
-          <h4>Select hiring dates</h4>
-          <div className="calendar-wrapper">
-            <Calendar
-              className="react-calendar"
-              tileDisabled={({ date }) =>
-                markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))
-              }
-              onChange={(date) => {
-                const updatedMarkedDates = [...markedDates, date];
-                setMarkedDates(updatedMarkedDates);
-              }}
-            />
+        <Modal // Define the modal
+          isOpen={isCalendarModalOpen}
+          onRequestClose={() => setIsCalendarModalOpen(false)} // Close the modal when the overlay is clicked
+          contentLabel="Calendar Modal"
+          style={{
+            content: {
+              width: '650px', // Set the width to your desired value
+              height: '450px', // Set the height to your desired value
+              margin: 'auto', // Center the modal horizontally
+            },
+          }}
+        >
+          <div className="calendar-container">
+            <h4>Select hiring dates for {selectedWorker?.name}</h4>
+            <div className="calendar-wrapper">
+              <Calendar
+                className="react-calendar"
+                tileDisabled={({ date }) =>
+                  selectedWorker?.unavailableDates.some((blockedDate) => isSameDay(new Date(blockedDate), date))
+                }
+                onChange={(date) => {
+                  handleDateSelection(date);
+                }}
+              />
+            </div>
+            <Button variant="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
-          <Button variant="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </div>
-      </Modal>
-      <Logout />
-    </div>
-    <Footer />
+        </Modal>
+        <Logout />
+      </div>
+      <Footer />
     </>
   );
 };
