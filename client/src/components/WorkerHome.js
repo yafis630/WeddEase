@@ -93,10 +93,16 @@ const navigate = useNavigate();
   const handleSubmit = async () => {
     console.log(markedDates)
     if (markedDates.length > 0) {
+    const validDates = markedDates.filter((date) => date instanceof Date && !isNaN(date));
+    
+  //  if (validDates.length > 0) {
+      // Extract only the date part from each selected date
+      const formattedDates = validDates.map((date) => date.toISOString().split('T')[0]);
+
       try {
         const response = await fetch(`http://localhost:8080/wedease/update-unavailable-dates`, {
           method: "POST",
-          body: JSON.stringify(markedDates),
+          body: JSON.stringify({ unavailableDates: markedDates }),
           headers: {
             "Content-Type": "application/json",
             Authentication: `Bearer ${auth}`}});
