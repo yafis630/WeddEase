@@ -40,7 +40,7 @@ const UpdateProfileSeller = () => {
   const fileInputRef = useRef(null);
   
   const handleCancel = async e => {
-    navigate("/WorkerHome")
+    navigate("/SellerHome")
   }
 
   const handleSubmit = async (e) => {
