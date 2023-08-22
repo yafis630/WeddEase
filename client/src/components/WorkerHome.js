@@ -69,7 +69,11 @@ const navigate = useNavigate();
             "Content-Type": "application/json",
             Authentication: `Bearer ${auth}`}});
         if (response.ok) {
+
        alert("dates pushed")
+
+          // Update the workerList or fetch updated data
+
         } else {
          
         }
@@ -110,6 +114,11 @@ const navigate = useNavigate();
            </Button>
           </div>
           ))};
+
+
+
+        <div className="worker-display">{workerList}</div>
+
 
         <Logout />
 
