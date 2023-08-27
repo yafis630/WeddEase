@@ -136,7 +136,6 @@ useEffect(() => {
   </Modal.Footer>
 </Modal>
 
-// ...
 
     </div>
   );
