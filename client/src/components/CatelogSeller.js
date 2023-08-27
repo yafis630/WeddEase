@@ -18,7 +18,7 @@ const SortingDropdown = ({ onChange }) => {
   );
 };
 
-const Catelog = () => {
+const CatelogSeller = () => {
   const [productList, setproductList] = useState([]);
   const [sortingOption, setSortingOption] = useState("latest");
 
@@ -132,4 +132,4 @@ const Catelog = () => {
   );
 };
 
-export default Catelog;
+export default CatelogSeller;

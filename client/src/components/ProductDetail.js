@@ -7,6 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
 
+
 const ProductDetails = (props) => {
   const navigate = useNavigate();
   const { productID } = useParams();
