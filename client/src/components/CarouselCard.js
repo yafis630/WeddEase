@@ -96,7 +96,7 @@ function CarouselCard() {
 
  {/* Seller Card */}
       <div className="mt-5">
-        <h2 className='front-card'>Purchase the top products.</h2>
+        <h2 className='front-card'>Purchase the top products</h2>
         <Container>
           <Row>
  
