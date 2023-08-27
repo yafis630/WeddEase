@@ -14,8 +14,13 @@
   box-sizing: border-box; /* Include padding and border in the width */
   margin-right: 30px;
   margin-left: 50px; /* Add some space between items */
+  
 }
 
+.text {
+  text-decoration: none;
+  color: inherit;
+}
 
 .worker-card:hover {
   background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover */

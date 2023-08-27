@@ -124,6 +124,9 @@ const [userName, setUserName] = useState("");
           <Button className="update-btn" variant="info" href="/UpdateProfile">
            Update Profile
            </Button>
+           <Button className="update-btn" variant="info" href="/UploadProduct">
+           Upload Images
+           </Button>
           </div>
           ))};
 
