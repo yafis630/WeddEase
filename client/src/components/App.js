@@ -29,8 +29,7 @@ import ProductDetails from "./ProductDetail";
 import UpdateProfileUser from "./UpdateProfileUser";
 import UserHome from "./UserHome";
 import ProductDetail from "./ProductDetail";
-import UserHome from "./UserHome";
-import UpdateProfileUser from "./UpdateProfileUser";
+
 
 
 function App() {

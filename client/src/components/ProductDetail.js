@@ -156,7 +156,7 @@ const ProductDetails = (props) => {
                 <th>Price:</th>
                 <td>₹ {productDetail.price}</td>
               
-                <td> {productDetails.qty}</td>
+                <td> {productDetail.qty}</td>
                 
               </tr>
               <tr>
