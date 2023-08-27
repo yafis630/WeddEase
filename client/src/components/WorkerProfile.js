@@ -153,82 +153,90 @@ const WorkerProfile = () => {
           ))
         )}
 
-        <Modal
-          isOpen={isCalendarModalOpen}
-          onRequestClose={() => setIsCalendarModalOpen(false)}
-          contentLabel="Calendar Modal"
-          style={{
-            content: {
-              width: "650px", // Set the width to your desired value
-              height: "450px", // Set the height to your desired value
-              margin: "auto", // Center the modal horizontally
-            },
+<Modal
+  isOpen={isCalendarModalOpen}
+  onRequestClose={() => setIsCalendarModalOpen(false)}
+  contentLabel="Calendar Modal"
+  style={{
+    content: {
+      display: "flex", // Use flex display to create two columns
+      alignItems: "center", // Vertically align content in the center
+      width: "1300px", // Set the total width of the modal
+      height: "500px", // Set the height to your desired value
+      margin: "auto", // Center the modal horizontally
+    },
+  }}
+>
+  <div style={{ flex: 1 }}>
+    <div className="calendar-container">
+      <h4>Select hiring dates for {selectedWorker?.name}</h4>
+      <div className="calendar-wrapper">
+        <Calendar
+          className="react-calendar"
+          tileDisabled={({ date }) =>
+            selectedWorker?.unavailableDates.some((blockedDate) =>
+              isSameDay(new Date(blockedDate), date)
+            ) ||
+            userSelectedDates.some((selectedDate) => isSameDay(new Date(selectedDate), date))
+          }
+          onChange={(date) => {
+            handleDateSelection(date);
           }}
-        >
-          <div className="calendar-container">
-            <h4>Select hiring dates for {selectedWorker?.name}</h4>
-            <div className="calendar-wrapper">
-              <Calendar
-                className="react-calendar"
-                tileDisabled={({ date }) =>
-                  selectedWorker?.unavailableDates.some((blockedDate) => isSameDay(new Date(blockedDate), date)) ||
-                  userSelectedDates.some((selectedDate) => isSameDay(new Date(selectedDate), date))
-                }
-                onChange={(date) => {
-                  handleDateSelection(date);
-                }}
-              />
-            </div>
-          </div>
-          <Container className="registration-form-container">
-            <h2 className="mt-5 mb-4 text-center">hiring details </h2>
-            <Form onSubmit={handleSubmit}>
-              <FormGroup>
-                <Label for="usersName">Name</Label>
-                <Input
-                  type="text"
-                  name="usersName"
-                  id="usersName"
-                  value={usersName}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  className="input-field"
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="usersEmail">Email</Label>
-                <Input
-                  type="text"
-                  name="usersEmail"
-                  id="usersEmail"
-                  value={usersEmail}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  className="input-field"
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="phoneNo">Phone Number</Label>
-                <Input
-                  type="text"
-                  name="phoneNo"
-                  id="phoneNo"
-                  value={phoneNo}
-                  onChange={handleChange}
-                  placeholder="Enter worker name"
-                  className="input-field"
-                  required
-                />
-              </FormGroup>
-              
-              <Button color="primary" block className="submit-button">
-                SUBMIT
-              </Button>
-            </Form>
-          </Container>
-        </Modal>
+        />
+      </div>
+    </div>
+  </div>
+  <div style={{ flex: 1 }}>
+    <Container className="registration-form-container">
+      <h2 className="mt-5 mb-4 text-center">Hiring Details</h2>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label for="usersName">Name</Label>
+          <Input
+            type="text"
+            name="usersName"
+            id="usersName"
+            value={usersName}
+            onChange={handleChange}
+            placeholder="Enter your name"
+            className="input-field"
+            required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="usersEmail">Email</Label>
+          <Input
+            type="text"
+            name="usersEmail"
+            id="usersEmail"
+            value={usersEmail}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            className="input-field"
+            required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="phoneNo">Phone Number</Label>
+          <Input
+            type="text"
+            name="phoneNo"
+            id="phoneNo"
+            value={phoneNo}
+            onChange={handleChange}
+            placeholder="Enter worker name"
+            className="input-field"
+            required
+          />
+        </FormGroup>
+        <Button color="primary" block className="submit-button">
+          SUBMIT
+        </Button>
+      </Form>
+    </Container>
+  </div>
+</Modal>
+
         <Logout />
       </div>
       <Footer />

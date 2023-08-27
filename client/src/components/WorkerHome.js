@@ -131,7 +131,6 @@ const WorkerHome = () => {
       });
 
       if (response.ok) {
-        // Remove the rejected notification from the state
         setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
