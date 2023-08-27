@@ -132,6 +132,7 @@ const WorkerProfile = () => {
         ) : (
           workerList.map((worker) => (
             <div className="worker-card" key={worker.id}>
+              <Link to = "/WorkerDetails" className="text">
               <img
                 className="worker-picture-list"
                 src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
@@ -143,6 +144,7 @@ const WorkerProfile = () => {
               <p>{worker.email}</p>
               <h3>Bio</h3>
               <p>{worker.bio}</p>
+              </Link>
 
               <Button className="update-btn" variant="info" onClick={() => Handle(worker)}>
                 Hire

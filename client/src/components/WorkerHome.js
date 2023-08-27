@@ -189,30 +189,34 @@ const WorkerHome = () => {
         style={{ float: "right", marginRight: "130px" }}
       />
       <div className="worker-home-container">
-        {workerList.map((worker) => (
-          <div className="worker-home" key={worker.id}>
-            <img
-              className="worker-profile-pic"
-              src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
-              alt="profile"
-            />
-            <h3>Name</h3>
-            <p>{worker.name}</p>
-            <h3>Email</h3>
-            <p>{worker.email}</p>
-            <h3>Phone Number</h3>
-            <p>{worker.phoneNumber}</p>
-            <h3>DOB</h3>
-            <p>{worker.DOB}</p>
-            <h3>Profession</h3>
-            <p>{worker.profession}</p>
-            <h3>Gender</h3>
-            <p>{worker.gender}</p>
-            <h3>Bio</h3>
-            <p>{worker.bio}</p>
-            <Button className="update-btn" variant="info" href="/UpdateProfile">
-              Update Profile
-            </Button>
+  
+      {workerList.map((worker) => (
+        <div className="worker-home" key={worker.id}>
+          <img
+            className="worker-profile-pic"
+            src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
+            alt="profile"
+          />
+          <h3>Name</h3>
+          <p>{worker.name}</p>
+          <h3>Email</h3>
+          <p>{worker.email}</p>           
+          <h3>Phone Number</h3>
+          <p>{worker.phoneNumber}</p>
+          <h3>DOB</h3>
+          <p>{worker.DOB}</p>
+          <h3>Profession</h3>
+          <p>{worker.profession}</p>
+          <h3>Gender</h3>
+          <p>{worker.gender}</p>
+          <h3>Bio</h3>
+          <p>{worker.bio}</p>
+          <Button className="update-btn" variant="info" href="/UpdateProfile">
+           Update Profile
+           </Button>
+           <Button className="update-btn" variant="info" href="/UploadProduct">
+           Upload Images
+           </Button>
           </div>
         ))}
 
