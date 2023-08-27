@@ -8,8 +8,20 @@ import AuthContext from "../context/AuthProvider";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel";
 
+const SortingDropdown = ({ onChange }) => {
+  return (
+    <select onChange={onChange}>
+      <option value="latest">Latest</option>
+      <option value="priceHighToLow">Price High to Low</option>
+      <option value="priceLowToHigh">Price Low to High</option>
+    </select>
+  );
+};
+
 const Catelog = () => {
   const [productList, setproductList] = useState([]);
+  const [sortingOption, setSortingOption] = useState("latest");
+
   const { category } = useParams();
   const { auth } = useContext(AuthContext);
 
@@ -28,7 +40,23 @@ const Catelog = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const productItems = data.map((product) => {
+
+          let sortedProducts = [...data];
+          if (sortingOption === "latest") {
+            sortedProducts.sort((a, b) => {
+              if (!a.createdAt || !b.createdAt) {
+                return 0; // Handle undefined createdAt values
+              }
+              return b.createdAt.localeCompare(a.createdAt);
+            });
+    } else if (sortingOption === "priceHighToLow") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    } else if (sortingOption === "priceLowToHigh") {
+      sortedProducts.sort((a, b) => a.price - b.price);
+    }
+          
+
+          const productItems = sortedProducts.map((product) => {
             console.log("product is", product);
             return (
               <div className="worker-card" key={product.id}>
@@ -77,15 +105,23 @@ const Catelog = () => {
     };
 
     fetchData();
-  }, [category]);
+  }, [category, sortingOption]);
+
+  const handleSortingChange = (event) => {
+    setSortingOption(event.target.value);
+  };
 
   return (
     <>
       <div className="back-img">
         <Header />
         <br />
-        <h2 className="worker-type">{category}</h2>
+        <div className="sorting-container">
+          <h2 className="worker-type">{category}</h2>
+          <SortingDropdown onChange={handleSortingChange} />
+        </div>
         {productList.length > 0 ? (
+          
           <div className="worker-card-container">{productList}</div>
         ) : (
           <p className="para">No products found in this category.</p>

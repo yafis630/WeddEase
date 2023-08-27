@@ -11,7 +11,7 @@ function Header() {
     const { isAuth,  role } = useContext(AuthContext); 
     const isSeller = role === 'seller';
     const isWorker = role === 'worker';
-    const isRegularUser = false;
+    const isUser = role === 'user';
     let flag = true;
     if (typeof(isAuth)==="boolean") flag = isAuth;
     else {
@@ -54,10 +54,10 @@ function Header() {
                                         Worker Dashboard
                                     </NavLink>
                                 )}
-                                {isRegularUser && (
+                                {isUser && (
                                     <NavLink to="/UserHome" className="home-button">
                                         <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                        User Dashboard
+                                         User Dashboard
                                     </NavLink>
                                 )}
                             </>

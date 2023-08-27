@@ -26,7 +26,10 @@ import { AuthProvider } from "../context/AuthProvider";
 import UploadProduct from "./UploadProduct";
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
-import ProductDetails from "./ProductDetail";
+import ProductDetail from "./ProductDetail";
+import UserHome from "./UserHome";
+import UpdateProfileUser from "./UpdateProfileUser";
+
 
 function App() {
   return (
@@ -57,12 +60,15 @@ function App() {
           <Route path="/SellerPr" element={<SellerPr />} exact />
 
           <Route path="/SellerHome" element={<SellerHome />} exact />
+          <Route path="/UserHome" element={<UserHome />} exact />
+          <Route path="/UpdateProfileUser" element={<UpdateProfileUser />} exact />
           <Route path="/LoginForm" element={<LoginForm />} />
           <Route
             path="/RegistrationForm"
             element={<RegistrationForm />}
             exact
           />
+          <Route path="/userHome" element={<userHome />} exact />
           <Route path="/contact" element={<Contact />} exact />
           <Route path="/CategoryButtons" element={<CategoryButtons />} />
           <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
@@ -89,7 +95,7 @@ function App() {
           <Route path="/AuthProvider" element={<AuthProvider />} />
           <Route path="/ShoppingServices" element={<ShoppingServices />} />
           <Route path="/sellers/:category" element={<Catelog />} />
-          <Route path="/ProductDetail/:productID" element={<ProductDetails />}
+          <Route path="/ProductDetail/:productID" element={<ProductDetail />}
           />
         </Routes>
       </AuthProvider>

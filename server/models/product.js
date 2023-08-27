@@ -45,6 +45,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim:true
   },
+  createdAt: {
+    type: Date,
+    default: Date.now, // This sets the default value to the current date and time
+  },
 });
 
 module.exports = mongoose.model('Product', productSchema);

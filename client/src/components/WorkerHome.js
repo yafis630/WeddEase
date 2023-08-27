@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns"; // Import addDays function
@@ -10,9 +10,16 @@ import Footer from "./Footer";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 import WorkerLogin from "./WorkerLogin";
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const WorkerHome = () => {
 const navigate = useNavigate();
+
+const [showModal, setShowModal] = useState(false);
+const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
+const [userName, setUserName] = useState("");
+
   const [workerList, setWorkerList] = useState([]);
   const { category, workerId } = useParams();
 
@@ -77,11 +84,20 @@ const navigate = useNavigate();
         console.error(error);
         // Handle error
       }
+      setSelectedDates(markedDates);
+    setShowModal(true);
     }
   };
  
   return (
     <div className="back"><Header />
+     <FontAwesomeIcon
+  className="notification-icon"
+  icon={faBell}
+  onClick={() => setShowModal(true)}
+  size="2x" // Adjust the size of the icon (2x for example)
+  style={{ float: "right", marginRight: "130px" }} // Position on the right side with margin
+/>
       <div className="worker-home-container">
   
       {workerList.map((worker) => (
@@ -120,6 +136,7 @@ const navigate = useNavigate();
               className="react-calendar"
               tileDisabled={({ date }) => markedDates.some((markedDate) => isSameDay(new Date(markedDate), date))}
               onChange={(date) => {
+                setUserName("User Name"); // Set the user's name here
                 const updatedMarkedDates = [...markedDates, date];
                 setMarkedDates(updatedMarkedDates);
               }}
@@ -133,6 +150,26 @@ const navigate = useNavigate();
 
         </div>
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+  <Modal.Header closeButton>
+    <Modal.Title>User Request</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <p>{userName} has selected the following dates:</p>
+    <ul>
+      {selectedDates.map((date, index) => (
+        <li key={index}>{date.toString()}</li>
+      ))}
+    </ul>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => setShowModal(false)}>
+      Close
+    </Button>
+    <Button variant="success">Accept</Button>
+    <Button variant="danger">Reject</Button>
+  </Modal.Footer>
+</Modal>
       <Footer />
     </div>
   );

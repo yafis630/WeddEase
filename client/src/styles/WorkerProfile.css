@@ -1,16 +1,21 @@
 .worker-card {
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: white;
   list-style: none;
-  width: 600px;
+  width: calc(50% - 100px); /* Calculate width to fit two items */
   background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   transition: background-color 0.3s;
+  display: inline-block; /* Display items inline */
+  box-sizing: border-box; /* Include padding and border in the width */
+  margin-right: 30px;
+  margin-left: 50px; /* Add some space between items */
 }
+
 
 .worker-card:hover {
   background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover */
