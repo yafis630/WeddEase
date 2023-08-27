@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 import Header from "./Header";
+import Footer from "./Footer";
 import classes from "../styles/ProductDetail.module.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -84,8 +85,10 @@ const ProductDetails = (props) => {
    const handleBuyNow=()=>{}
 
   return (
+    <div>
+    <div className="body"> <Header /></div>
     <section className={classes["product_details"]}>
-      <Header />
+      
       {productDetail && (
         <div className={classes["product_detail__container"]}>
           <div className={classes["product_detail__image_container"]}>
@@ -178,8 +181,10 @@ const ProductDetails = (props) => {
             </table>
           </div>
         </div>
-      )}
-    </section>
+      )} 
+    </section><Footer />
+    </div>
+    
   );
 };
 
