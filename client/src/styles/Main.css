@@ -3,9 +3,13 @@
   
     background-size:cover;
 }
-
+.card-image-container {
+  height: 450px; /* Set the desired height for the card images */
+  overflow: hidden;
+  
+}
 .card-image {
-  height: 300px; /* Make the image fill the container's height */
+  height: 360px; /* Make the image fill the container's height */
   object-fit: cover; /* Ensure the image covers the container */
 }
 
