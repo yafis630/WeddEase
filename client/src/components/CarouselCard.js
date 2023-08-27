@@ -46,7 +46,7 @@ function CarouselCard() {
     <div className="mt-5">
         <h2 className='front-card'>Hire Our Best Workers</h2>
         <Container>
-        <Row xs={3} md={3} className="g-4">
+          <Row xs={1} md={3} className="g-4">
             <Col md={4}>
               <Card >
               
@@ -98,7 +98,7 @@ function CarouselCard() {
       <div className="mt-5">
         <h2 className='front-card'>Purchase the top products</h2>
         <Container>
-          <Row>
+          <Row xs={1} md={3} className="g-4">
  
             <Col md={4}>
               <Card >
