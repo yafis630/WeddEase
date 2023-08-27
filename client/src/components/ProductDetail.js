@@ -84,7 +84,7 @@ const ProductDetails = (props) => {
 
             <table className={classes["product__info-table"]}>
               <tr>
-                <th>Qty:</th>
+              
                 <td> {productDetails.qty}</td>
                 
               </tr>
