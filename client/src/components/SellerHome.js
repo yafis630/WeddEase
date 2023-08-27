@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button,Modal } from "react-bootstrap";
 import "../styles/WorkerHome.css"; // Create a CSS file for styling SellerHome
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
@@ -23,7 +23,6 @@ const { category , sellerId} = useParams();
 useEffect(() => {
   if(!flag){
     navigate("/SellerLogin");
-    console.log("hi");
   }
   else{
     const fetchData = async () => {
@@ -76,9 +75,9 @@ useEffect(() => {
 
   return (
     <div className="back"> <Header />
+    
     <div className="seller-home-container">
       
-     
         <Logout />
       
      < div className="worker-display">{sellerList}</div>
@@ -86,6 +85,9 @@ useEffect(() => {
         Upload Product
       </Button>
     </div>
+
+    
+
     </div>
   );
 };

@@ -5,6 +5,9 @@ const multer = require("multer");
 const path = require("path");
 const { log, Console } = require("console");
 const mongoose = require("mongoose");
+const Carts = require("../models/carts");
+const jwt = require("jsonwebtoken"); 
+const authenticateToken=require('../middlewares/authenticateToken');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,6 +21,7 @@ const storage = multer.diskStorage({
     cb(null, uniqueFilename);
   },
 });
+
 
 const upload = multer({
   storage: storage,
@@ -58,7 +62,7 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
     });
 
     await product.save();
-   // console.log(product);
+    console.log(product);
     res.json(product);
   } catch (error) {
     console.error("Error uploading product", error);
@@ -76,7 +80,7 @@ router.get("/catelog/:category", async (req, res) => {
     category = category.substring(9);
     const products = await Product.find({ Category: category });
 
-    console.log(products);
+    //console.log(products);
     res.json(products);
   } catch (error) {
     console.error("Error fetching products", error);
@@ -98,5 +102,44 @@ router.get("/catelog/product/:productID", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
+
+
+router.post("/carted", async (req, res) => {
+  console.log("CART")
+  try {
+    const { name, price,qty,usertoken,imagePaths } = req.body;
+    const decoded = jwt.verify(usertoken, "WedEase");
+    const userEmail = decoded.email;
+  
+    const carts = new Carts({
+      name,
+      price,
+      qty,
+      userEmail,
+      imagePaths
+    });
+
+    await carts.save();
+    console.log(carts);
+    res.json(carts);
+  } catch (error) {
+    console.error("Error uploading product", error);
+    res.status(500).json({ error: "Failed to cart product" });
+  }
+});
+ 
+
+router.get('/cartedItems', authenticateToken ,async (req, res) => {
+  try {
+    const carts = await Carts.find({ userEmail:req.email.email }); 
+    res.json(carts);
+ 
+  } catch (error) {
+    console.error('Error fetching carts', error);
+    res.status(500).json({ error: 'Failed to fetch carts' });
+  }
+});
+
+
 
 module.exports = router;

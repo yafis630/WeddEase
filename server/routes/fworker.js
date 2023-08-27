@@ -9,7 +9,6 @@ router.get('/workers/:category', async (req, res) => {
     let category = req.params.category;
     category=category.substring(9)
     const workers = await Worker.find({ profession:category }); 
-    console.log(workers);
     res.json(workers);
   }catch (error) {
     console.error('Error fetching workers', error);

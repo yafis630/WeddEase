@@ -61,12 +61,12 @@ const Catelog = () => {
             return (
               <div className="worker-card" key={product.id}>
                 <Carousel showThumbs={false} infiniteLoop>
-                  {product.imagePaths.map((imagePath, index) => (
+                  {product.imagePaths.map((imagePaths, index) => (
                     <div key={`image-carousel-${index}`}>
                       <img
                         className="worker-picture-list-P"
                         src={`http://localhost:8080/pimages/${String(
-                          imagePath
+                          imagePaths
                         ).substring(9)}`}
                         alt={`profile-${index}`}
                       />
@@ -80,7 +80,7 @@ const Catelog = () => {
                 <p>{product.description}</p>
                 <h6>Price</h6>
                 <p>₹ {product.price}</p>
-
+              
                 <Link to={`/ProductDetail/${product._id}`}>
                   <Button
                     variant="primary"

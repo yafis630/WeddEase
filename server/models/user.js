@@ -5,43 +5,31 @@ const bcrypt = require('bcrypt');
 const registrationSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
     maxlength: 32,
   },
-
   email: {
     type: String,
-    required: true,
     trim: true,
     unique: true,
   },
   phoneNumber: {
     type: Number,
-    required: true,
     min: 10,
   },
   DOB:{
     type: String,
-   // required: true,
     trim: true,
   },
   gender: {
     type: String,
-    required: true,
-  },
-  profession:{
-    type: String,
-  //  required: true,
   },
   bio:{
     type: String,
-  //  required: true,
     trim: true,
   },
   password:{
   type: String,
-  required: true,
   min: 6,
 },
 salt: String,

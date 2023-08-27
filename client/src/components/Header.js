@@ -11,7 +11,7 @@ function Header() {
     const { isAuth,  role } = useContext(AuthContext); 
     const isSeller = role === 'seller';
     const isWorker = role === 'worker';
-    const isUser = role === 'user';
+    const isUser = role == 'user';
     let flag = true;
     if (typeof(isAuth)==="boolean") flag = isAuth;
     else {

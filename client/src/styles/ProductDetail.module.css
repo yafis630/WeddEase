@@ -1,3 +1,4 @@
+User
 
 /* ProductDetail.module.css */
 
@@ -10,37 +11,35 @@
 .product_detail__container {
   display: flex;
   align-items: flex-start;
+  
 }
 
 .product_detail__image_container {
-  flex: 1;
-  padding-right: 400px;
-  align-self: center;
-  
+  flex: 0.5; /* Adjust flex value to make it narrower */
+  padding-right: 10px; /* Adjust padding as needed */
 }
 
 .product__image {
   max-width: 100%;
   height: auto;
- 
+  transition: transform 0.3s ease-in-out; /* Add smooth transition effect */
 }
 
 .product_detail__details_container {
-  flex: 2;
-  padding: 20px;
+  flex: 0.2; /* Equal width to image container */
+  padding: 10px; /* Adjust as needed */
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
-
 .product__title {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
 .product__description {
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -63,7 +62,7 @@
   font-size: 16px;
   text-align: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px;
   cursor: pointer;
 }
 
@@ -116,4 +115,14 @@
   background-color: #f08800;
 }
 
-/* Add more styles as needed */
+/* Add more styles as needed *//* ProductDetail.module.css */
+
+.product__quantity-select {
+  margin-bottom: 20px; /* Add margin-bottom to create space below the dropdown */
+}
+
+.button--primary,
+.button--secondary {
+  /* ... (existing styles) */
+  margin-top: 10px; /* Add margin-top to create space between buttons */
+}

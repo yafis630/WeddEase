@@ -5,37 +5,30 @@ const bcrypt = require('bcrypt');
 const sellerSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
     maxlength: 32,
   },
   imagePath: {
     type:String ,
-     required:true
  },
   email: {
     type: String,
-    required: true,
     trim: true,
     unique: true,
   },
   phoneNumber: {
     type: Number,
-    required: true,
     min: 10,
   },
   DOB:{
     type: String,
-    required: true,
     trim: true,
   },
   gender: {
     type: String,
-    required: true,
   },
   category:{
     type: String,
-    required: true,
   },
   address:{
     type: String,

@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const SelectedData = require('../models/SelectedData');
+
 const authenticateToken=require('../middlewares/authenticateToken');
 
 
-// Register a new user
 router.post('/register', async (req, res) => {
   try {
     console.log(req.body)
@@ -20,10 +21,48 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/userhome', authenticateToken ,async (req, res) => {
+
+router.post('/hiredWorker', authenticateToken, async (req, res) => {
+  try {
+    const { selectedDates, formData,workersEmail,workersName } = req.body;
+    const { usersName, usersEmail, phoneNo  } = formData;
+    console.log(workersEmail);
+
+    const selectedData = new SelectedData({
+      selectedDates,
+      usersName,
+      usersEmail,
+      workersEmail,
+      workersName,
+      phoneNo
+    });
+
+    await selectedData.save();
+
+    res.json(selectedData);
+  } catch (error) {
+    console.error('Error saving selected data', error);
+    res.status(500).json({ error: 'Failed to save selected data' });
+  }
+});
+
+
+
+  router.get('/updates', authenticateToken ,async (req, res) => {
+    try {
+      const selectedData = await SelectedData.find({usersEmail:req.email.email }); 
+      res.json(selectedData);
+   
+    } catch (error) {
+      console.error('Error fetching worker', error);
+      res.status(500).json({ error: 'Failed to fetch worker' });
+    }
+  });
+
+
+  router.get('/userhome', authenticateToken ,async (req, res) => {
   try {
     const users = await User.find({ email:req.email.email }); 
-    console.log(users);
     res.json(users);
 
   } catch (error) {
@@ -34,28 +73,21 @@ router.get('/userhome', authenticateToken ,async (req, res) => {
 });
 
 router.post("/putuser", authenticateToken, async(req,res)=>{
-  console.log(req.body)
-    if (!req.file) {
-      return res.status(400).json({ error: 'No image provided' });
-    }
-    const { name, phoneNumber, } = req.body;
-   
-
+  const {name, phoneNumber, } = req.body;
   const filter={email:req.email.email};
   const update = {
     $set: {
       name: name,
-      
       phoneNumber: phoneNumber,
-      
     }
   };
   const changed = await User.updateOne(filter,update ,{
     new:true
    }
     );
-    console.log(changed);
+    console.log(changed)
     res.send(true);
   });
 
 module.exports = router;
+

@@ -18,7 +18,6 @@ import PaymentGatewayPage from "./PaymentGatewayPage";
 import UpdateProfile from "./UpdateProfile";
 import UpdateProfileSeller from "./UpdateProfileSeller";
 import SellerPr from "./SellerPr";
-
 import SellerRegistration from "./SellerRegistration";
 import SellerLogin from "./SellerLogin";
 import SellerHome from "./SellerHome";
@@ -26,9 +25,11 @@ import { AuthProvider } from "../context/AuthProvider";
 import UploadProduct from "./UploadProduct";
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
-import ProductDetail from "./ProductDetail";
-import UserHome from "./UserHome";
+import ProductDetails from "./ProductDetail";
 import UpdateProfileUser from "./UpdateProfileUser";
+import UserHome from "./UserHome";
+import ProductDetail from "./ProductDetail";
+
 
 
 function App() {
@@ -95,6 +96,9 @@ function App() {
           <Route path="/AuthProvider" element={<AuthProvider />} />
           <Route path="/ShoppingServices" element={<ShoppingServices />} />
           <Route path="/sellers/:category" element={<Catelog />} />
+          <Route path="/ProductDetail/:productID" element={<ProductDetails />}/>
+          <Route path="/UserHome"  element={<UserHome/>}/>
+          <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
           <Route path="/ProductDetail/:productID" element={<ProductDetail />}
           />
         </Routes>

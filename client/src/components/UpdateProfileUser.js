@@ -19,7 +19,6 @@ const UpdateProfileUser = () => {
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
-   
   });
 
   const handleChange = (e) => {
@@ -27,9 +26,7 @@ const UpdateProfileUser = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  
 
-  
   
   const handleCancel = async e => {
     navigate("/UserHome")
@@ -37,17 +34,14 @@ const UpdateProfileUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('phoneNumber', formData.phoneNumber);
-    
-
+    console.log(formData)
     try {
       const response = await fetch('http://localhost:8080/wedease/putuser', {
         method: 'POST',
-        body: formDataToSend,
-        headers: {Authentication: `Bearer ${auth}`,
+        body:JSON.stringify(formData),
+        headers: {
+        "Content-Type": "application/json",
+          Authentication: `Bearer ${auth}`,
       }
       });
 
@@ -67,7 +61,7 @@ const UpdateProfileUser = () => {
     }
   };
 
-  const { name, phoneNumber, } = formData;
+  const { name, phoneNumber } = formData;
 
   return (
     <div className="back">
@@ -75,8 +69,7 @@ const UpdateProfileUser = () => {
       <Container className="registration-form-container">
         <h2 className="mt-5 mb-4 text-center">Update Profile</h2>
 
-        <Form onSubmit={handleSubmit} encType="multipart/form-data">
-          
+        <Form onSubmit={handleSubmit} >
           <FormGroup>
             <Label for="name">Name</Label>
             <Input

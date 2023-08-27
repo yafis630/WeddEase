@@ -5,6 +5,7 @@ const Worker = require('../models/worker');
 const multer = require('multer');
 const path = require('path');
 const authenticateToken=require('../middlewares/authenticateToken');
+const SelectedData = require('../models/SelectedData');
 
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
@@ -74,7 +75,6 @@ router.post('/worker', upload.single('image'), async (req, res) => {
   });
 
   router.post("/putworker",authenticateToken, upload.single('image'),async(req,res)=>{
-    console.log(req.body)
       if (!req.file) {
         return res.status(400).json({ error: 'No image provided' });
       }
@@ -97,5 +97,58 @@ router.post('/worker', upload.single('image'), async (req, res) => {
       console.log(changed);
       res.send(true);
     });
+
+    router.get('/notification', authenticateToken ,async (req, res) => {
+      try {
+        const selectedData = await SelectedData.find({workersEmail:req.email.email }); 
+        res.json(selectedData);
+     
+      } catch (error) {
+        console.error('Error fetching worker', error);
+        res.status(500).json({ error: 'Failed to fetch worker' });
+      }
+    });
+
+    /*router.post("/request",authenticateToken,async(req,res)=>{
+      const  {isAccepted } = req.body;
+      console.log(req.body)
+      const filter={workersEmail:req.email.email};
+      const update = {
+        $set: {
+          isAccepted: isAccepted,
+        }
+      };
+      const changed = await SelectedData.updateOne(filter,update ,{
+        new:true
+       }
+        );
+        console.log(changed);
+        res.send(true);
+      });
+*/
+
+      router.post("/request", authenticateToken, async (req, res) => {
+        const { isAccepted, selectedDates, usersEmail } = req.body; 
+        console.log(req.body);
+       try {
+         const filter = {workersEmail: req.email.email,usersEmail:usersEmail, selectedDates:selectedDates};
+         console.log(filter)
+          const update = {
+          $set: {
+              isAccepted: isAccepted,
+            },
+          };
+          const changed = await SelectedData.updateOne(filter, update, {
+            new: true,
+       });
+       console.log(changed);
+          res.send(true);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: "Server error" });
+        }
+      });
+      
+      
 
 module.exports = router;

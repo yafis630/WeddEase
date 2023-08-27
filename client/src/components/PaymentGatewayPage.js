@@ -60,10 +60,9 @@ const PaymentForm = ({ totalAmount }) => {
             card: elements.getElement(CardNumberElement),
             billing_details: {
               name: cardholderName,
-
               email: email,
-            phone: phoneNumber,
-            address: {
+              phone: phoneNumber,
+              address: {
               line1: streetAddress,
               city: city,
               state: state,

@@ -1,60 +1,93 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/CartPage.css';
-import Header from './Header';
-import Footer from './Footer';
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import AuthContext from "../context/AuthProvider";
+import "../styles/CartPage.css";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  // Dummy cart data for demonstration
-  const cartItems = [
-    { id: 1, name: 'Product 1', price: 10, quantity: 1, imageUrl: '/product1.jpg' },
-    { id: 2, name: 'Product 2', price: 15, quantity: 2, imageUrl: '/product2.jpg' },
-    { id: 3, name: 'Product 3', price: 20, quantity: 1, imageUrl: '/product3.jpg' },
-  ];
+  const [productDetail, setProductDetail] = useState([]);
+  const { auth } = useContext(AuthContext);
 
-  // Calculate the total price of items in the cart
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/wedease/cartedItems`,
+          { headers: { Authentication: `Bearer ${auth}` } }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setProductDetail(data);
+        } else {
+          throw new Error("Error fetching product data.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [auth]);
+
+  const totalPrice = productDetail.reduce(
+    (total, item) => total + item.price * item.qty,
+    0
+  );
 
   const handleBuyNow = () => {
-    navigate('/PaymentGatewayPage', { state: { totalAmount: totalPrice } });
+    navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice } });
   };
 
   return (
-    <div className='back-img'>
+    <div className="back-img">
       <Header />
-    <div className="cart-page">
-      <h2>Your Cart</h2>
-      {cartItems.length > 0 ? (
-        <>
-          <div className="cart-items">
-            {cartItems.map(item => (
-              <div key={item.id} className="cart-item">
-                <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
-                <div className="cart-item-details">
-                  <h3>{item.name}</h3>
-                  <div className="cart-item-price-quantity">
-                    <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
-                    <span>Qty: {item.quantity}</span>
+      <div className="cart-page">
+        <h2>Your Cart</h2>
+        {productDetail.length > 0 ? (
+          <>
+            <div className="cart-items">
+              {productDetail.map((item) => (
+                <div key={item._id} className="cart-item">
+                  <Carousel showThumbs={false}>
+                    {item.imagePaths.map((imagePath, index) => (
+                      <div key={index}>
+                        <img
+                          src={`http://localhost:8080/pimages/${String(
+                            imagePath
+                          ).substring(9)}`}
+                          alt={item.name}
+                          className="cart-item-image"
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
+                  <div className="cart-item-details">
+                    <h3>{item.name}</h3>
+                    <div className="cart-item-price-quantity">
+                      <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
+                      <span>Qty: {item.qty}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="cart-total">
-            <span>Total:</span>
-            <span>₹{totalPrice}</span> {/* Display total price in Indian Rupees */}
-          </div>
-          <button className="buy-now-button" onClick={handleBuyNow}>Buy Now</button>
-        </>
-      ) : (
-        <p>Your cart is empty.</p>
-      )}
-    </div>
-    
+              ))}
+            </div>
+            <div className="cart-total">
+              <span>Total:</span>
+              <span>₹{totalPrice}</span> {/* Display total price in Indian Rupees */}
+            </div>
+            <button className="buy-now-button" onClick={handleBuyNow}>
+              Buy Now
+            </button>
+          </>
+        ) : (
+          <p>Your cart is empty.</p>
+        )}
+      </div>
     </div>
   );
 };
 
 export default CartPage;
-
