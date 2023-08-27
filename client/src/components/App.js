@@ -18,7 +18,6 @@ import PaymentGatewayPage from "./PaymentGatewayPage";
 import UpdateProfile from "./UpdateProfile";
 import UpdateProfileSeller from "./UpdateProfileSeller";
 import SellerPr from "./SellerPr";
-
 import SellerRegistration from "./SellerRegistration";
 import SellerLogin from "./SellerLogin";
 import SellerHome from "./SellerHome";
@@ -27,7 +26,8 @@ import UploadProduct from "./UploadProduct";
 import ShoppingServices from "./ShoppingServices";
 import Catelog from "./Catelog";
 import ProductDetails from "./ProductDetail";
-
+import UpdateProfileUser from "./UpdateProfileUser";
+import UserHome from "./UserHome";
 function App() {
   return (
     <div>
@@ -89,8 +89,9 @@ function App() {
           <Route path="/AuthProvider" element={<AuthProvider />} />
           <Route path="/ShoppingServices" element={<ShoppingServices />} />
           <Route path="/sellers/:category" element={<Catelog />} />
-          <Route path="/ProductDetail/:productID" element={<ProductDetails />}
-          />
+          <Route path="/ProductDetail/:productID" element={<ProductDetails />}/>
+          <Route path="/UserHome"  element={<UserHome/>}/>
+          <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
         </Routes>
       </AuthProvider>
     </div>

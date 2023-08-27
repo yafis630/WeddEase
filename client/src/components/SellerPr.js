@@ -220,7 +220,7 @@ const SellerPr = () => {
               placeholder="Enter the product quantity."
               className="input-field"
               required 
-              min={1}
+          
             />
           </FormGroup>
 
@@ -239,7 +239,7 @@ const SellerPr = () => {
             />
           </FormGroup>
           
- {errors.material && (
+             {errors.material && (
             <Alert color="danger">{errors.material}</Alert>
           )}
           <FormGroup>

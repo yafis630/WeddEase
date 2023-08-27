@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
         token: accessToken,
       });
       await token.save();
-      res.send({accessToken,success:true});
+      res.send({accessToken,success:true, role:"user"});
       console.log('Login successful');
       
     } else {

@@ -77,7 +77,6 @@ router.get('/sellerhome', authenticateToken ,async (req, res) => {
 });
 
 router.post("/putseller",authenticateToken, upload.single('image'),async(req,res)=>{
-  console.log(req.body)
     if (!req.file) {
       return res.status(400).json({ error: 'No image provided' });
     }

@@ -1,10 +1,11 @@
-.worker-card {
+/*
+worker-card {
   margin: auto;
   margin-bottom: 20px;
   color: white;
   list-style: none;
   width: 600px;
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black *
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 20px;
@@ -13,8 +14,8 @@
 }
 
 .worker-card:hover {
-  background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover */
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add a subtle box-shadow on hover */
+  background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover *
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add a subtle box-shadow on hover *
 }
 
 .worker-picture-list {
@@ -76,3 +77,109 @@
   font-weight: bold;
   text-align: center;
 }
+*/
+.worker-card {
+ 
+  
+  height: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+    list-style: none;
+    width: 400px;
+    background-color: rgba(227, 227, 44, 0.152); /* Transparent black */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    transition: background-color 0.3s;
+  }
+  
+  .worker-card:hover {
+    background-color: rgba(32, 33, 38, 0.8); /* Darker transparent black on hover */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add a subtle box-shadow on hover */
+    color: white;
+  }
+  
+  /*.worker-picture-list {
+    height: 200px;
+    width: 200px;
+    float: right;
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+  */
+  .worker-picture-list-P {
+       /*C*/
+   
+    height:200px;
+    width: 100%;
+    
+    margin-right: 5px;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+  
+  .worker-type {    /*Heading*/
+    text-align: center;
+    color: rgb(7, 24, 59);
+    font-size: 50px;
+  font-family: 'Lobster', cursive;
+  font-weight:bolder;
+    margin-top: 15px;
+  }
+  
+  .worker-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .worker-card-link:hover,
+  .worker-card-link:active,
+  .worker-card-link:focus {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  
+  .hire-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color:black;
+    background-color: rgba(196, 179, 112, 0.745);
+    border: none;
+  }
+  .hire-button:hover{
+    background-color:rgb(190, 120, 7);
+    color:white;
+  }
+  
+  .back-img {
+    background-image: url("../assets/blue-abstract.jpg");
+    background-size: cover;
+    background-position: center;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  .worker-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .para {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .footer{
+  margin-bottom: 0%;
+  }
