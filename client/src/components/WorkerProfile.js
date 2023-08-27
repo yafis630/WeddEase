@@ -132,7 +132,7 @@ const WorkerProfile = () => {
         ) : (
           workerList.map((worker) => (
             <div className="worker-card" key={worker.id}>
-              <Link to = "/WorkerDetails" className="text">
+              <Link to = "/WorkerDetails" className="worker-card-link">
               <img
                 className="worker-picture-list"
                 src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
@@ -146,7 +146,7 @@ const WorkerProfile = () => {
               <p>{worker.bio}</p>
               </Link>
 
-              <Button className="update-btn" variant="info" onClick={() => Handle(worker)}>
+              <Button color="primary" size="lg" variant="info" onClick={() => Handle(worker)}>
                 Hire
               </Button>
             </div>
