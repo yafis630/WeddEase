@@ -90,7 +90,7 @@ router.post('/worker', upload.single('image'), async (req, res) => {
         imagePath: imagePath
       }
     };
-    const changed = await Worker.updateOne(filter,update ,{
+    const changed = await User.updateOne(filter,update ,{
       new:true
      }
       );

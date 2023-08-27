@@ -23,9 +23,10 @@ function Main() {
     
       <div className="body">
         
-        
+        <><Header /></>
         <Container fluid className="background-image">
-          <><Header /></>
+         
+          
           {!flag && (
                             <>
           <Row>

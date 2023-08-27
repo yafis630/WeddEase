@@ -57,7 +57,7 @@ function Header() {
                                 {isUser && (
                                     <NavLink to="/UserHome" className="home-button">
                                         <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                        User Dashboard
+                                         User Dashboard
                                     </NavLink>
                                 )}
                             </>

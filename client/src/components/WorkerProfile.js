@@ -9,7 +9,8 @@ import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns";
 import AuthContext from "../context/AuthProvider";
 import "../styles/forms.css";
-import Modal from "react-modal"; // Import react-modal
+import Modal from "react-modal";
+
 
 import {
   Container,
@@ -125,24 +126,30 @@ const WorkerProfile = () => {
         <Header />
         <br />
         <h2 className="worker-type">{category}</h2>
-        {workerList.map((worker) => (
-          <div className="worker-card" key={worker.id}>
-            <img
-              className="worker-picture-list"
-              src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
-              alt="profile"
-            />
-            <h3>Name</h3>
-            <p>{worker.name}</p>
-            <h3>Email</h3>
-            <p>{worker.email}</p>
-            <h3>Bio</h3>
-            <p>{worker.bio}</p>
-            <Button className="update-btn" variant="info" onClick={() => Handle(worker)}>
-              Hire
-            </Button>
-          </div>
-        ))}
+
+        {workerList.length === 0 ? (
+          <p className="para">No workers available</p>
+        ) : (
+          workerList.map((worker) => (
+            <div className="worker-card" key={worker.id}>
+              <img
+                className="worker-picture-list"
+                src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
+                alt="profile"
+              />
+              <h3>Name</h3>
+              <p>{worker.name}</p>
+              <h3>Email</h3>
+              <p>{worker.email}</p>
+              <h3>Bio</h3>
+              <p>{worker.bio}</p>
+
+              <Button className="update-btn" variant="info" onClick={() => Handle(worker)}>
+                Hire
+              </Button>
+            </div>
+          ))
+        )}
 
         <Modal
           isOpen={isCalendarModalOpen}
