@@ -12,7 +12,8 @@ function Footer() {
             <h5>About Us</h5>
             <p>
               We are a team of developers passionate about creating amazing
-              websites and web applications.
+              websites and web applications. We created this to help people easily
+              manage their wedding.
             </p>
           </Col>
           <Col md={4} className="footer-section">

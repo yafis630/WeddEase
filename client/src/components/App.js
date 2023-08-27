@@ -30,6 +30,7 @@ import UpdateProfileUser from "./UpdateProfileUser";
 import UserHome from "./UserHome";
 import ProductDetail from "./ProductDetail";
 import Catelog2 from "./Catelog2";
+import AboutUs from "./AboutUs";
 
 
 
@@ -53,7 +54,7 @@ function App() {
           />
           <Route path="/SellerLogin" element={<SellerLogin />} exact />
           <Route path="/SellerHome" element={<SellerHome />} exact />
-
+          <Route path="/AboutUs" element={<AboutUs />} exact />
           <Route
             path="/UpdateProfileSeller"
             element={<UpdateProfileSeller />}

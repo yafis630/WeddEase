@@ -8,6 +8,7 @@ import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import Footer from "./Footer";
 
 
 const UserHome = () => {
@@ -135,7 +136,7 @@ useEffect(() => {
     </Button>
   </Modal.Footer>
 </Modal>
-
+<Footer />
 
     </div>
   );

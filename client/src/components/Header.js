@@ -32,11 +32,11 @@ function Header() {
                         <Nav.Link href="/CategoryButtons" className="nav-link">
                             <FontAwesomeIcon icon={faList} className="nav-icon" /> Categories
                         </Nav.Link>
-                        <Nav.Link href="#about" className="nav-link">
+                        <Nav.Link href="/AboutUs" className="nav-link">
                             <FontAwesomeIcon icon={faInfoCircle} className="nav-icon" /> About
                         </Nav.Link>
                         <Nav.Link href="/contact" className="nav-link">
-                            <FontAwesomeIcon icon={faAddressBook} className="nav-icon" /> Contact
+                            <FontAwesomeIcon icon={faAddressBook} className="nav-icon" /> Our Team
                         </Nav.Link>
                     </Nav>
                     <Nav className="ml-auto"> {/* Use ml-auto to push items to the right */}
