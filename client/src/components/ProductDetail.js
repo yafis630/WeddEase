@@ -102,6 +102,9 @@ const ProductDetails = (props) => {
                 </div>
               ))}
             </Carousel>
+            <p className={classes["product__description"]}>
+              <th> {productDetail.description}</th>
+              </p>
             <p className={classes["product__price"]}>
               <h5> Price: ₹ {productDetail.price}</h5>
             </p>

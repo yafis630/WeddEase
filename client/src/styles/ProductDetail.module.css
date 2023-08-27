@@ -1,5 +1,3 @@
-User
-
 /* ProductDetail.module.css */
 
 .product_details {
@@ -18,6 +16,7 @@ User
   flex: 0.5; /* Adjust flex value to make it narrower */
   padding-right: 10px; /* Adjust padding as needed */
 }
+
 
 .product__image {
   max-width: 100%;
@@ -115,7 +114,7 @@ User
   background-color: #f08800;
 }
 
-/* Add more styles as needed *//* ProductDetail.module.css */
+/* Add more styles as needed // ProductDetail.module.css */
 
 .product__quantity-select {
   margin-bottom: 20px; /* Add margin-bottom to create space below the dropdown */

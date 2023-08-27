@@ -125,16 +125,16 @@ const WorkerProfile = () => {
       <div className="back-img">
         <Header />
         <br />
-        <h2 className="worker-type">{category}</h2>
+        <h2 className="work-type">{category}</h2>
 
         {workerList.length === 0 ? (
           <p className="para">No workers available</p>
         ) : (
           workerList.map((worker) => (
-            <div className="worker-card" key={worker.id}>
-              <Link to = "/WorkerDetails" className="worker-card-link">
+            <div className="work-card" key={worker.id}>
+              <Link to = "/WorkerDetails" className="work-card-link">
               <img
-                className="worker-picture-list"
+                className="work-picture-list"
                 src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
                 alt="profile"
               />

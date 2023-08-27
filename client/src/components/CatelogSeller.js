@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import "../styles/WorkerProfile.css";
+import "../styles/catelog.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import AuthContext from "../context/AuthProvider";
