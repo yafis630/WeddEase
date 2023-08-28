@@ -42,6 +42,7 @@ function CarouselCard() {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    
      {/* Worker Card */}
     <div className="mt-5">
         <h2 className='front-card'>Hire Our Best Workers</h2>
