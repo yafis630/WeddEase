@@ -126,7 +126,8 @@ useEffect(() => {
           ) : (
             <p>{update.workersName} has rejected your request</p>
           )
-        ) : null /* Don't display anything when isAccepted is undefined */}
+        ) : null
+        }
       </div>
     ))}
   </Modal.Body>

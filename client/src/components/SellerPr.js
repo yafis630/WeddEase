@@ -58,7 +58,7 @@ const SellerPr = () => {
       for (let i = 0; i < products.images.length; i++) {
         formDataToSend.append("images", products.images[i]);
       }
-
+      console.log(products)
       try {
         const response = await fetch("http://localhost:8080/wedease/uproduct", {
           method: "POST",

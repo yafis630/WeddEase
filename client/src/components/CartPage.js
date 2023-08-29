@@ -21,7 +21,6 @@ const CartPage = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          //console.log(data)
           setProductDetail(data);
         } else {
           throw new Error("Error fetching product data.");

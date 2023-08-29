@@ -42,6 +42,9 @@ unavailableDates:{
 type:[String]
 } ,
 
+imagePaths: {
+  type:[String] ,
+},
 
 salt: String,
 });
