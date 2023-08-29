@@ -88,10 +88,8 @@ const changed = await Worker.updateOne(filter,update ,{
 
 //fetch images on the basis of worker id
 router.get("/worker/:id", async (req, res) => {
-  console.log("hi")
   try {
     const { id } = req.params;
-    console.log(id)
     const images = await Worker.findById(id);
     res.status(200).json(images);
   } catch (error) {

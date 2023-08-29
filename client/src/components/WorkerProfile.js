@@ -146,7 +146,7 @@ const WorkerProfile = () => {
               <p>{worker.email}</p>
               <h3>Bio</h3>
               <p>{worker.bio}</p>
-              <p>{worker._id}</p>
+              
               </Link>
 
               <Button color="primary" size="lg" variant="info" onClick={() => Handle(worker)}>
