@@ -28,6 +28,9 @@ const cartSchema = new mongoose.Schema({
   },
   imagePaths:{
     type:[String]
+},
+isSuccessful:{
+  type: Boolean
 }
 });
 

@@ -20,10 +20,11 @@ const stripePromise = loadStripe(
   'pk_test_51NYmPkSCfYsS3TchcSObjNfzHWpWXIkcjrKAT9KNe5bxLD5PVAtcYQ2VtNDXpUMsqDNhBx075XhBhB8CD3NLC5XK00gzVu1aFf'
 ); // Stripe public key
 
-const PaymentForm = ({ totalAmount }) => {
+const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const location = useLocation();
+    const {totalAmount,productDetail}=location.state;
     const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
     const [cardholderName, setCardholderName] = useState('');
 
@@ -34,6 +35,8 @@ const PaymentForm = ({ totalAmount }) => {
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
   
+    console.log(productDetail);
+
     const handlePayment = async (event) => {
       event.preventDefault();
       setIsPaymentProcessing(true);
@@ -43,6 +46,7 @@ const PaymentForm = ({ totalAmount }) => {
         const response = await fetch('http://localhost:8080/wedease/payment', {
           method: 'POST',
           headers: {
+           
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -51,7 +55,6 @@ const PaymentForm = ({ totalAmount }) => {
             cardholderName: cardholderName,
           }),
         });
-  
         const { clientSecret } = await response.json();
   
         // Confirm the payment using the Stripe Card Element
@@ -74,17 +77,44 @@ const PaymentForm = ({ totalAmount }) => {
   
         if (result.error) {
           console.error(result.error.message);
+          sendPaymentStatusToBackend(false);
         } else {
           console.log('Payment succeeded:', result.paymentIntent);
           alert('Payment Successful!');
+          sendPaymentStatusToBackend(true);
         }
       } catch (error) {
         console.error('Error processing payment: ', error);
+        sendPaymentStatusToBackend(false);
       }
   
       setIsPaymentProcessing(false);
     };
   
+    const sendPaymentStatusToBackend = async (isSuccessful) => {
+      try {
+        const response = await fetch('http://localhost:8080/wedease/status', {
+          method: 'POST',
+          headers: {
+
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            isSuccessful: isSuccessful,
+            productDetail: productDetail,
+          }),
+        });
+        
+        if (response.ok) {
+          console.log('Payment status sent successfully');
+        } else {
+          console.error('Failed to send payment status to the backend');
+        }
+      } catch (error) {
+        console.error('Error sending payment status to the backend: ', error);
+      }
+    };
+
     return (
         <div className="payment-container">
         <div className="address-container">

@@ -4,17 +4,14 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
     maxlength: 32,
   },
   imagePaths: {
     type:[String] ,
-     required:true
  },
   price: {
     type: Number,
-    required: true,
     trim: true,
   },
   
@@ -25,7 +22,6 @@ const productSchema = new mongoose.Schema({
   },
   Category:{
     type: String,
-    required: true,
     trim:true
   },
   colour:{
@@ -47,8 +43,9 @@ const productSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now, // This sets the default value to the current date and time
+    default: Date.now, 
   },
+  
 });
 
 module.exports = mongoose.model('Product', productSchema);

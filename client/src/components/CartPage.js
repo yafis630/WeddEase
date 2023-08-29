@@ -20,6 +20,7 @@ const CartPage = () => {
         );
         if (response.ok) {
           const data = await response.json();
+          //console.log(data)
           setProductDetail(data);
         } else {
           throw new Error("Error fetching product data.");
@@ -32,13 +33,18 @@ const CartPage = () => {
     fetchData();
   }, [auth]);
 
-  const totalPrice = productDetail.reduce(
+  const filteredProductDetail = productDetail.filter(
+    (item) => item.isSuccessful === undefined
+  );
+  console.log(filteredProductDetail)
+
+  const totalPrice = filteredProductDetail.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
-
+ 
   const handleBuyNow = () => {
-    navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice } });
+    navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice , productDetail} });
   };
 
   return (
@@ -46,10 +52,10 @@ const CartPage = () => {
       <Header />
       <div className="cart-page">
         <h2>Your Cart</h2>
-        {productDetail.length > 0 ? (
+        {filteredProductDetail.length > 0 ? (
           <>
             <div className="cart-items">
-              {productDetail.map((item) => (
+              {filteredProductDetail.map((item) => (
                 <div key={item._id} className="cart-item">
                   <Carousel showThumbs={false}>
                     {item.imagePaths.map((imagePath, index) => (

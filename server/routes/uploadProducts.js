@@ -140,6 +140,32 @@ router.get('/cartedItems', authenticateToken ,async (req, res) => {
   }
 });
 
+router.post("/status", async (req, res) => {
+  const { isSuccessful, productDetail } = req.body;
 
+  try {
+    // Extract the array of product IDs from productDetail
+    const productIds = productDetail.map(product => product._id);
+
+    // Create a filter to update products with matching IDs
+    const filter = { _id: { $in: productIds } };
+
+    // Create an update object to set the isSuccessful field
+    const update = {
+      $set: {
+        isSuccessful: isSuccessful,
+      },
+    };
+
+    // Use the updateMany method to update all matching products
+    const changed = await Carts.updateMany(filter, update);
+
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 module.exports = router;

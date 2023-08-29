@@ -4,12 +4,10 @@ const stripe = require('stripe')('sk_test_51NYmPkSCfYsS3Tchht4Iy8CkgaTc7DpuNi1kw
 const Payment = require('../models/payment');
 
 router.post('/payment', async (req, res) => {
-  console.log('hi');
   const { amount, currency, cardholderName } = req.body;
 
   try {
     const amountInCents = Math.floor(amount * 100); // Convert amount to cents
-
     if (amountInCents < 100) { // Minimum amount check
       throw new Error('Amount must be at least 1 cent.');
     }
@@ -19,7 +17,6 @@ router.post('/payment', async (req, res) => {
       payment_method_types: ['card'],
      
     });
-
     // Save payment details to the database
     const payment = new Payment({ amount: amountInCents, currency, name: cardholderName });
     await payment.save();
