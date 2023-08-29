@@ -72,7 +72,12 @@
   border-radius: 5px;
 }
 
-
+.update-product-button {
+  padding: 10px;
+  margin-left: 20px;
+  position: relative;
+  
+}
 
 .calendar-container {
   margin: 20px 5px;
@@ -114,4 +119,5 @@
     max-width: none;
     align-items: center; /* Remove max-width for smaller screens */
   }
+  
 }

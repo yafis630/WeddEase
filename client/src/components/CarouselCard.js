@@ -42,18 +42,21 @@ function CarouselCard() {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    
      {/* Worker Card */}
     <div className="mt-5">
         <h2 className='front-card'>Hire Our Best Workers</h2>
         <Container>
-          <Row>
+          <Row xs={1} md={3} className="g-4">
             <Col md={4}>
               <Card >
+              
               <Link to ="/WorkerCategory">
                 <Card.Img variant="top" 
                 src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fHww&w=1000&q=80" 
                 className='card-image' />
                  </Link>
+                 
                 <Card.Body>
                   <Card.Title>Photographer</Card.Title>
                   
@@ -94,50 +97,47 @@ function CarouselCard() {
 
  {/* Seller Card */}
       <div className="mt-5">
-        <h2 className='front-card'>Purchase the top products.</h2>
+        <h2 className='front-card'>Purchase the top products</h2>
         <Container>
-          <Row>
+          <Row xs={1} md={3} className="g-4">
  
             <Col md={4}>
               <Card >
-              <Link to ="/WorkerCategory">
+              <Link to ="/ShoppingServices">
                 <Card.Img variant="top" 
-                src={Groom} 
-                className='card-image' />
+                src={Groom}
+                className='card-image-container' />
                  </Link>
                 <Card.Body>
-                  <Card.Title>Photographer</Card.Title>
+                  <Card.Title>Groom Wear</Card.Title>
                   
                 </Card.Body>
               </Card>
             </Col>
            
-
-            {/* Second Worker Card */}
             <Col md={4}>
               <Card >
-              <Link to ="/WorkerCategory">
+              <Link to ="/ShoppingServices">
                 <Card.Img variant="top" 
-                src="https://media.istockphoto.com/id/523576663/photo/blondie-fashion-model-pretty-girl-portrait.jpg?s=612x612&w=0&k=20&c=vjEtJIURjxbHDXCz5XHhxqOg5XjSTSz5X-t_5ZYeg9M=" 
-                className='card-image' />
+                src="https://www.hunarcourses.com/blog/wp-content/uploads/2022/02/bridal-jewellery-1.jpg" 
+                className='card-image-container' />
                 </Link>
                 <Card.Body>
-                  <Card.Title>Make-Up Artist</Card.Title>
+                  <Card.Title>Jewellery</Card.Title>
                   
                 </Card.Body>
               </Card>
             </Col>
 
-            {/* Third Worker Card */}
             <Col md={4}>
               <Card>
-              <Link to ="/WorkerCategory">
+              <Link to ="/ShoppingServices">
                 <Card.Img variant="top" 
-                src="https://media.istockphoto.com/id/161838634/photo/rock-concert.jpg?s=612x612&w=0&k=20&c=ffT8W7fCeWYhCqcVGihq1cB79kN-hRJ66r3RSJpMoEM="
-                className='card-image' />
+                src="https://5.imimg.com/data5/SELLER/Default/2022/2/MI/TW/NM/7767235/bridal-dresses-rental.jpeg"
+                className='card-image-container' />
                 </Link>
                 <Card.Body>
-                  <Card.Title>Musician</Card.Title>
+                  <Card.Title>Bridal Wear</Card.Title>
                   
                 </Card.Body>
               </Card>

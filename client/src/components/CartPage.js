@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthProvider";
 import "../styles/CartPage.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Button } from "reactstrap";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -47,6 +48,28 @@ const CartPage = () => {
     navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice , productDetail} });
   };
 
+  const handleRemoveItem = async (itemId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/wedease/cartedItems/${itemId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authentication": `Bearer ${auth}`
+        }
+      });
+  
+      if (response.ok) {
+        // Remove the item from the local state
+        setProductDetail(prevItems => prevItems.filter(item => item._id !== itemId));
+      } else {
+        throw new Error("Error removing item from cart.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
   return (
     <div className="back-img">
       <Header />
@@ -76,6 +99,7 @@ const CartPage = () => {
                       <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
                       <span>Qty: {item.qty}</span>
                     </div>
+                    <Button color="danger" onClick={() => handleRemoveItem(item._id)}>Remove</Button>
                   </div>
                 </div>
               ))}
@@ -84,9 +108,9 @@ const CartPage = () => {
               <span>Total:</span>
               <span>₹{totalPrice}</span> {/* Display total price in Indian Rupees */}
             </div>
-            <button className="buy-now-button" onClick={handleBuyNow}>
+            <Button className="buy-now-button" color="danger" onClick={handleBuyNow}>
               Buy Now
-            </button>
+            </Button>
           </>
         ) : (
           <p>Your cart is empty.</p>

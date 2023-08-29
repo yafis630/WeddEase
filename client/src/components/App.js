@@ -24,11 +24,13 @@ import SellerHome from "./SellerHome";
 import { AuthProvider } from "../context/AuthProvider";
 import UploadProduct from "./UploadProduct";
 import ShoppingServices from "./ShoppingServices";
-import Catelog from "./Catelog";
+import CatelogSeller from "./CatelogSeller";
 import ProductDetails from "./ProductDetail";
 import UpdateProfileUser from "./UpdateProfileUser";
 import UserHome from "./UserHome";
 import ProductDetail from "./ProductDetail";
+import Catelog2 from "./Catelog2";
+import AboutUs from "./AboutUs";
 
 
 
@@ -52,7 +54,7 @@ function App() {
           />
           <Route path="/SellerLogin" element={<SellerLogin />} exact />
           <Route path="/SellerHome" element={<SellerHome />} exact />
-
+          <Route path="/AboutUs" element={<AboutUs />} exact />
           <Route
             path="/UpdateProfileSeller"
             element={<UpdateProfileSeller />}
@@ -91,16 +93,16 @@ function App() {
             element={<PaymentGatewayPage />}
             exact
           />
+          <Route path="/Catelog2" element={<Catelog2 />} exact />
           <Route path="/UpdateProfile" element={<UpdateProfile />} exact />
           <Route path="/UploadProduct" element={<UploadProduct />} exact />
           <Route path="/AuthProvider" element={<AuthProvider />} />
           <Route path="/ShoppingServices" element={<ShoppingServices />} />
-          <Route path="/sellers/:category" element={<Catelog />} />
+          <Route path="/sellers/:category" element={<CatelogSeller />} />
           <Route path="/ProductDetail/:productID" element={<ProductDetails />}/>
           <Route path="/UserHome"  element={<UserHome/>}/>
           <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
-          <Route path="/ProductDetail/:productID" element={<ProductDetail />}
-          />
+          <Route path="/ProductDetail/:productID" element={<ProductDetail />} />
         </Routes>
       </AuthProvider>
     </div>

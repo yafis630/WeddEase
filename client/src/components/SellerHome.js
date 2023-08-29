@@ -84,6 +84,9 @@ useEffect(() => {
       <Button variant="success" className="update-product-button" href="/SellerPr">
         Upload Product
       </Button>
+      <Button variant="success" className="update-product-button" href="/Catelog2">
+        Uploaded Product
+      </Button>
     </div>
 
     
