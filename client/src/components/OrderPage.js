@@ -21,7 +21,7 @@ function OrderPage() {
               const data = await response.json();
               setOrders(data);
             } else {
-              throw new Error("Error fetching product data.");
+              throw new Error("Error fetching order data.");
             }
           } catch (error) {
             console.log(error);
