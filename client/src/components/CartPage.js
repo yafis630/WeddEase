@@ -36,7 +36,6 @@ const CartPage = () => {
   const filteredProductDetail = productDetail.filter(
     (item) => item.isSuccessful === undefined
   );
-  console.log(filteredProductDetail)
 
   const totalPrice = filteredProductDetail.reduce(
     (total, item) => total + item.price * item.qty,
@@ -47,19 +46,20 @@ const CartPage = () => {
     navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice , productDetail} });
   };
 
-  const handleRemoveItem = async (itemId) => {
+
+  const handleRemoveItem = async (_id) => {
+    console.log(_id)
     try {
-      const response = await fetch(`http://localhost:8080/wedease/cartedItems/${itemId}`, {
+      const response = await fetch(`http://localhost:8080/wedease/delcart/${_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           "Authentication": `Bearer ${auth}`
-        }
+        },
       });
   
       if (response.ok) {
-        // Remove the item from the local state
-        setProductDetail(prevItems => prevItems.filter(item => item._id !== itemId));
+        setProductDetail((prevItems) => prevItems.filter((item) => item._id !== _id));
       } else {
         throw new Error("Error removing item from cart.");
       }

@@ -13,8 +13,7 @@ function OrderPage() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch(
-              `http://localhost:8080/wedease/orders`,
+            const response = await fetch(`http://localhost:8080/wedease/cartedItems`,
               { headers: { Authentication: `Bearer ${auth}` } }
             );
             if (response.ok) {
@@ -31,15 +30,19 @@ function OrderPage() {
         fetchData();
       }, [auth]);
 
+      const filteredProductDetail = orders.filter(
+        (item) => item.isSuccessful === true
+      );
+
       return (
         <div className="back-img">
           <Header />
           <div className="cart-page">
             <h2>Your Orders</h2>
-            {orders.length > 0 ? (
+            {filteredProductDetail.length > 0 ? (
               <>
                 <div className="cart-items">
-                  {orders.map((item) => (
+                  {filteredProductDetail.map((item) => (
                     <div key={item._id} className="cart-item">
                       <Carousel showThumbs={false}>
                         {item.imagePaths.map((imagePath, index) => (

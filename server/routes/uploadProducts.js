@@ -64,7 +64,7 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
   }
 });
 
-
+//upload images in worker profile
 router.post('/samples', upload.array("upimages",5),authenticateToken, async(req,res)=>{
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ error: 'No images provided' });
@@ -105,6 +105,7 @@ router.get("/catelog/:category", async (req, res) => {
   }
 });
 
+// fetch products on the basis of product id
 router.get("/catelog/product/:productID", async (req, res) => {
   try {
     const { productID } = req.params;
@@ -153,6 +154,22 @@ router.get('/cartedItems', authenticateToken ,async (req, res) => {
   } catch (error) {
     console.error('Error fetching carts', error);
     res.status(500).json({ error: 'Failed to fetch carts' });
+  }
+});
+
+//remove carted images
+router.delete('/delcart/:_id', authenticateToken, async (req, res) => {
+  const productId = req.params._id;
+  try {
+    const deletedProduct = await Carts.findByIdAndDelete(productId);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete product' });
   }
 });
 

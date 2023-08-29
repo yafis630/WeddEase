@@ -22,6 +22,7 @@ const WorkerHome = () => {
   const [notifications, setNotifications] = useState([]);
   const [workerList, setWorkerList] = useState([]);
   const { category, workerId } = useParams();
+  const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
 
   const [markedDates, setMarkedDates] = useState([]);
   const { auth, isAuth } = useContext(AuthContext);
@@ -72,6 +73,9 @@ const WorkerHome = () => {
         if (response.ok) {
           const data = await response.json();
           setNotifications(data);
+          const pendingCount = data.filter(notification => notification.isAccepted === undefined).length;
+          setPendingRequestsCount(pendingCount);
+          console.log(pendingCount)
         } else {
           throw new Error("Error fetching worker data.");
         }
@@ -131,7 +135,7 @@ const WorkerHome = () => {
       });
 
       if (response.ok) {
-        setNotifications((prevNotifications) =>
+          setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
 
@@ -182,12 +186,35 @@ const WorkerHome = () => {
     <div className="back">
       <Header />
       <FontAwesomeIcon
-        className="notification-icon"
-        icon={faBell}
-        onClick={handleNotificationClick}
-        size="2x"
-        style={{ float: "right", marginRight: "130px" }}
-      />
+  className="notification-icon"
+  icon={faBell}
+  onClick={handleNotificationClick}
+  size="2x"
+  style={{
+    float: "right",
+    marginRight: "130px",
+    position: "relative", // Make sure the parent has a relative position
+  }}
+>
+  {pendingRequestsCount > 0 && (
+    <span
+      className="badge"
+      style={{
+        position: "absolute",
+        top: "-10px", // Adjust this value to position the badge properly
+        right: "-10px", // Adjust this value to position the badge properly
+        backgroundColor: "red", // Customize badge background color
+        color: "white", // Customize badge text color
+        padding: "4px 8px", // Adjust padding as needed
+        borderRadius: "50%", // Create a circular badge
+        zIndex: "999", // Ensure the badge is above the icon
+      }}
+    >
+      {pendingRequestsCount}
+    </span>
+  )}
+</FontAwesomeIcon>
+
       <div className="worker-home-container">
   
       {workerList.map((worker) => (
