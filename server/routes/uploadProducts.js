@@ -86,6 +86,19 @@ const changed = await Worker.updateOne(filter,update ,{
   res.send(true);
 })
 
+//fetch images on the basis of worker id
+router.get("/worker/:id", async (req, res) => {
+  console.log("hi")
+  try {
+    const { id } = req.params;
+    console.log(id)
+    const images = await Worker.findById(id);
+    res.status(200).json(images);
+  } catch (error) {
+    console.error("Error fetching products", error);
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
 
 
 
@@ -96,8 +109,6 @@ router.get("/catelog/:category", async (req, res) => {
     let category = req.params.category;
     category = category.substring(9);
     const products = await Product.find({ Category: category });
-
-    //console.log(products);
     res.json(products);
   } catch (error) {
     console.error("Error fetching products", error);

@@ -84,7 +84,7 @@ function App() {
 
           <Route path="/workers/:category" element={<WorkerProfile />} exact />
           <Route
-            path="/workers/:category/:workerId"
+            path="/WorkerDetails/:id"
             element={<WorkerDetails />}
             exact
           />
