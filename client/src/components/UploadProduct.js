@@ -4,8 +4,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/forms.css";
 import AuthContext from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const UploadProduct = () => {
+  const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const [uploadedImages, setUploadedImages] = useState({
     upimages: [],
@@ -39,7 +41,7 @@ const UploadProduct = () => {
         const data = await response.json();
         console.log(data);
         alert("Product uploaded");
-        window.location.href = "/ShoppingServices";
+        navigate("/WorkerCategory");
       } else {
         alert("Product not uploaded");
       }

@@ -44,8 +44,6 @@ const LoginForm = () => {
       return;
     }
 
-    // Here you can add the logic to send a password reset email to the provided email.
-    // You might call an API endpoint to trigger the password reset process.
     alert(`Password reset email sent to ${email}`);
   };
 
