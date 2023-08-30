@@ -30,7 +30,7 @@ const upload=multer({
 })
 
 
-// Register a new user
+// Register a new worker
 router.post('/worker', upload.single('image'), async (req, res) => {
   try {
   if (!req.file) {
@@ -62,7 +62,7 @@ router.post('/worker', upload.single('image'), async (req, res) => {
   
 });
 
-
+//fetch workers
   router.get('/workerHome', authenticateToken ,async (req, res) => {
     try {
       const workers = await Worker.find({ email:req.email.email }); 
@@ -74,6 +74,8 @@ router.post('/worker', upload.single('image'), async (req, res) => {
     }
   });
 
+
+//update workers
   router.post("/putworker",authenticateToken, upload.single('image'),async(req,res)=>{
       if (!req.file) {
         return res.status(400).json({ error: 'No image provided' });
@@ -98,6 +100,8 @@ router.post('/worker', upload.single('image'), async (req, res) => {
       res.send(true);
     });
 
+    
+//get the notifications from users
     router.get('/notification', authenticateToken ,async (req, res) => {
       try {
         const selectedData = await SelectedData.find({workersEmail:req.email.email }); 
@@ -109,28 +113,11 @@ router.post('/worker', upload.single('image'), async (req, res) => {
       }
     });
 
-    /*router.post("/request",authenticateToken,async(req,res)=>{
-      const  {isAccepted } = req.body;
-      console.log(req.body)
-      const filter={workersEmail:req.email.email};
-      const update = {
-        $set: {
-          isAccepted: isAccepted,
-        }
-      };
-      const changed = await SelectedData.updateOne(filter,update ,{
-        new:true
-       }
-        );
-        console.log(changed);
-        res.send(true);
-      });
-*/
-
-      router.post("/request", authenticateToken, async (req, res) => {
-        const { isAccepted, selectedDates, usersEmail } = req.body; 
-        console.log(req.body);
-       try {
+//accept or reject notification
+router.post("/request", authenticateToken, async (req, res) => {
+  const { isAccepted, selectedDates, usersEmail } = req.body; 
+    console.log(req.body);
+      try {
          const filter = {workersEmail: req.email.email,usersEmail:usersEmail, selectedDates:selectedDates};
          console.log(filter)
           const update = {
@@ -149,6 +136,7 @@ router.post('/worker', upload.single('image'), async (req, res) => {
         }
       });
       
+
       
 
 module.exports = router;

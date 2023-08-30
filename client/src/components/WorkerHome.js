@@ -22,6 +22,7 @@ const WorkerHome = () => {
   const [notifications, setNotifications] = useState([]);
   const [workerList, setWorkerList] = useState([]);
   const { category, workerId } = useParams();
+  const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
 
   const [markedDates, setMarkedDates] = useState([]);
   const { auth, isAuth } = useContext(AuthContext);
@@ -72,6 +73,9 @@ const WorkerHome = () => {
         if (response.ok) {
           const data = await response.json();
           setNotifications(data);
+          const pendingCount = data.filter(notification => notification.isAccepted === undefined).length;
+          setPendingRequestsCount(pendingCount);
+          console.log(pendingCount)
         } else {
           throw new Error("Error fetching worker data.");
         }
@@ -100,11 +104,11 @@ const WorkerHome = () => {
       });
 
       if (response.ok) {
-        // Remove the accepted notification from the state
+       
         setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
-
+        setPendingRequestsCount((prevCount) => prevCount - 1);
         alert("Request accepted successfully");
       } else {
         alert("Error accepting the request");
@@ -118,9 +122,9 @@ const WorkerHome = () => {
     try {
       const requestData = {
         isAccepted: false,
-        usersEmail:notification.usersEmail
+        usersEmail:notification.usersEmail,
+        selectedDates:notification.selectedDates
       };
-    console.log(requestData)
       const response = await fetch(`http://localhost:8080/wedease/request`, {
         method: "POST",
         body: JSON.stringify(requestData),
@@ -131,10 +135,10 @@ const WorkerHome = () => {
       });
 
       if (response.ok) {
-        setNotifications((prevNotifications) =>
+          setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
-
+        setPendingRequestsCount((prevCount) => prevCount - 1);
         alert("Request rejected");
       } else {
         alert("Error rejecting the request");
@@ -181,13 +185,21 @@ const WorkerHome = () => {
   return (
     <div className="back">
       <Header />
+      <div className="notification-container">
       <FontAwesomeIcon
-        className="notification-icon"
-        icon={faBell}
-        onClick={handleNotificationClick}
-        size="2x"
-        style={{ float: "right", marginRight: "130px" }}
-      />
+       className="notification-icon"
+       icon={faBell}
+       onClick={handleNotificationClick}
+       size="2x"
+       
+  
+>
+    </FontAwesomeIcon>
+         {pendingRequestsCount > 0 && (
+          <span className="notification-badge">{pendingRequestsCount}</span>
+        )}
+       </div>
+
       <div className="worker-home-container">
   
       {workerList.map((worker) => (

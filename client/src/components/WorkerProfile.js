@@ -106,6 +106,7 @@ const WorkerProfile = () => {
         });
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           setWorkerList(data);
        
         } else {
@@ -132,7 +133,8 @@ const WorkerProfile = () => {
         ) : (
           workerList.map((worker) => (
             <div className="work-card" key={worker.id}>
-              <Link to = "/WorkerDetails" className="work-card-link">
+            
+              <Link to = {`/WorkerDetails/${worker._id}`} className="work-card-link">
               <img
                 className="work-picture-list"
                 src={`http://localhost:8080/images/${String(worker.imagePath).substring(8)}`}
@@ -144,6 +146,7 @@ const WorkerProfile = () => {
               <p>{worker.email}</p>
               <h3>Bio</h3>
               <p>{worker.bio}</p>
+              
               </Link>
 
               <Button color="primary" size="lg" variant="info" onClick={() => Handle(worker)}>
