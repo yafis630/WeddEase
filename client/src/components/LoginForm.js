@@ -37,17 +37,31 @@ const LoginForm = () => {
     setFormData({ ...formData, recaptchaValue: value });
   };
 
-  const handleForgotPassword = () => {
-    const { email } = formData;
-    if (!email.trim()) {
-      alert("Please provide your email to reset password.");
-      return;
+  const handleForgotPassword = async () => {
+    try {
+      
+  
+      const response = await fetch('http://localhost:8080/wedease/forgot-password', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        alert(`Password reset email sent to ${email}`);
+      } else {
+        alert('Failed to initiate password reset');
+      }
+    } catch (error) {
+      console.error('Error initiating password reset', error);
+      alert('Failed to initiate password reset');
     }
-
-    // Here you can add the logic to send a password reset email to the provided email.
-    // You might call an API endpoint to trigger the password reset process.
-    alert(`Password reset email sent to ${email}`);
   };
+  
 
   const handleSubmit = async  e => {
     e.preventDefault();

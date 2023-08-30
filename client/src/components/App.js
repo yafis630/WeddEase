@@ -32,6 +32,7 @@ import ProductDetail from "./ProductDetail";
 import Catelog2 from "./Catelog2";
 import AboutUs from "./AboutUs";
 import OrderPage from "./OrderPage";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 
 
@@ -65,6 +66,7 @@ function App() {
 
           <Route path="/SellerHome" element={<SellerHome />} exact />
           <Route path="/UserHome" element={<UserHome />} exact />
+          <Route path="/ResetPasswordForm" element={<ResetPasswordForm />} exact />
           <Route path="/OrderPage" element={<OrderPage />} exact />
           <Route path="/UpdateProfileUser" element={<UpdateProfileUser />} exact />
           <Route path="/LoginForm" element={<LoginForm />} />
