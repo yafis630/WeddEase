@@ -37,11 +37,12 @@ const upload = multer({
 });
 
 // Register a new product
-router.post("/uproduct", upload.array("images", 5), async (req, res) => {
+router.post("/uproduct", upload.array("images", 5),authenticateToken, async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No images provided" });
     }
+    const sellerEmail=req.email.email
     const { name, price, Category, description,brand,colour,qty,material } = req.body;
     const imagePaths = req.files.map((file) => file.path);
     const product = new Product({
@@ -53,7 +54,8 @@ router.post("/uproduct", upload.array("images", 5), async (req, res) => {
       colour,
       material,
       qty,
-      imagePaths, 
+      imagePaths,
+      sellerEmail 
     });
 
     await product.save();
@@ -111,6 +113,34 @@ router.get("/catelog/:category", async (req, res) => {
   } catch (error) {
     console.error("Error fetching products", error);
     res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
+
+// fetch products in seller home
+router.get("/catelog2", authenticateToken,async (req, res) => {
+  try {
+    const sellerEmail=req.email.email
+    const products = await Product.find({ sellerEmail: sellerEmail });
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products", error);
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
+
+//delete products in seller home
+router.delete('/delProducts/:_id', authenticateToken, async (req, res) => {
+  const productId = req.params._id;
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete product' });
   }
 });
 

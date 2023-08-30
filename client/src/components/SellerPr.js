@@ -1,4 +1,4 @@
-import React, { useState , useRef} from "react";
+import React, { useState ,useContext, useRef} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import "../styles/SellerPr.css";
 import { Container, Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import ShoppingServices from "./ShoppingServices";
 import SellerCategories from "../data/sellerCategories";
+import AuthContext from "../context/AuthProvider";
 
 const categoryOptions = SellerCategories.map((category, i) => (
   <option value={category.name} key={i}>
@@ -26,6 +27,7 @@ const SellerPr = () => {
     images: [],  // Change to an array to hold multiple images
     errors: {}
   });
+  const { auth } = useContext(AuthContext);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -62,8 +64,9 @@ const SellerPr = () => {
       try {
         const response = await fetch("http://localhost:8080/wedease/uproduct", {
           method: "POST",
-          body: formDataToSend
-        });
+          body: formDataToSend,
+           headers: { Authentication: `Bearer ${auth}` } }        
+          );
 
         if (response.ok) {
           const data = await response.json();
