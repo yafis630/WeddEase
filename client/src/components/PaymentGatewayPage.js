@@ -15,12 +15,14 @@ import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import '../styles/PaymentGatewayPage.css';
 import Header from './Header';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe(
   'pk_test_51NYmPkSCfYsS3TchcSObjNfzHWpWXIkcjrKAT9KNe5bxLD5PVAtcYQ2VtNDXpUMsqDNhBx075XhBhB8CD3NLC5XK00gzVu1aFf'
 ); // Stripe public key
 
 const PaymentForm = () => {
+    const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
     const location = useLocation();
@@ -82,6 +84,8 @@ const PaymentForm = () => {
           console.log('Payment succeeded:', result.paymentIntent);
           alert('Payment Successful!');
           sendPaymentStatusToBackend(true);
+          navigate("/OrderPage");
+          
         }
       } catch (error) {
         console.error('Error processing payment: ', error);
