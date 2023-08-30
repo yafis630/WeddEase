@@ -104,11 +104,11 @@ const WorkerHome = () => {
       });
 
       if (response.ok) {
-        // Remove the accepted notification from the state
+       
         setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
-
+        setPendingRequestsCount((prevCount) => prevCount - 1);
         alert("Request accepted successfully");
       } else {
         alert("Error accepting the request");
@@ -122,9 +122,9 @@ const WorkerHome = () => {
     try {
       const requestData = {
         isAccepted: false,
-        usersEmail:notification.usersEmail
+        usersEmail:notification.usersEmail,
+        selectedDates:notification.selectedDates
       };
-    console.log(requestData)
       const response = await fetch(`http://localhost:8080/wedease/request`, {
         method: "POST",
         body: JSON.stringify(requestData),
@@ -138,7 +138,7 @@ const WorkerHome = () => {
           setNotifications((prevNotifications) =>
           prevNotifications.filter((item) => item !== notification)
         );
-
+        setPendingRequestsCount((prevCount) => prevCount - 1);
         alert("Request rejected");
       } else {
         alert("Error rejecting the request");
@@ -185,35 +185,20 @@ const WorkerHome = () => {
   return (
     <div className="back">
       <Header />
+      <div className="notification-container">
       <FontAwesomeIcon
-  className="notification-icon"
-  icon={faBell}
-  onClick={handleNotificationClick}
-  size="2x"
-  style={{
-    float: "right",
-    marginRight: "130px",
-    position: "relative", // Make sure the parent has a relative position
-  }}
+       className="notification-icon"
+       icon={faBell}
+       onClick={handleNotificationClick}
+       size="2x"
+       
+  
 >
-  {pendingRequestsCount > 0 && (
-    <span
-      className="badge"
-      style={{
-        position: "absolute",
-        top: "-10px", // Adjust this value to position the badge properly
-        right: "-10px", // Adjust this value to position the badge properly
-        backgroundColor: "red", // Customize badge background color
-        color: "white", // Customize badge text color
-        padding: "4px 8px", // Adjust padding as needed
-        borderRadius: "50%", // Create a circular badge
-        zIndex: "999", // Ensure the badge is above the icon
-      }}
-    >
-      {pendingRequestsCount}
-    </span>
-  )}
-</FontAwesomeIcon>
+    </FontAwesomeIcon>
+         {pendingRequestsCount > 0 && (
+          <span className="notification-badge">{pendingRequestsCount}</span>
+        )}
+       </div>
 
       <div className="worker-home-container">
   
