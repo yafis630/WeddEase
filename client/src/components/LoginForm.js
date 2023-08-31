@@ -39,14 +39,13 @@ const LoginForm = () => {
 
   const handleForgotPassword = async () => {
     try {
-      
-  
       const response = await fetch('http://localhost:8080/wedease/forgot-password', {
         method: 'POST',
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email }), 
         headers: {
           'Content-Type': 'application/json',
         },
+
       });
   
       const data = await response.json();

@@ -19,7 +19,7 @@ const cartSchema = new mongoose.Schema({
   },
   
   qty:{
-    type: String,
+    type: Number,
     required: true,
     trim:true
   },
@@ -33,6 +33,9 @@ isSuccessful:{
   type: Boolean
 },
 sellerEmail:{
+  type:String
+},
+productID:{
   type:String
 }
 });

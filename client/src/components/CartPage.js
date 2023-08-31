@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import AuthContext from "../context/AuthProvider";
+import CartContext from "../context/CartContext";
 import "../styles/CartPage.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -11,6 +12,9 @@ const CartPage = () => {
   const navigate = useNavigate();
   const [productDetail, setProductDetail] = useState([]);
   const { auth } = useContext(AuthContext);
+
+  // Access cartItems from CartContext
+  const { cartItems, setCustomValue } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,29 +41,38 @@ const CartPage = () => {
     (item) => item.isSuccessful === undefined
   );
 
+  // Count the items in the cart
+  const count = filteredProductDetail.length;
+
+  // Update the count in your CartContext
+  //setCustomValue(count);
+
   const totalPrice = filteredProductDetail.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
- 
+
   const handleBuyNow = () => {
-    navigate("/PaymentGatewayPage", { state: { totalAmount: totalPrice , productDetail} });
+    navigate("/PaymentGatewayPage", {
+      state: { totalAmount: totalPrice, filteredProductDetail, },
+    });
   };
 
-
   const handleRemoveItem = async (_id) => {
-    console.log(_id)
+    console.log(_id);
     try {
       const response = await fetch(`http://localhost:8080/wedease/delcart/${_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authentication": `Bearer ${auth}`
+          Authentication: `Bearer ${auth}`,
         },
       });
-  
+
       if (response.ok) {
         setProductDetail((prevItems) => prevItems.filter((item) => item._id !== _id));
+        // Remove the item from the cart context
+        // Note: You may need to implement removeFromCart in your CartContext
       } else {
         throw new Error("Error removing item from cart.");
       }
@@ -67,7 +80,6 @@ const CartPage = () => {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="back-img">
@@ -83,9 +95,7 @@ const CartPage = () => {
                     {item.imagePaths.map((imagePath, index) => (
                       <div key={index}>
                         <img
-                          src={`http://localhost:8080/pimages/${String(
-                            imagePath
-                          ).substring(9)}`}
+                          src={`http://localhost:8080/pimages/${String(imagePath).substring(9)}`}
                           alt={item.name}
                           className="cart-item-image"
                         />
@@ -98,7 +108,9 @@ const CartPage = () => {
                       <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
                       <span>Qty: {item.qty}</span>
                     </div>
-                    <Button color="danger" onClick={() => handleRemoveItem(item._id)}>Remove</Button>
+                    <Button color="danger" onClick={() => handleRemoveItem(item._id)}>
+                      Remove
+                    </Button>
                   </div>
                 </div>
               ))}

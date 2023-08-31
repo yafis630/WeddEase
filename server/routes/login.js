@@ -4,7 +4,17 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Token =require( "../models/token");
-const generateAccessToken=require('../helpers/generateAccessToken')
+const generateAccessToken=require('../helpers/generateAccessToken');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // e.g., 'Gmail' or use your SMTP server details
+  auth: {
+    user: 'jasiahassan120@gmail.com', // Your email address
+    pass: 'Jasia@4101998', // Your email password or application-specific password
+  },
+});
+
 // User login
 router.post('/login', async (req, res) => {
   try {
@@ -34,8 +44,10 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/forgot-password', async (req, res) => {
+  console.log("hi")
   try {
     const { email } = req.body;
+    console.log(email)
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -43,12 +55,22 @@ router.post('/forgot-password', async (req, res) => {
     }
 
     // Generate a reset token and save it in the database
-    const resetToken = generateToken();
+    const resetToken = generateAccessToken();
     const token = new Token({
       userId: user._id,
       token: resetToken,
     });
     await token.save();
+
+    const mailOptions = {
+      from: 'jasiahassan120@gmail.com', // Sender email address
+      to: email, // Recipient's email address
+      subject: 'Password Reset', // Email subject
+      text: `Here is your password reset token: ${resetToken}`, // Email content
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
 
     // Send an email to the user containing the reset token
     // (You'll need to use a library to send emails, like Nodemailer)
@@ -61,6 +83,7 @@ router.post('/forgot-password', async (req, res) => {
 });
 
 router.post('/reset-password', async (req, res) => {
+  console.log("hi")
   try {
     const { token, password } = req.body;
 

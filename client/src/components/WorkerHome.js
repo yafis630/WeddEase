@@ -191,8 +191,6 @@ const WorkerHome = () => {
        icon={faBell}
        onClick={handleNotificationClick}
        size="2x"
-       
-  
 >
     </FontAwesomeIcon>
          {pendingRequestsCount > 0 && (

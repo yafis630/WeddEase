@@ -71,7 +71,7 @@ function SellerRequests() {
                 
               </>
             ) : (
-              <p>No orders found.</p>
+              <p>No purchase requests found.</p>
             )}
           </div>
         </div>

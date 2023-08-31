@@ -26,7 +26,7 @@ const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const location = useLocation();
-    const {totalAmount,productDetail}=location.state;
+    const {totalAmount,filteredProductDetail}=location.state;
     const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
     const [cardholderName, setCardholderName] = useState('');
 
@@ -99,12 +99,11 @@ const PaymentForm = () => {
         const response = await fetch('http://localhost:8080/wedease/status', {
           method: 'POST',
           headers: {
-
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             isSuccessful: isSuccessful,
-            productDetail: productDetail,
+            filteredProductDetail: filteredProductDetail,
           }),
         });
         
@@ -116,6 +115,15 @@ const PaymentForm = () => {
       } catch (error) {
         console.error('Error sending payment status to the backend: ', error);
       }
+      console.log(filteredProductDetail)
+      const response = await fetch("http://localhost:8080/wedease/quantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({filteredProductDetail:filteredProductDetail}),
+      });
+
     };
 
     return (

@@ -25,7 +25,6 @@ const ProductDetails = (props) => {
       // Quantity is 0 or negative, don't proceed
       return;
     }
-
     try {
       const itemToAdd = {
         qty: selectedQuantity,
@@ -33,6 +32,7 @@ const ProductDetails = (props) => {
         price: productDetail.price,
         usertoken: auth,
         sellerEmail:productDetail.sellerEmail,
+        productID:productDetail._id,
         imagePaths: productDetail.imagePaths || [],
       };
 
@@ -53,8 +53,8 @@ const ProductDetails = (props) => {
     } catch (error) {
       console.error(error);
     }
+  
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -82,6 +82,8 @@ const ProductDetails = (props) => {
 
     fetchData();
   }, []);
+
+ 
 
    const handleBuyNow=()=>{}
 
@@ -124,15 +126,15 @@ const ProductDetails = (props) => {
                   id="quantity"
                   value={selectedQuantity}
                   onChange={(e) =>
-                    setSelectedQuantity(parseInt(e.target.value))
-                  }
-                >
-                  {Array.from({ length: productDetail.qty }, (_, index) => (
-                    <option key={index} value={index}>
-                      {index}
-                    </option>
-                  ))}
-                </select>
+                  setSelectedQuantity(parseInt(e.target.value))}
+               >
+           {Array.from({ length:( productDetail.qty ) }, (_, index) => (
+            <option key={index+1} value={index+1}>
+           {index+1}
+           </option>
+            ))}
+           </select>
+
               </div>
             </div>
             {outOfStock ? (
@@ -163,8 +165,6 @@ const ProductDetails = (props) => {
               <tr>
                 <th>Price:</th>
                 <td>₹ {productDetail.price}</td>
-              
-                <td> {productDetail.qty}</td>
                 
               </tr>
               <tr>
