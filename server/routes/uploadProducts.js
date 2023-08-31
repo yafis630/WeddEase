@@ -162,19 +162,18 @@ router.get("/catelog/product/:productID", async (req, res) => {
 // save the carted items
 router.post("/carted", async (req, res) => {
   try {
-    const { name, price,qty,usertoken,imagePaths,sellerEmail } = req.body;
+    const { name, price,qty,usertoken,imagePaths,sellerEmail,productID } = req.body;
     const decoded = jwt.verify(usertoken, "WedEase");
     const userEmail = decoded.email;
-  
     const carts = new Carts({
       name,
       price,
       qty,
       userEmail,
       imagePaths,
-      sellerEmail
+      sellerEmail,
+      productID
     });
-
     await carts.save();
     res.json(carts);
   } catch (error) {
@@ -182,6 +181,42 @@ router.post("/carted", async (req, res) => {
     res.status(500).json({ error: "Failed to cart product" });
   }
 });
+
+// update quantity
+router.post("/quantity", async (req, res) => {
+  const { filteredProductDetail } = req.body;
+
+  try {
+    // Iterate through filteredProductDetail and update qty for each product
+    for (const product of filteredProductDetail) {
+      const { productID, qty } = product;
+
+      // Define the filter to find the product by its ID
+      const filter = { _id: productID };
+      console.log(qty)
+      // Define the update operation to subtract the value from qty
+      const update = {
+        $inc: {
+          qty: -qty, // Subtract the specified value from qty
+        },
+      };
+
+      // Update the product and return the updated document
+      const changed = await Product.updateOne(filter, update, {
+        new: true,
+      });
+
+      console.log(`Updated quantity for product ${productID}:`, changed);
+    }
+
+    res.send(true);
+  } catch (error) {
+    console.error("Error updating quantity:", error);
+    res.status(500).send("Error updating quantity");
+  }
+});
+
+
  
 //retrieve the carted items
 router.get('/cartedItems', authenticateToken ,async (req, res) => {
@@ -226,10 +261,10 @@ router.delete('/delcart/:_id', authenticateToken, async (req, res) => {
 
 // check the payement status
 router.post("/status", async (req, res) => {
-  const { isSuccessful, productDetail } = req.body;
+  const { isSuccessful, filteredProductDetail } = req.body;
 
   try {
-    const productIds = productDetail.map(product => product._id);
+    const productIds = filteredProductDetail.map(product => product._id);
     const filter = { _id: { $in: productIds } };
     const update = {
       $set: {

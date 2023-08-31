@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
     trim:true
   },
   qty:{
-    type: String,
+    type: Number,
     required: true,
     trim:true
   },

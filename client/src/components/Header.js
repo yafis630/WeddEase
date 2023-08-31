@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav,Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
 import AuthContext from "../context/AuthProvider";
+import CartContext from "../context/CartContext";
 
 
 function Header() {
@@ -17,6 +18,7 @@ function Header() {
     else {
        flag = (isAuth  === "true"? true:false);
     }
+    const { customVariable } = useContext(CartContext);
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -64,7 +66,11 @@ function Header() {
                         )}
                         
                         <NavLink to="/CartPage" className="cart-button">
-                            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> Cart
+                            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> 
+                            <Badge pill variant="danger">
+                                {customVariable}
+                            </Badge>
+                            Cart
                         </NavLink>
                     </Nav>
                 </Navbar.Collapse>
