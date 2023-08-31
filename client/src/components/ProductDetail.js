@@ -5,7 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import classes from "../styles/ProductDetail.module.css";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -14,8 +14,7 @@ const ProductDetails = (props) => {
   const { productID } = useParams();
   const { auth } = useContext(AuthContext);
   const [productDetail, setProductDetail] = useState();
-  const [selectedQuantity, setSelectedQuantity] = useState(0); // Initialize quantity as 0
-  const [cart, setCart] = useState([]); // Add cart state
+  const [selectedQuantity, setSelectedQuantity] = useState(1); // Initialize quantity as 0
   const [outOfStock, setOutOfStock] = useState(false); // State to track out of stock status
 
   // ... useEffect and other code ...
@@ -95,6 +94,7 @@ const ProductDetails = (props) => {
       {productDetail && (
         <div className={classes["product_detail__container"]}>
           <div className={classes["product_detail__image_container"]}>
+          
             <Carousel showThumbs={true} infiniteLoop>
               {productDetail.imagePaths.map((imagePath, index) => (
                 <div key={`image-carousel-${index}`}>
@@ -108,6 +108,8 @@ const ProductDetails = (props) => {
                 </div>
               ))}
             </Carousel>
+            
+            
             <p className={classes["product__description"]}>
               <th> {productDetail.description}</th>
               </p>
@@ -165,7 +167,9 @@ const ProductDetails = (props) => {
               <tr>
                 <th>Price:</th>
                 <td>₹ {productDetail.price}</td>
-                
+                  </tr>
+                <tr>
+                <th>In Stock:</th>
               </tr>
               <tr>
                 <th>Colour:</th>
