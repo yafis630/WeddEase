@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -14,34 +13,11 @@ const Catelog2 = () => {
   const { category } = useParams();
   const { auth } = useContext(AuthContext);
 
-  const handleDelete = async (productId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/wedease/products/${productId}`,
-        {
-          method: "DELETE",
-          headers: { Authentication: `Bearer ${auth}` },
-        }
-      );
-
-      if (response.ok) {
-        setProductList((prevList) =>
-          prevList.filter((product) => product._id !== productId)
-        );
-      } else {
-        throw new Error("Error deleting product.");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/wedease/catelog/" +
-            new URLSearchParams({ category }),
+          "http://localhost:8080/wedease/catelog2",
           { headers: { Authentication: `Bearer ${auth}` } }
         );
 
@@ -51,22 +27,21 @@ const Catelog2 = () => {
             <div className="worker-card" key={product._id}>
               <Carousel showThumbs={false} infiniteLoop>
                 {product.imagePaths.map((imagePath, index) => (
-                    <div key={`image-carousel-${index}`}>
-                      <img
-                        className="worker-picture-list-P"
-                        src={`http://localhost:8080/pimages/${String(
-                          imagePath
-                        ).substring(9)}`}
-                        alt={`profile-${index}`}
-                      />
-                    </div>
-                  ))}
+                  <div key={`image-carousel-${index}`}>
+                    <img
+                      className="worker-picture-list-P"
+                      src={`http://localhost:8080/pimages/${String(
+                        imagePath
+                      ).substring(9)}`}
+                      alt={`profile-${index}`}
+                    />
+                  </div>
+                ))}
               </Carousel>
               <div className="Discription">
                 <h6>Name</h6>
-                      <p>{product.name}</p>
-                      
-                      <p>₹ {product.price}</p>
+                <p>{product.name}</p>
+                <p>₹ {product.price}</p>
               </div>
               <div className="buttons-container">
                 <Link to={`/ProductDetail/${product._id}`}>
@@ -78,14 +53,16 @@ const Catelog2 = () => {
                     View Details
                   </Button>
                 </Link>
-                {<Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleDelete(product._id)}
-                  className="delete-button"
-                >
-                  Delete
-              </Button>}
+                {
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(product._id)}
+                    className="delete-button"
+                  >
+                    Delete
+                  </Button>
+                }
               </div>
             </div>
           ));
@@ -101,6 +78,29 @@ const Catelog2 = () => {
 
     fetchData();
   }, [category, auth]);
+
+  const handleDelete = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/wedease/delProducts/${productId}`,
+        {
+          method: "DELETE",
+          headers: { Authentication: `Bearer ${auth}` },
+        }
+      );
+
+      if (response.ok) {
+        // Remove the deleted product from the state
+        setProductList((prevList) =>
+          prevList.filter((product) => product.key !== productId)
+        );
+      } else {
+        throw new Error("Error deleting product.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>

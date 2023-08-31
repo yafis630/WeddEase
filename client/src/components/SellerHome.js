@@ -87,10 +87,10 @@ useEffect(() => {
       <Button variant="success" className="update-product-button" href="/Catelog2">
         Uploaded Product
       </Button>
+      <Button variant="success" className="update-product-button" href="/SellerRequests">
+         Product requests
+      </Button>
     </div>
-
-    
-
     </div>
   );
 };

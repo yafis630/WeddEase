@@ -55,9 +55,8 @@ router.post('/seller', upload.single('image'), async (req, res) => {
       imagePath // Store the file path in the database
     });
   await seller.save();
-    console.log(seller);
     res.json(seller);
-}catch(error){
+   }catch(error){
   console.error('Error registering seller', error);
   res.status(500).json({ error: 'Failed to register seller' });
 }
@@ -66,7 +65,6 @@ router.post('/seller', upload.single('image'), async (req, res) => {
 router.get('/sellerhome', authenticateToken ,async (req, res) => {
   try {
     const sellers = await Seller.find({ email:req.email.email }); 
-    console.log(sellers);
     res.json(sellers);
 
   } catch (error) {

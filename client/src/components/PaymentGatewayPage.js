@@ -37,7 +37,6 @@ const PaymentForm = () => {
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
   
-    console.log(productDetail);
 
     const handlePayment = async (event) => {
       event.preventDefault();
@@ -48,15 +47,15 @@ const PaymentForm = () => {
         const response = await fetch('http://localhost:8080/wedease/payment', {
           method: 'POST',
           headers: {
-           
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            amount: totalAmount , // Convert amount to smallest currency unit (e.g., paisa for INR)
+            amount: totalAmount , 
             currency: 'INR',
             cardholderName: cardholderName,
           }),
         });
+
         const { clientSecret } = await response.json();
   
         // Confirm the payment using the Stripe Card Element
