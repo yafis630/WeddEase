@@ -13,8 +13,9 @@
 }
 
 .product_detail__image_container {
-  flex: 0.5; /* Adjust flex value to make it narrower */
+  flex: 0.45; /* Adjust flex value to make it narrower */
   padding-right: 10px; /* Adjust padding as needed */
+  margin-left: 40px;
 }
 
 
@@ -25,26 +26,29 @@
 }
 
 .product_detail__details_container {
-  flex: 0.2; /* Equal width to image container */
+  flex: 0.35; /* Equal width to image container */
   padding: 10px; /* Adjust as needed */
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+  margin-top: 10px;
 }
 .product__title {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .product__description {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .product__info-table {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .product__info-table th {
@@ -124,4 +128,41 @@
 .button--secondary {
   /* ... (existing styles) */
   margin-top: 10px; /* Add margin-top to create space between buttons */
+}
+
+@media (max-width: 768px) {
+  .product_detail__container {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: center; /* Center align items vertically */
+  }
+  
+  .product_detail__image_container,
+  .product_detail__details_container {
+    flex: 1; /* Make both sections take full width on smaller screens */
+    padding: 10px; /* Adjust padding as needed */
+    margin: 10px; /* Add margin between sections */
+  }
+  
+  .product__title {
+    font-size: 20px; /* Decrease font size for title */
+  }
+  
+  .product__description,
+  .product__price {
+    font-size: 16px; /* Decrease font size for description and price */
+  }
+  
+  .product__info-table th,
+  .product__info-table td {
+    font-size: 14px; /* Decrease font size for table cells */
+  }
+}
+
+/* Adjust buttons for smaller screens */
+@media (max-width: 480px) {
+  .button--primary,
+  .button--secondary {
+    font-size: 14px; /* Decrease font size for buttons */
+    padding: 8px; /* Adjust button padding */
+  }
 }
