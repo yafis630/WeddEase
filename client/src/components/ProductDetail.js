@@ -170,6 +170,7 @@ const ProductDetails = (props) => {
                   </tr>
                 <tr>
                 <th>In Stock:</th>
+                <td>{productDetail.qty}</td>
               </tr>
               <tr>
                 <th>Colour:</th>
