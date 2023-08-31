@@ -15,7 +15,6 @@ const ProductDetails = (props) => {
   const { auth } = useContext(AuthContext);
   const [productDetail, setProductDetail] = useState();
   const [selectedQuantity, setSelectedQuantity] = useState(1); // Initialize quantity as 0
-  const [cart, setCart] = useState([]); // Add cart state
   const [outOfStock, setOutOfStock] = useState(false); // State to track out of stock status
 
   // ... useEffect and other code ...
