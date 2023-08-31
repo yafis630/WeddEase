@@ -32,6 +32,7 @@ const ProductDetails = (props) => {
         name: productDetail.name,
         price: productDetail.price,
         usertoken: auth,
+        sellerEmail:productDetail.sellerEmail,
         imagePaths: productDetail.imagePaths || [],
       };
 

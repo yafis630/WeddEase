@@ -33,6 +33,7 @@ import Catelog2 from "./Catelog2";
 import AboutUs from "./AboutUs";
 import OrderPage from "./OrderPage";
 import ResetPasswordForm from "./ResetPasswordForm";
+import SellerRequests from "./SellerRequests";
 
 
 
@@ -107,6 +108,7 @@ function App() {
           <Route path="/UserHome"  element={<UserHome/>}/>
           <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
           <Route path="/ProductDetail/:productID" element={<ProductDetail />} />
+          <Route path="/SellerRequests"  element={<SellerRequests/>}/>
         </Routes>
       </AuthProvider>
     </div>

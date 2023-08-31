@@ -31,6 +31,9 @@ const cartSchema = new mongoose.Schema({
 },
 isSuccessful:{
   type: Boolean
+},
+sellerEmail:{
+  type:String
 }
 });
 

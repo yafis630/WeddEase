@@ -6,14 +6,14 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
-function OrderPage() {
+function SellerRequests() {
     const [orders, setOrders] = useState([]);
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch(`http://localhost:8080/wedease/cartedItems`,
+            const response = await fetch(`http://localhost:8080/wedease/purchases`,
               { headers: { Authentication: `Bearer ${auth}` } }
             );
             if (response.ok) {
@@ -38,7 +38,7 @@ function OrderPage() {
         <div className="back-img">
           <Header />
           <div className="cart-page">
-            <h2>Your Orders</h2>
+            <h2>"Incoming Purchase Requests" </h2>
             {filteredProductDetail.length > 0 ? (
               <>
                 <div className="cart-items">
@@ -69,7 +69,6 @@ function OrderPage() {
                   ))}
                 </div>
                 
-                
               </>
             ) : (
               <p>No orders found.</p>
@@ -79,4 +78,4 @@ function OrderPage() {
       );
 }
 
-export default OrderPage;
+export default SellerRequests;

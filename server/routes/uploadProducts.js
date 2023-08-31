@@ -163,7 +163,7 @@ router.get("/catelog/product/:productID", async (req, res) => {
 router.post("/carted", async (req, res) => {
   console.log("CART")
   try {
-    const { name, price,qty,usertoken,imagePaths } = req.body;
+    const { name, price,qty,usertoken,imagePaths,sellerEmail } = req.body;
     const decoded = jwt.verify(usertoken, "WedEase");
     const userEmail = decoded.email;
   
@@ -172,7 +172,8 @@ router.post("/carted", async (req, res) => {
       price,
       qty,
       userEmail,
-      imagePaths
+      imagePaths,
+      sellerEmail
     });
 
     await carts.save();
@@ -195,6 +196,19 @@ router.get('/cartedItems', authenticateToken ,async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch carts' });
   }
 });
+
+//fetch the seller purchases
+router.get('/purchases', authenticateToken ,async (req, res) => {
+  try {
+    const carts = await Carts.find({ sellerEmail:req.email.email }); 
+    res.json(carts);
+ 
+  } catch (error) {
+    console.error('Error fetching carts', error);
+    res.status(500).json({ error: 'Failed to fetch carts' });
+  }
+});
+
 
 //remove carted images
 router.delete('/delcart/:_id', authenticateToken, async (req, res) => {
