@@ -187,21 +187,16 @@ router.post("/quantity", async (req, res) => {
   const { filteredProductDetail } = req.body;
 
   try {
-    // Iterate through filteredProductDetail and update qty for each product
     for (const product of filteredProductDetail) {
       const { productID, qty } = product;
 
-      // Define the filter to find the product by its ID
       const filter = { _id: productID };
       console.log(qty)
-      // Define the update operation to subtract the value from qty
       const update = {
         $inc: {
-          qty: -qty, // Subtract the specified value from qty
+          qty: -qty, 
         },
       };
-
-      // Update the product and return the updated document
       const changed = await Product.updateOne(filter, update, {
         new: true,
       });
