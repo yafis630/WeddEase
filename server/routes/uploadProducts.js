@@ -161,7 +161,6 @@ router.get("/catelog/product/:productID", async (req, res) => {
 
 // save the carted items
 router.post("/carted", async (req, res) => {
-  console.log("CART")
   try {
     const { name, price,qty,usertoken,imagePaths,sellerEmail } = req.body;
     const decoded = jwt.verify(usertoken, "WedEase");
@@ -177,7 +176,6 @@ router.post("/carted", async (req, res) => {
     });
 
     await carts.save();
-    console.log(carts);
     res.json(carts);
   } catch (error) {
     console.error("Error uploading product", error);
