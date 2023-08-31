@@ -41,18 +41,18 @@ const Catelog2 = () => {
               <div className="Discription">
                 <h6>Name</h6>
                 <p>{product.name}</p>
+                <h6>price</h6>
                 <p>₹ {product.price}</p>
+                <h6>colour</h6>
+                <p>{product.colour}</p>
+                <h6>Brand</h6>
+                <p>{product.brand}</p>
+                <h6>Material</h6>
+                <p>{product.material}</p>
+                <h6>description</h6>
+                <p>{product.description}</p>
               </div>
               <div className="buttons-container">
-                <Link to={`/ProductDetail/${product._id}`}>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="details-button"
-                  >
-                    View Details
-                  </Button>
-                </Link>
                 {
                   <Button
                     variant="danger"
