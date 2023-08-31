@@ -25,10 +25,9 @@ function Main() {
         
         <><Header /></>
         <Container fluid className="background-image">
-         
-          
+                   
           {!flag && (
-                            <>
+        <>
           <Row>
             <Col md={{ span: 6, offset: 6 }} xs={{ span: 12 }}>
               <div className="button-group">
