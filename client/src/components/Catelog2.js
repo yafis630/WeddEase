@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import "../styles/WorkerProfile.css";
+import "../styles/catelog.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import AuthContext from "../context/AuthProvider";
@@ -24,7 +24,7 @@ const Catelog2 = () => {
         if (response.ok) {
           const data = await response.json();
           const productItems = data.map((product) => (
-            <div className="worker-card" key={product._id}>
+            <div className="catelog2-card" key={product._id}>
               <Carousel showThumbs={false} infiniteLoop>
                 {product.imagePaths.map((imagePath, index) => (
                   <div key={`image-carousel-${index}`}>
@@ -105,7 +105,8 @@ const Catelog2 = () => {
   return (
     <>
       <div className="back-img">
-        <Header />
+        <Header /> 
+        <h2 className="mt-2 mb-4 text-center">Uploaded Products</h2>
         <br />
         <h2 className="worker-type">{category}</h2>
         {productList.length > 0 ? (
