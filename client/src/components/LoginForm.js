@@ -18,15 +18,13 @@ import AuthContext from "../context/AuthProvider";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     errors: {},
     recaptchaValue: "",
   });
-  
+  const [loading, setLoading] = useState(false);
   const { setAuth, setIsAuth, setRole } = useContext(AuthContext);
   const handleChange = e => {
     const { name, value } = e.target;
@@ -39,17 +37,15 @@ const LoginForm = () => {
 
   const handleForgotPassword = async () => {
     try {
+      setLoading(true);
       const response = await fetch('http://localhost:8080/wedease/forgot-password', {
         method: 'POST',
         body: JSON.stringify({ email }), 
         headers: {
           'Content-Type': 'application/json',
         },
-
       });
-  
       const data = await response.json();
-  
       if (data.success) {
         alert(`Password reset email sent to ${email}`);
       } else {
@@ -59,15 +55,18 @@ const LoginForm = () => {
       console.error('Error initiating password reset', error);
       alert('Failed to initiate password reset');
     }
+    finally {
+      setLoading(false);
+    }
   };
   
 
   const handleSubmit = async  e => {
     e.preventDefault();
-   // if (!formData.recaptchaValue) {
-    //  alert("Please complete the reCAPTCHA");
-   //   return;
-   // }
+    if (!formData.recaptchaValue) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
     const response= await fetch('http://localhost:8080/wedease/login',{
       method:'POST',
       body:JSON.stringify(formData),
@@ -164,9 +163,15 @@ const LoginForm = () => {
         </p>
       </Form>
       <div className="mt-3">
+      {loading ? (
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
           <Button color="link" onClick={handleForgotPassword}>
             Forgot Password?
           </Button>
+          )}
         </div>
     </Container>
     <Footer />

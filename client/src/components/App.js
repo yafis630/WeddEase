@@ -35,8 +35,8 @@ import AboutUs from "./AboutUs";
 import OrderPage from "./OrderPage";
 import ResetPasswordForm from "./ResetPasswordForm";
 import SellerRequests from "./SellerRequests";
-
-
+import ResetPasswordWorker from "./ResetPasswordWorker";
+import ResetPasswordSeller from "./ResetPasswordSeller";
 
 function App() {
   return (
@@ -111,6 +111,9 @@ function App() {
           <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
           <Route path="/ProductDetail/:productID" element={<ProductDetail />} />
           <Route path="/SellerRequests"  element={<SellerRequests/>}/>
+          <Route path="/reset-password/:id/:token" element={<ResetPasswordForm/>}/>
+          <Route path="/reset-password-worker/:id/:token" element={<ResetPasswordWorker/>}/>
+          <Route path="/reset-password-seller/:id/:token" element={<ResetPasswordSeller/>}/>
         </Routes>
         </CartProvider>
       </AuthProvider>

@@ -225,6 +225,50 @@ router.get('/cartedItems', authenticateToken ,async (req, res) => {
   }
 });
 
+router.post("/Address", async (req, res) => {
+  const {Username,phoneNumber, pincode, streetAddress,state,city,filteredProductDetail} = req.body;
+
+  try {
+    const productIds = filteredProductDetail.map(product => product._id);
+    const filter = { _id: { $in: productIds } };
+    const update = {
+      $set: {
+        Username : Username,
+        phoneNumber:phoneNumber,
+        pincode:pincode,
+        streetAddress:streetAddress,
+        state:state,
+        city:city,
+      },
+    };
+    const changed = await Carts.updateMany(filter, update);
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.post("/delivery/:orderId", async (req, res) => {
+  const { orderId } = req.params;
+  const{delivered}=req.body
+  try {
+    const filter = {_id:orderId}
+    const update = {
+      $set: {
+        delivered:delivered
+      },
+    };
+    const changed = await Carts.updateOne(filter, update);
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 //fetch the seller purchases
 router.get('/purchases', authenticateToken ,async (req, res) => {
   try {
@@ -268,7 +312,7 @@ router.post("/status", async (req, res) => {
     };
     const changed = await Carts.updateMany(filter, update);
 
-    console.log(changed);
+    console.log("payement status",changed);
     res.send(true);
   } catch (error) {
     console.error(error);

@@ -38,26 +38,26 @@ const PaymentForm = () => {
     const [pincode, setPincode] = useState('');
   
 
-    const handlePayment = async (event) => {
+    const handlePayment  = async (event) => {
       event.preventDefault();
       setIsPaymentProcessing(true);
-  
+    
       try {
-        // Create PaymentIntent on the server and retrieve the client secret
+        // Continue with the payment confirmation logic
         const response = await fetch('http://localhost:8080/wedease/payment', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            amount: totalAmount , 
+            amount: totalAmount,
             currency: 'INR',
             cardholderName: cardholderName,
           }),
         });
-
+    
         const { clientSecret } = await response.json();
-  
+    
         // Confirm the payment using the Stripe Card Element
         const result = await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
@@ -67,33 +67,58 @@ const PaymentForm = () => {
               email: email,
               phone: phoneNumber,
               address: {
-              line1: streetAddress,
-              city: city,
-              state: state,
-              postal_code: pincode,
-            },
+                line1: streetAddress,
+                city: city,
+                state: state,
+                postal_code: pincode,
+              },
             },
           },
         });
-  
+    
         if (result.error) {
           console.error(result.error.message);
           sendPaymentStatusToBackend(false);
+          alert('Payment not successful. Please try again.');
         } else {
           console.log('Payment succeeded:', result.paymentIntent);
           alert('Payment Successful!');
           sendPaymentStatusToBackend(true);
+          if (result.paymentIntent.status === 'succeeded') {
+            // If payment was successful, send and store the address
+            const addressResponse = await fetch('http://localhost:8080/wedease/Address', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                Username: cardholderName,
+                phoneNumber: phoneNumber,
+                streetAddress: streetAddress,
+                city: city,
+                state: state,
+                pincode: pincode,
+                filteredProductDetail: filteredProductDetail,
+              }),
+            });
+    
+            if (addressResponse.ok) {
+              console.log('Address details sent and stored successfully');
+            } else {
+              console.error('Failed to send and store address details');
+            }
+          }
           navigate("/OrderPage");
-          
         }
       } catch (error) {
         console.error('Error processing payment: ', error);
         sendPaymentStatusToBackend(false);
       }
-  
+    
       setIsPaymentProcessing(false);
     };
-  
+    
+    
     const sendPaymentStatusToBackend = async (isSuccessful) => {
       try {
         const response = await fetch('http://localhost:8080/wedease/status', {
@@ -115,7 +140,7 @@ const PaymentForm = () => {
       } catch (error) {
         console.error('Error sending payment status to the backend: ', error);
       }
-      console.log(filteredProductDetail)
+      if(isSuccessful){
       const response = await fetch("http://localhost:8080/wedease/quantity", {
         method: "POST",
         headers: {
@@ -123,12 +148,14 @@ const PaymentForm = () => {
         },
         body: JSON.stringify({filteredProductDetail:filteredProductDetail}),
       });
-
+    }
     };
 
     return (
         <div className="payment-container">
+          
         <div className="address-container">
+          
           <h3>Address Details</h3>
           <input
             type="text"
@@ -182,30 +209,31 @@ const PaymentForm = () => {
         </div>
         <div className="payment-form-container">
           <h3>Payment Details</h3>
-          <form className="payment-form" onSubmit={handlePayment}>
-            <div className="card-details">
+          <form className="payment-form" onSubmit={handlePayment }>
+             <div className="card-details">
               <CardNumberElement options={{}} className='card-exp' />
               <input
-          type="text"
-          name="name"
-          placeholder="Cardholder Name"
-          value={cardholderName}
-          onChange={(event) => setCardholderName(event.target.value)}
-        />
-            </div>
-            <div className="expiry-cvc">
+              type="text"
+             name="name"
+             placeholder="Cardholder Name"
+             value={cardholderName}
+             onChange={(event) => setCardholderName(event.target.value)}
+             />
+             </div>
+             <div className="expiry-cvc">
               <CardExpiryElement options={{}} className='card-exp' />
               <CardCvcElement options={{}} className='card-exp' />
-            </div>
-            <button
+             </div>
+             <button
               className="buy-now-button"
               type="submit"
               disabled={!stripe || isPaymentProcessing}
-            >
+             >
               {isPaymentProcessing ? 'Processing...' : 'Buy Now'}
-            </button>
-          </form>
+             </button>
+             </form>
         </div>
+      
       </div>
     );
   };
