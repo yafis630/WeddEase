@@ -37,6 +37,7 @@ import ResetPasswordForm from "./ResetPasswordForm";
 import SellerRequests from "./SellerRequests";
 import ResetPasswordWorker from "./ResetPasswordWorker";
 import ResetPasswordSeller from "./ResetPasswordSeller";
+import UpdateQuantity from"./UpdateQuantity";
 
 function App() {
   return (
@@ -82,24 +83,13 @@ function App() {
           <Route path="/contact" element={<Contact />} exact />
           <Route path="/CategoryButtons" element={<CategoryButtons />} />
           <Route path="/WorkerCategory" element={<WorkerCategory />} exact />
-
           <Route path="/WorkerHome" element={<WorkerHome />} exact />
-
           <Route path="/WorkerLogin" element={<WorkerLogin />} exact />
-
           <Route path="/workers/:category" element={<WorkerProfile />} exact />
-          <Route
-            path="/WorkerDetails/:id"
-            element={<WorkerDetails />}
-            exact
-          />
+          <Route path="/WorkerDetails/:id" element={<WorkerDetails />} exact/>
           <Route path="/CartPage" element={<CartPage />} exact />
           <Route path="/address" element={<AddressPage />} exact />
-          <Route
-            path="/PaymentGatewayPage"
-            element={<PaymentGatewayPage />}
-            exact
-          />
+          <Route path="/PaymentGatewayPage"element={<PaymentGatewayPage />}exact/>
           <Route path="/Catelog2" element={<Catelog2 />} exact />
           <Route path="/UpdateProfile" element={<UpdateProfile />} exact />
           <Route path="/UploadProduct" element={<UploadProduct />} exact />
@@ -111,9 +101,12 @@ function App() {
           <Route path="/UpdateProfileUser"  element={<UpdateProfileUser/>}/>
           <Route path="/ProductDetail/:productID" element={<ProductDetail />} />
           <Route path="/SellerRequests"  element={<SellerRequests/>}/>
+          <Route path="/UpdateQuantity/:productID"  element={<UpdateQuantity/>}/>
           <Route path="/reset-password/:id/:token" element={<ResetPasswordForm/>}/>
           <Route path="/reset-password-worker/:id/:token" element={<ResetPasswordWorker/>}/>
           <Route path="/reset-password-seller/:id/:token" element={<ResetPasswordSeller/>}/>
+
+        
         </Routes>
         </CartProvider>
       </AuthProvider>

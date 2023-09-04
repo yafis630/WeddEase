@@ -14,14 +14,13 @@ const ProductDetails = (props) => {
   const { productID } = useParams();
   const { auth } = useContext(AuthContext);
   const [productDetail, setProductDetail] = useState();
-  const [selectedQuantity, setSelectedQuantity] = useState(1); // Initialize quantity as 0
-  const [outOfStock, setOutOfStock] = useState(false); // State to track out of stock status
+  const [selectedQuantity, setSelectedQuantity] = useState(0); 
+  const [outOfStock, setOutOfStock] = useState(false); 
 
-  // ... useEffect and other code ...
+
 
   const handleAddToCart = async () => {
     if (selectedQuantity <= 0) {
-      // Quantity is 0 or negative, don't proceed
       return;
     }
     try {
@@ -67,7 +66,7 @@ const ProductDetails = (props) => {
           console.log(data);
           setProductDetail(data);
 
-          // Check if the product is out of stock
+
           if (data.qty <= 0) {
             setOutOfStock(true);
           }

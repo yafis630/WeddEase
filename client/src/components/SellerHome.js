@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button,Modal } from "react-bootstrap";
-import "../styles/WorkerHome.css"; // Create a CSS file for styling SellerHome
+import "../styles/WorkerHome.css";
 import Header from "./Header";
 import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";

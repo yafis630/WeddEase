@@ -38,7 +38,7 @@ router.post('/worker', upload.single('image'), async (req, res) => {
   }
   const { name, email, phoneNumber, DOB, gender, bio, profession, password } = req.body;
 
-    // Extract the file path from the request file object
+   
     const imagePath = req.file.path;
 
     const worker = new Worker({
@@ -50,7 +50,7 @@ router.post('/worker', upload.single('image'), async (req, res) => {
       bio,
       profession,
       password,
-      imagePath // Store the file path in the database
+      imagePath 
     });
   await worker.save();
     console.log(worker);

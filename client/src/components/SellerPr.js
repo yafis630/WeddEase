@@ -24,7 +24,7 @@ const SellerPr = () => {
     material:"",
     colour:"",
     Category: "",
-    images: [],  // Change to an array to hold multiple images
+    images: [],  
     errors: {}
   });
   const { auth } = useContext(AuthContext);
@@ -92,7 +92,7 @@ const SellerPr = () => {
 
   const validateForm = () => {
     const errors = {};
-    const { name,description,price,colour,brand,qty,material } = products;
+    const { name,description,price,Category,colour,brand,qty,material,images } = products;
     if (!name.trim()) {
       errors.name = "product Name is required";
     }
@@ -102,26 +102,24 @@ const SellerPr = () => {
     if (!description.trim()) {
      errors.description = "Please specify description";
     }
-    if (!products.images) {
+    if (!images) {
       errors.images = 'Please upload your photo';
     }
-    if (!products.Category) {
+    if (!Category) {
       errors.Category = 'product category is required';
     }
-    if (!products.colour) {
+    if (!colour) {
       errors.colour = 'product colour is required';
     }
-    if (!products.qty) {
+    if (!qty) {
       errors.qty = 'choose atleast one product';
     }
-    if (!products.material) {
+    if (!material) {
       errors.material = 'Tell us about the product material';
     }
-    if (!products.brand) {
+    if (!brand) {
       errors.qty = 'Brand name of your product ';
     }
-
-
     return errors;
   };
 
