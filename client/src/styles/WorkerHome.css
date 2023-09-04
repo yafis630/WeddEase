@@ -164,7 +164,7 @@
 .calendar-container {
   margin: 20px 5px;
   margin-left: 30px;
-  margin-bottom: 221px;
+  margin-bottom: 331px;
   text-align: center;
   color: rgb(26, 18, 141);
   padding-left:50px ;
@@ -174,12 +174,19 @@
 /* Styling for the Calendar */
 .calendar-wrapper {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  height: 300px;
+  
   margin: 0 auto;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.select-dates{
+  font-size: 30px;
+  color:white;
 }
 
 .react-calendar {
