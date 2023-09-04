@@ -187,21 +187,16 @@ router.post("/quantity", async (req, res) => {
   const { filteredProductDetail } = req.body;
 
   try {
-    // Iterate through filteredProductDetail and update qty for each product
     for (const product of filteredProductDetail) {
       const { productID, qty } = product;
 
-      // Define the filter to find the product by its ID
       const filter = { _id: productID };
       console.log(qty)
-      // Define the update operation to subtract the value from qty
       const update = {
         $inc: {
-          qty: -qty, // Subtract the specified value from qty
+          qty: -qty, 
         },
       };
-
-      // Update the product and return the updated document
       const changed = await Product.updateOne(filter, update, {
         new: true,
       });
@@ -227,6 +222,50 @@ router.get('/cartedItems', authenticateToken ,async (req, res) => {
   } catch (error) {
     console.error('Error fetching carts', error);
     res.status(500).json({ error: 'Failed to fetch carts' });
+  }
+});
+
+router.post("/Address", async (req, res) => {
+  const {Username,phoneNumber, pincode, streetAddress,state,city,filteredProductDetail} = req.body;
+
+  try {
+    const productIds = filteredProductDetail.map(product => product._id);
+    const filter = { _id: { $in: productIds } };
+    const update = {
+      $set: {
+        Username : Username,
+        phoneNumber:phoneNumber,
+        pincode:pincode,
+        streetAddress:streetAddress,
+        state:state,
+        city:city,
+      },
+    };
+    const changed = await Carts.updateMany(filter, update);
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.post("/delivery/:orderId", async (req, res) => {
+  const { orderId } = req.params;
+  const{delivered}=req.body
+  try {
+    const filter = {_id:orderId}
+    const update = {
+      $set: {
+        delivered:delivered
+      },
+    };
+    const changed = await Carts.updateOne(filter, update);
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
@@ -273,7 +312,7 @@ router.post("/status", async (req, res) => {
     };
     const changed = await Carts.updateMany(filter, update);
 
-    console.log(changed);
+    console.log("payement status",changed);
     res.send(true);
   } catch (error) {
     console.error(error);

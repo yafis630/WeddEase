@@ -25,7 +25,7 @@ const SellerLogin = () => {
     errors: {},
     recaptchaValue: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const { setAuth, setIsAuth, setRole } = useContext(AuthContext);
 
   const handleChange = e => {
@@ -37,17 +37,31 @@ const SellerLogin = () => {
     setFormData({ ...formData, recaptchaValue: value });
   };
 
-  const handleForgotPassword = () => {
-    const { email } = formData;
-    if (!email.trim()) {
-      alert("Please provide your email to reset password.");
-      return;
+  const handleForgotPassword = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:8080/wedease/forgot-password-seller', {
+        method: 'POST',
+        body: JSON.stringify({ email }), 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert(`Password reset email sent to ${email}`);
+      } else {
+        alert('Failed to initiate password reset');
+      }
+    } catch (error) {
+      console.error('Error initiating password reset', error);
+      alert('Failed to initiate password reset');
     }
-
-    // Here you can add the logic to send a password reset email to the provided email.
-    // You might call an API endpoint to trigger the password reset process.
-    alert(`Password reset email sent to ${email}`);
+    finally {
+      setLoading(false);
+    }
   };
+
 
   const handleSubmit =async  e => {
     e.preventDefault();
@@ -147,9 +161,15 @@ const SellerLogin = () => {
         </p>
       </Form>
       <div className="mt-3">
+      {loading ? (
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
           <Button color="link" onClick={handleForgotPassword}>
             Forgot Password?
           </Button>
+          )}
         </div>
     </Container>
     <Footer />

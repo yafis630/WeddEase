@@ -8,10 +8,6 @@ const cartSchema = new mongoose.Schema({
     trim: true,
     maxlength: 32,
   },
- // imagePaths: {
- //   type:[String] ,
-    
-// },
   price: {
     type: Number,
     required: true,
@@ -26,18 +22,45 @@ const cartSchema = new mongoose.Schema({
   userEmail:{
     type:String
   },
+  Username: {
+    type: String,
+    trim: true,
+    maxlength: 32,
+  },
   imagePaths:{
     type:[String]
-},
-isSuccessful:{
-  type: Boolean
-},
-sellerEmail:{
-  type:String
-},
-productID:{
-  type:String
-}
+  },
+  isSuccessful:{
+    type: Boolean
+  },
+  sellerEmail:{
+   type:String
+  },
+  productID:{
+   type:String
+  },
+  phoneNumber: {
+    type: Number,
+    min: 10,
+  },
+  pincode: {
+    type: String,
+    trim: true,
+    min: 6,
+  },
+  streetAddress: {
+    type: String,
+    trim: true,
+  },
+  state: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  delivered:{
+    type:String
+  }
 });
 
 module.exports = mongoose.model('Carts', cartSchema);

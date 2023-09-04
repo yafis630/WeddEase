@@ -6,14 +6,7 @@ const User = require('../models/user');
 const Token =require( "../models/token");
 const generateAccessToken=require('../helpers/generateAccessToken');
 const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  service: 'Gmail', // e.g., 'Gmail' or use your SMTP server details
-  auth: {
-    user: 'jasiahassan120@gmail.com', // Your email address
-    pass: 'Jasia@4101998', // Your email password or application-specific password
-  },
-});
+const authenticateToken=require('../middlewares/authenticateToken')
 
 // User login
 router.post('/login', async (req, res) => {
@@ -44,73 +37,67 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/forgot-password', async (req, res) => {
-  console.log("hi")
   try {
     const { email } = req.body;
-    console.log(email)
-
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({ success: false, message: 'User not found' });
     }
-
-    // Generate a reset token and save it in the database
-    const resetToken = generateAccessToken();
+    const resetToken = generateAccessToken(email);
     const token = new Token({
-      userId: user._id,
       token: resetToken,
     });
     await token.save();
-
+  
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'jasiahassan120@gmail.com',
+        pass: 'rtkjvbubweburafj',
+      },
+    });
     const mailOptions = {
-      from: 'jasiahassan120@gmail.com', // Sender email address
-      to: email, // Recipient's email address
-      subject: 'Password Reset', // Email subject
-      text: `Here is your password reset token: ${resetToken}`, // Email content
+      from: 'jasiahassan120@gmail.com',
+      to: email, 
+      subject: 'Reset password link',
+      text: `http://localhost:3000/reset-password/${user._id}/${resetToken}`,
     };
 
-    // Send the email
-    await transporter.sendMail(mailOptions);
-
-    // Send an email to the user containing the reset token
-    // (You'll need to use a library to send emails, like Nodemailer)
-
-    res.json({ success: true, message: 'Password reset email sent' });
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Failed to send password reset email' });
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.json({ success: true, message: 'Password reset email sent' });
+      }
+    });
   } catch (error) {
     console.error('Error initiating password reset', error);
     res.status(500).json({ error: 'Failed to initiate password reset' });
   }
 });
 
-router.post('/reset-password', async (req, res) => {
-  console.log("hi")
-  try {
-    const { token, password } = req.body;
 
-    // Find the token in the database
-    const tokenEntry = await Token.findOne({ token });
-    if (!tokenEntry) {
-      return res.json({ success: false, message: 'Invalid token' });
+  router.post('/reset-password/:id/:token', authenticateToken, async (req, res) => {
+    try {
+      const token= req.params.token;
+      const userId = req.params.id;
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const hashedPassword = await bcrypt.hash(req.body.password, 10); 
+      await User.updateOne({ _id: userId }, { password: hashedPassword });
+      const del = await Token.deleteOne({ token });
+      res.status(200).json( {success:true});
+    } catch (error) {
+      console.error('Error resetting password', error);
+      res.status(500).json( {success:false});
     }
-
-    // Check if the token is expired
-    if (tokenEntry.expiresAt < Date.now()) {
-      return res.json({ success: false, message: 'Token has expired' });
-    }
-
-    // Find the user associated with the token and update the password
-    const user = await User.findById(tokenEntry.userId);
-    user.password = password;
-    await user.save();
-
-    // Invalidate the token
-    await tokenEntry.remove();
-
-    res.json({ success: true, message: 'Password reset successful' });
-  } catch (error) {
-    console.error('Error resetting password', error);
-    res.status(500).json({ error: 'Failed to reset password' });
-  }
-});
-
-module.exports = router;
+  });
+  
+  module.exports = router;
+  
+ 
+ 

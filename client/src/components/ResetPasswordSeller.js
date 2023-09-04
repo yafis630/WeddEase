@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 
 
-const ResetPasswordForm = () => {
+const ResetPasswordSeller = () => {
   const navigate = useNavigate();
   const { token,id } = useParams();
   const [password, setPassword] = useState('');
   const handleResetPassword = async () => {
-    const response = await fetch(`http://localhost:8080/wedease/reset-password/${id}/${token}`, {
+    const response = await fetch(`http://localhost:8080/wedease/reset-password-seller/${id}/${token}`, {
       method: 'POST',
        headers: { Authentication: `Bearer ${token}`,
         'Content-Type': 'application/json', 
@@ -19,7 +19,7 @@ const ResetPasswordForm = () => {
     const data = await response.json();
     if (data.success) {
       alert('Password reset successful');
-      navigate('/LoginForm');
+      navigate('/SellerLogin');
    
     } else {
       alert('Password reset failed');
@@ -42,4 +42,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ResetPasswordSeller;

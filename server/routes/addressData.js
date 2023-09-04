@@ -3,7 +3,7 @@ const router = express.Router();
 const Address = require('../models/address');
 
 // Route to handle saving address details to MongoDB
-router.post('/address', (req, res) => {
+router.post('/Address', (req, res) => {
   const addressData = req.body;
 
   const newAddress = new Address(addressData);
