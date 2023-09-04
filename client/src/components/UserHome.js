@@ -9,51 +9,45 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer";
 
-
 const UserHome = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [updates, setUpdates] = useState([])
+  const [updates, setUpdates] = useState([]);
   const [userList, setuserList] = useState([]);
+  const [unseenRequestCount, setUnseenRequestCount] = useState(0); 
   const { auth, isAuth } = useContext(AuthContext);
   let flag = true;
-  if (typeof (isAuth) === "boolean") flag = isAuth;
+  if (typeof isAuth === "boolean") flag = isAuth;
   else {
-    flag = (isAuth === "true" ? true : false);
+    flag = isAuth === "true" ? true : false;
   }
-
 
   useEffect(() => {
     if (!flag) {
       navigate("/LoginForm");
-    }
-    else {
+    } else {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/wedease/userhome`,
-            { headers: { Authentication: `Bearer ${auth}` } })
+          const response = await fetch(`http://localhost:8080/wedease/userhome`, {
+            headers: { Authentication: `Bearer ${auth}` },
+          });
 
           if (response.ok) {
             const data = await response.json();
             const userItems = data.map((user) => (
               <div className="worker-home" key={user.id}>
-
                 <h3>Name</h3>
                 <p>{user.name}</p>
-
                 <h3>Email</h3>
                 <p>{user.email}</p>
                 <h3>Phone Number</h3>
                 <p>{user.phoneNumber}</p>
-
                 <h3>Gender</h3>
                 <p>{user.gender}</p>
-
                 <Button className="update-btn" variant="info" href="/UpdateProfileUser">
                   Update Profile
                 </Button>
               </div>
-
             ));
             setuserList(userItems);
           } else {
@@ -76,9 +70,10 @@ const UserHome = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
+          console.log(data);
+          const unseenCount = data.filter((update) => !update.isSeen).length;
+          setUnseenRequestCount(unseenCount);
           setUpdates(data);
-
         } else {
           throw new Error("Error fetching worker data.");
         }
@@ -93,8 +88,38 @@ const UserHome = () => {
     setShowModal(true);
   };
 
+  const acknowledgeUpdate = async (updateId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/wedease/requests/${updateId}`, {
+        method: "POST",
+        body: JSON.stringify({ isSeen: true }),
+        headers: {
+          "Content-Type": "application/json",
+          Authentication: `Bearer ${auth}`,
+        },
+      });
+
+      if (response.ok) {
+        const updatedUpdates = updates.map((update) => {
+          if (update._id === updateId) {
+            return { ...update, isSeen: true };
+          }
+          return update;
+        });
+        setUpdates(updatedUpdates);
+        const unseenCount = updatedUpdates.filter((update) => !update.isSeen).length;
+        setUnseenRequestCount(unseenCount);
+      } else {
+        console.error("Error acknowledging update.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="back"> <Header />
+    <div className="back">
+      <Header />
 
       <FontAwesomeIcon
         className="notification-icon"
@@ -103,16 +128,19 @@ const UserHome = () => {
         size="2x"
         style={{ float: "right", marginRight: "130px" }}
       />
+       {unseenRequestCount > 0 && (
+          <span className="notification-badge">{unseenRequestCount}</span>
+        )}
+      
+
       <div className="seller-home-container">
         <Logout />
 
-        < div className="worker-display">{userList}</div>
-        <Button variant="info" className="order-button" href="/OrderPage">
-          My Orders
+        <div className="worker-display">{userList}</div>
+        <Button variant="success" className="update-product-button" href="/OrderPage">
+          Orders
         </Button>
       </div>
-
-
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Updates</Modal.Title>
@@ -122,12 +150,20 @@ const UserHome = () => {
             <div key={index}>
               {update.isAccepted !== undefined ? (
                 update.isAccepted ? (
-                  <p>{update.workersName} has accepted your request</p>
-                ) : (
+                  <p>{update.workersName} has accepted your request and will contact you soon</p>
+                  
+                )  : (
                   <p>{update.workersName} has rejected your request</p>
                 )
-              ) : null
-              }
+              ) : null}
+               {!update.isSeen && ( 
+               <div>
+               <Button variant="info" onClick={() => acknowledgeUpdate(update._id)}>
+               OK
+              </Button>
+              </div>
+                )}
+                <hr /> 
             </div>
           ))}
         </Modal.Body>
@@ -138,7 +174,6 @@ const UserHome = () => {
         </Modal.Footer>
       </Modal>
       <Footer />
-
     </div>
   );
 };

@@ -41,6 +41,9 @@ const Catelog2 = () => {
               <div className="Discription">
                 <h6>Name</h6>
                 <p>{product.name}</p>
+                <h6>Quantity</h6>
+                <p>{product.qty}</p>
+                
                 <h6>price</h6>
                 <p>₹ {product.price}</p>
                 <h6>colour</h6>
@@ -53,16 +56,17 @@ const Catelog2 = () => {
                 <p>{product.description}</p>
               </div>
               <div className="buttons-container">
-                {
                   <Button
                     variant="danger"
-                    size="sm"
-                    onClick={() => handleDelete(product._id)}
-                    className="delete-button"
-                  >
+                    onClick={() => handleDelete(product._id)}>
                     Delete
                   </Button>
-                }
+                  <Button
+                    variant="info"
+                    href={`/UpdateQuantity/${product._id}`}>
+                     Update Quantity
+                  </Button>
+                
               </div>
             </div>
           ));
@@ -90,7 +94,6 @@ const Catelog2 = () => {
       );
 
       if (response.ok) {
-        // Remove the deleted product from the state
         setProductList((prevList) =>
           prevList.filter((product) => product.key !== productId)
         );
@@ -101,6 +104,7 @@ const Catelog2 = () => {
       console.log(error);
     }
   };
+  
 
   return (
     <>

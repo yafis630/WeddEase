@@ -21,11 +21,7 @@ const UploadProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Create a FormData object
     const formDataToSend = new FormData();
-  
-    // Append each image file to the FormData object
     for (let i = 0; i < uploadedImages.upimages.length; i++) {
       formDataToSend.append("upimages", uploadedImages.upimages[i]);
     }
@@ -51,12 +47,6 @@ const UploadProduct = () => {
     }
   };
   
-
-
-
-
-  
-
   return (
     <div className="back">
       <Header />

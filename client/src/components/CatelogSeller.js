@@ -25,9 +25,7 @@ const CatelogSeller = () => {
   const { category } = useParams();
   const { auth } = useContext(AuthContext);
 
-  // const Handle = () => {
-  //   alert("Hired ");
-  // };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +43,7 @@ const CatelogSeller = () => {
           if (sortingOption === "latest") {
             sortedProducts.sort((a, b) => {
               if (!a.createdAt || !b.createdAt) {
-                return 0; // Handle undefined createdAt values
+                return 0; 
               }
               return b.createdAt.localeCompare(a.createdAt);
             });

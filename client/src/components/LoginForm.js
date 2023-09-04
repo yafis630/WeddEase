@@ -81,8 +81,6 @@ const LoginForm = () => {
       setAuth(accessToken);
       setIsAuth(true);
       setRole(role);
-      alert("login successfull")
-      
       navigate('/CategoryButtons');
     } else {
       alert("invalid usename and password");

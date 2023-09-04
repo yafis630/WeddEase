@@ -125,3 +125,13 @@
       
       background-color: rgb(116, 8, 8);
     }
+    .buttons-container {
+      display: flex; 
+      justify-content: space-between; 
+      margin-top: 10px; 
+    }
+
+    .buttons-container button {
+      font-size: 18px; 
+      padding: 7px 20px;
+    }

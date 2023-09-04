@@ -144,6 +144,33 @@ router.delete('/delProducts/:_id', authenticateToken, async (req, res) => {
   }
 });
 
+router.post('/Qty/:productID', authenticateToken, async (req, res) => {
+  const productId = req.params.productID;
+  const { qty } = req.body;
+  console.log(qty);
+  const filter = { _id: productId };
+  const update = {
+    $set: {
+      qty: qty,
+    },
+  };
+  try {
+    const changed = await Product.updateOne(filter, update, {
+      new: true,
+    });
+    console.log(changed);
+    if (changed.acknowledged) {
+      res.send(true);
+    } else {
+      res.status(500).send("Update was not acknowledged");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 // fetch products on the basis of product id
 router.get("/catelog/product/:productID", async (req, res) => {
   try {
@@ -250,6 +277,7 @@ router.post("/Address", async (req, res) => {
   }
 });
 
+//update delivery status
 router.post("/delivery/:orderId", async (req, res) => {
   const { orderId } = req.params;
   const{delivered}=req.body

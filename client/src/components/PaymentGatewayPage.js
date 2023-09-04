@@ -57,7 +57,7 @@ const PaymentForm = () => {
         });
     
         const { clientSecret } = await response.json();
-    
+
         // Confirm the payment using the Stripe Card Element
         const result = await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
@@ -141,7 +141,7 @@ const PaymentForm = () => {
         console.error('Error sending payment status to the backend: ', error);
       }
       if(isSuccessful){
-      const response = await fetch("http://localhost:8080/wedease/quantity", {
+       await fetch("http://localhost:8080/wedease/quantity", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

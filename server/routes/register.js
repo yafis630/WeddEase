@@ -38,11 +38,30 @@ router.post('/hiredWorker', authenticateToken, async (req, res) => {
     });
 
     await selectedData.save();
-
     res.json(selectedData);
   } catch (error) {
     console.error('Error saving selected data', error);
     res.status(500).json({ error: 'Failed to save selected data' });
+  }
+});
+  
+
+router.post("/requests/:updateId", async (req, res) => {
+  const { updateId } = req.params;
+  const{isSeen}=req.body
+  try {
+    const filter = {_id:updateId}
+    const update = {
+      $set: {
+        isSeen:isSeen
+      },
+    };
+    const changed = await SelectedData.updateOne(filter, update);
+    console.log(changed);
+    res.send(true);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

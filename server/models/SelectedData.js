@@ -7,7 +7,8 @@ const selectedDataSchema = new mongoose.Schema({
   workersEmail:String,
   workersName:String,
   phoneNo:String,
-  isAccepted:Boolean
+  isAccepted:Boolean,
+  isSeen:Boolean
   
 });
 

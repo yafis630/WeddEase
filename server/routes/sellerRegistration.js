@@ -38,7 +38,7 @@ router.post('/seller', upload.single('image'), async (req, res) => {
   }
   const { name, email, phoneNumber, DOB, gender,bname,address ,bio, category, password } = req.body;
 
-    // Extract the file path from the request file object
+ 
     const imagePath = req.file.path;
 
     const seller = new Seller({
@@ -52,7 +52,7 @@ router.post('/seller', upload.single('image'), async (req, res) => {
       bio,
       category,
       password,
-      imagePath // Store the file path in the database
+      imagePath 
     });
   await seller.save();
     res.json(seller);

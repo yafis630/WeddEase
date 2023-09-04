@@ -13,7 +13,6 @@ const CartPage = () => {
   const [productDetail, setProductDetail] = useState([]);
   const { auth } = useContext(AuthContext);
 
-  // Access cartItems from CartContext
   const { cartItems, setCustomValue } = useContext(CartContext);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const CartPage = () => {
   const filteredProductDetail = productDetail.filter(
     (item) => item.isSuccessful === undefined
   );
-
+    console.log(filteredProductDetail)
   // Count the items in the cart
   const count = filteredProductDetail.length;
 
@@ -71,8 +70,6 @@ const CartPage = () => {
 
       if (response.ok) {
         setProductDetail((prevItems) => prevItems.filter((item) => item._id !== _id));
-        // Remove the item from the cart context
-        // Note: You may need to implement removeFromCart in your CartContext
       } else {
         throw new Error("Error removing item from cart.");
       }
