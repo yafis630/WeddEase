@@ -57,7 +57,7 @@ const PaymentForm = () => {
         });
     
         const { clientSecret } = await response.json();
-    
+        
         // Confirm the payment using the Stripe Card Element
         const result = await stripe.confirmCardPayment(clientSecret, {
           payment_method: {

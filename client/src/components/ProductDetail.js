@@ -14,10 +14,9 @@ const ProductDetails = (props) => {
   const { productID } = useParams();
   const { auth } = useContext(AuthContext);
   const [productDetail, setProductDetail] = useState();
-  const [selectedQuantity, setSelectedQuantity] = useState(0); 
+  const [productDetail2, setProductDetail2] = useState([]);
+  const [selectedQuantity, setSelectedQuantity] = useState(1); 
   const [outOfStock, setOutOfStock] = useState(false); 
-
-
 
   const handleAddToCart = async () => {
     if (selectedQuantity <= 0) {
@@ -51,7 +50,6 @@ const ProductDetails = (props) => {
     } catch (error) {
       console.error(error);
     }
-  
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -60,13 +58,9 @@ const ProductDetails = (props) => {
           `http://localhost:8080/wedease/catelog/product/${productID}`,
           { headers: { Authentication: `Bearer ${auth}` } }
         );
-
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           setProductDetail(data);
-
-
           if (data.qty <= 0) {
             setOutOfStock(true);
           }
@@ -81,24 +75,65 @@ const ProductDetails = (props) => {
     fetchData();
   }, []);
 
- 
-
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
     if (selectedQuantity <= 0) {
       return;
     }
-
-    // Calculate total amount here based on the selected quantity and product price
-    const totalAmount = selectedQuantity * productDetail.price;
-
-    // Navigate to PaymentGatewayPage with the totalAmount in state
-    navigate("/PaymentGatewayPage", {
-      state: {
-        totalAmount: totalAmount,
-        filteredProductDetail: productDetail, // You can pass other product details if needed
-      },
-    });
+    try {
+      const itemToAdd = {
+        qty: selectedQuantity,
+        name: productDetail.name,
+        price: productDetail.price,
+        usertoken: auth,
+        sellerEmail: productDetail.sellerEmail,
+        productID: productDetail._id,
+        imagePaths: productDetail.imagePaths || [],
+      };
+  
+      const response = await fetch("http://localhost:8080/wedease/carted", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authentication: `Bearer ${auth}`,
+        },
+        body: JSON.stringify(itemToAdd),
+      });
+  
+      if (!response.ok) {
+        alert("Error in buying product");
+        return;
+      }
+  
+      const cartedItemsResponse = await fetch(
+        `http://localhost:8080/wedease/cartedItems`,
+        { headers: { Authentication: `Bearer ${auth}` } }
+      );
+  
+      if (cartedItemsResponse.ok) {
+        const data = await cartedItemsResponse.json();
+  
+        setProductDetail2(data);
+        const newFilteredProductDetail = data.filter(
+          (item) => item.productID === itemToAdd.productID
+        );
+  
+        const totalAmount = selectedQuantity * productDetail.price;
+  
+        navigate("/PaymentGatewayPage", {
+          state: {
+            totalAmount: totalAmount,
+            filteredProductDetail: newFilteredProductDetail,
+          },
+        });
+      } else {
+        throw new Error("Error fetching carted items.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
+  
 
   return (
     <div>

@@ -80,7 +80,6 @@ const WorkerLogin = () => {
       setAuth(accessToken);
       setIsAuth(true);
       setRole(role)
-      alert("login successfull")
       navigate('/WorkerHome');
     } else {
       alert("invalid usename and password");
