@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
+import "../styles/forms.css";
 
 
 const ResetPasswordForm = () => {
@@ -27,17 +28,20 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <div>
-      <h2>Reset Your Password</h2>
+    <div className="reset-password-container">
+      <h2 className="reset-password-title">Reset Your Password</h2>
       <input
         type="password"
         placeholder="New Password"
-        autoComplete='off'
+        autoComplete="off"
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className="reset-password-input"
       />
-      <button onClick={handleResetPassword}>update Password</button>
+      <button onClick={handleResetPassword} className="reset-password-button">
+        Update Password
+      </button>
     </div>
   );
 };

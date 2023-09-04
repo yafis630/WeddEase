@@ -65,6 +65,20 @@
   margin-left: 36px;
 }
 
+.user-home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 320px; /* Take full width on smaller screens */
+  max-width: 490px; /* Limit maximum width for larger screens */
+  margin: 10px;
+  margin-left: 36px;
+}
+
 .seller-home {
   display: flex;
   flex-direction: column;
@@ -207,6 +221,10 @@
   }
 
   .worker-home {
+    max-width: none;
+    align-items: center; /* Remove max-width for smaller screens */
+  }
+  .user-home {
     max-width: none;
     align-items: center; /* Remove max-width for smaller screens */
   }

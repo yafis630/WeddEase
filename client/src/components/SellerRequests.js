@@ -85,18 +85,20 @@ function SellerRequests() {
                   </Carousel>
                   <div >
                     <h3>{item.name}</h3>
-                    <span>Unit price: ₹{item.price}</span><br></br>
+                    <span>Unit price: ₹{item.price}</span><br />
 
                     <span>Qty: {item.qty}</span>
                   </div>
-                  <h3>Address details</h3>
-                  <span>{item.Username}</span>
-                  <span>{item.streetAddress}</span>
-                  <span>{item.state}</span>
-                  <span>{item.pincode}</span>
-                  <span>{item.phoneNumber}</span>
                   <div>
-                    <br />
+                  <h3>Address details</h3>
+                  <span>User: {item.Username}</span><br />
+                  <span>Address: {item.streetAddress}</span><br />
+                  <span>Pincode: {item.pincode}</span><br />
+                  <span>City: {item.city}</span><br />
+                  <span>State: {item.state}</span><br />
+                  <span>Mobile no.: {item.phoneNumber}</span>
+                  </div>
+                  <div>
                     {item.delivered ? (
                       <p>Product delivered successfully</p>
                     ) : (
