@@ -104,10 +104,11 @@ const CartPage = () => {
                   </Carousel>
                   <div className="cart-item-details">
                     <h3>{item.name}</h3>
-                    <div className="cart-item-price-quantity">
-                      <span>₹{item.price}</span> {/* Display price in Indian Rupees */}
+                    <div >
+                      <span>₹{item.price}</span><br /> {/* Display price in Indian Rupees */}
                       <span>Qty: {item.qty}</span>
                     </div>
+                    <br />
                     <Button color="danger" onClick={() => handleRemoveItem(item._id)}>
                       Remove
                     </Button>

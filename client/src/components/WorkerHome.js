@@ -185,18 +185,19 @@ const WorkerHome = () => {
   return (
     <div className="back">
       <Header />
-      <div className="notification-container">
+      
       <FontAwesomeIcon
        className="notification-icon"
        icon={faBell}
        onClick={handleNotificationClick}
        size="2x"
+       style={{ float: "right", marginRight: "130px" }}
 >
     </FontAwesomeIcon>
          {pendingRequestsCount > 0 && (
           <span className="notification-badge">{pendingRequestsCount}</span>
         )}
-       </div>
+       
 
       <div className="worker-home-container">
   
