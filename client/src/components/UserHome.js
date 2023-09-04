@@ -132,10 +132,8 @@ const UserHome = () => {
           <span className="notification-badge">{unseenRequestCount}</span>
         )}
       
-
       <div className="seller-home-container">
         <Logout />
-
         <div className="worker-display">{userList}</div>
         <Button variant="success" className="update-product-button" href="/OrderPage">
           Orders
