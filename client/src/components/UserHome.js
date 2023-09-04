@@ -137,8 +137,8 @@ const UserHome = () => {
         <Logout />
 
         <div className="worker-display">{userList}</div>
-        <Button variant="success" className="update-product-button" href="/OrderPage">
-          Orders
+        <Button variant="info" className="order-button" href="/OrderPage">
+          My Orders
         </Button>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
