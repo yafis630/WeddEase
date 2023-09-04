@@ -64,7 +64,7 @@ function SellerRequests() {
     <div className="back-img">
       <Header />
       <div className="cart-page">
-        <h2>"Incoming Purchase Requests"</h2>
+        <h2>Incoming Purchase Requests</h2>
         {filteredProductDetail.length > 0 ? (
           <>
             <div className="cart-items">
@@ -83,12 +83,13 @@ function SellerRequests() {
                       </div>
                     ))}
                   </Carousel>
-                  <div className="cart-item-details">
+                  <div >
                     <h3>{item.name}</h3>
-                    <span>Unit price: ₹{item.price}</span>
+                    <span>Unit price: ₹{item.price}</span><br></br>
+
                     <span>Qty: {item.qty}</span>
                   </div>
-                  <h3>address details</h3>
+                  <h3>Address details</h3>
                   <span>{item.Username}</span>
                   <span>{item.streetAddress}</span>
                   <span>{item.state}</span>

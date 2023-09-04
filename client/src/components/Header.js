@@ -47,19 +47,19 @@ function Header() {
                                 {isSeller && (
                                     <NavLink to="/SellerHome" className="home-button">
                                         <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                       Seller Dashboard
+                                       Dashboard
                                     </NavLink>
                                 )}
                                 {isWorker && (
                                     <NavLink to="/WorkerHome" className="home-button">
                                         <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                        Worker Dashboard
+                                        Dashboard
                                     </NavLink>
                                 )}
                                 {isUser && (
                                     <NavLink to="/UserHome" className="home-button">
                                         <FontAwesomeIcon icon={faUser} className="nav-icon" />
-                                         User Dashboard
+                                         Dashboard
                                     </NavLink>
                                 )}
                             </>

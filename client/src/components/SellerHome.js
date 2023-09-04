@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button,Modal } from "react-bootstrap";
 import "../styles/WorkerHome.css";
 import Header from "./Header";
-import profile from "../data/profile-placeholder.png";
 import AuthContext from "../context/AuthProvider";
 import Logout from "./Logout";
+import Footer from "./Footer";
 
 
 const SellerHome = () => {
@@ -33,7 +33,7 @@ useEffect(() => {
         if (response.ok) {
           const data = await response.json();
           const sellerItems = data.map((seller) => (
-            <div className="worker-home" key={seller.id}>
+            <div className="seller-home" key={seller.id}>
                 <img
                   className="worker-profile-pic"
                   src={'http://localhost:8080/images/'+String(seller.imagePath).substring(8)}
@@ -49,7 +49,7 @@ useEffect(() => {
                 <p>{seller.phoneNumber}</p>
                 <h3>DOB</h3>
                 <p>{seller.DOB}</p>
-                <h3>category</h3>
+                <h3>Category</h3>
                 <p>{seller.category}</p>
                 <h3>Gender</h3>
                 <p>{seller.gender}</p>
@@ -76,21 +76,24 @@ useEffect(() => {
   return (
     <div className="back"> <Header />
     
-    <div className="seller-home-container">
-      
+    
+      <div className="seller-home-container">
         <Logout />
       
-     < div className="worker-display">{sellerList}</div>
+     <div className="worker-display">{sellerList}</div>
+     <div className="seller-buttons-container">
       <Button variant="success" className="update-product-button" href="/SellerPr">
         Upload Product
       </Button>
-      <Button variant="success" className="update-product-button" href="/Catelog2">
+      <Button variant="info" className="update-product-button" href="/Catelog2">
         Uploaded Product
       </Button>
-      <Button variant="success" className="update-product-button" href="/SellerRequests">
+      <Button variant="danger" className="update-product-button" href="/SellerRequests">
          Purchase Requests
       </Button>
+      </div>
     </div>
+    <Footer />
     </div>
   );
 };

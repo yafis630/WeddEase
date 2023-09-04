@@ -7,6 +7,7 @@
   align-items: center;
   
 }
+
 .notification-icon {
   cursor: pointer;
   float: right;
@@ -53,15 +54,30 @@
 .worker-home {
   display: flex;
   flex-direction: column;
-  
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 300px; /* Take full width on smaller screens */
+  width: 400px; /* Take full width on smaller screens */
   max-width: 490px; /* Limit maximum width for larger screens */
   margin: 10px;
+  margin-left: 36px;
+}
+
+.seller-home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px; /* Take full width on smaller screens */
+  max-width: 490px; /* Limit maximum width for larger screens */
+  margin: 10px;
+  margin-left: 36px;
+  
 }
 
 
@@ -85,24 +101,70 @@
   font-size: 14px;
 }
 
+.seller-buttons-container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  margin: 0 auto; /* Center horizontally */
+   
+  font-size: 24px; /* Adjust the font size as needed */
+  width: 20%; /* Set a maximum width for responsiveness */
+  position: relative;
+  bottom: 900px;
+  right: 50px;
+  
+  
+  /* Add media queries for smaller screens */
+  @media (max-width: 1298px) {
+    font-size: 18px; /* Adjust font size for smaller screens */
+    width: 90%; /* Full width for smaller screens */
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+  }
+}
 /* Update and Upload Buttons Styling */
 .update-btn {
   margin: 10px;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
+  
 }
 
 .update-product-button {
-  padding: 10px;
+  padding: 50px;
+  margin: 10px;
   margin-left: 20px;
   position: relative;
   
 }
 
+.order-button {
+  padding: 50px;
+  margin: 0 auto; /* Center horizontally */
+  display: block; /* Make it a block-level element */
+  font-size: 24px; /* Adjust the font size as needed */
+  width: 20%; /* Set a maximum width for responsiveness */
+  position: relative;
+  bottom: 300px;
+  right: 50px;
+  
+  /* Add media queries for smaller screens */
+  @media (max-width: 931px) {
+    font-size: 18px; /* Adjust font size for smaller screens */
+    width: 90%; /* Full width for smaller screens */
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+  }
+}
+
 .calendar-container {
   margin: 20px 5px;
   margin-left: 30px;
+  margin-bottom: 221px;
   text-align: center;
   color: rgb(26, 18, 141);
   padding-left:50px ;
@@ -130,6 +192,7 @@
 @media (max-width: 768px) {
   .calendar-container {
     margin-left: 0;
+    margin-bottom: 0;
   }
 
   .calendar-wrapper {
@@ -139,6 +202,12 @@
   .worker-home {
     max-width: none;
     align-items: center; /* Remove max-width for smaller screens */
+  }
+  .seller-home {
+    margin-top: 50px;
+    max-width: none;
+    width: 300px;
+    align-items: center;
   }
   
 }

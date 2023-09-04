@@ -83,7 +83,22 @@ const ProductDetails = (props) => {
 
  
 
-   const handleBuyNow=()=>{}
+  const handleBuyNow = () => {
+    if (selectedQuantity <= 0) {
+      return;
+    }
+
+    // Calculate total amount here based on the selected quantity and product price
+    const totalAmount = selectedQuantity * productDetail.price;
+
+    // Navigate to PaymentGatewayPage with the totalAmount in state
+    navigate("/PaymentGatewayPage", {
+      state: {
+        totalAmount: totalAmount,
+        filteredProductDetail: productDetail, // You can pass other product details if needed
+      },
+    });
+  };
 
   return (
     <div>
