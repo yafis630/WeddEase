@@ -140,7 +140,6 @@ const UserHome = () => {
         <Button variant="success" className="update-product-button" href="/OrderPage">
           Orders
         </Button>
-        <div>Unseen Requests: {unseenRequestCount}</div>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
