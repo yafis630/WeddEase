@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext ,useEffect,useState} from "react";
 import { Navbar, Nav,Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
 import AuthContext from "../context/AuthProvider";
-import {useCartCount} from "../context/CartContext";
 
 
 
@@ -19,7 +18,34 @@ function Header() {
     else {
        flag = (isAuth  === "true"? true:false);
     }
-    const { cartCount } = useCartCount();
+    const { auth } = useContext(AuthContext);
+    const[ count,setcount]=useState()
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(
+              `http://localhost:8080/wedease/cartedItems`,
+              { headers: { Authentication: `Bearer ${auth}` } }
+            );
+            if (response.ok) {
+              const data = await response.json();
+              console.log(data)
+              const filteredData = data.filter(item => item.isSuccessful === undefined);
+              console.log(filteredData)
+              setcount(filteredData.length);
+            } else {
+              throw new Error("Error fetching product data.");
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData();
+        const interval = setInterval(fetchData, 400); 
+        return () => clearInterval(interval);
+      }, [auth]);
+
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -65,14 +91,12 @@ function Header() {
                                 )}
                             </>
                         )}
-                        
                         <NavLink to="/CartPage" className="cart-button">
-                            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> 
-                            <Badge pill variant="danger">
-                                
-                                {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+                        <Badge pill variant="danger">
+                                {count > 0 && <span className="cart-count">{count}</span>}
                             </Badge>
-                            Cart
+                            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> 
+                            Cart 
                         </NavLink>
                     </Nav>
                 </Navbar.Collapse>

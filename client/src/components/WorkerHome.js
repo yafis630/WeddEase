@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal,Badge } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns";
@@ -84,6 +84,8 @@ const WorkerHome = () => {
       }
     };
     fetchNotification();
+    const interval = setInterval(fetchNotification, 400); 
+    return () => clearInterval(interval);
   }, []);
 
   const handleAccept = async (notification) => {
@@ -194,11 +196,13 @@ const WorkerHome = () => {
        style={{ float: "right", marginRight: "130px" }}
 >
     </FontAwesomeIcon>
-         {pendingRequestsCount > 0 && (
-          <span className="notification-badge">{pendingRequestsCount}</span>
-        )}
-       
 
+    <Badge pill variant="danger"
+     onClick={handleNotificationClick}
+    style={{ float: "right", marginRight: "-10px" }}>
+     {pendingRequestsCount > 0 && <span className="cart-count">{pendingRequestsCount}</span>}
+    </Badge>
+          
       <div className="worker-home-container">
   
       {workerList.map((worker) => (

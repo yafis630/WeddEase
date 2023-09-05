@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal,Badge } from "react-bootstrap";
 import "../styles/WorkerHome.css";
 import Header from "./Header";
 import AuthContext from "../context/AuthProvider";
@@ -82,6 +82,8 @@ const UserHome = () => {
       }
     };
     fetchUpdates();
+    const interval = setInterval(fetchUpdates, 400); 
+    return () => clearInterval(interval);
   }, []);
 
   const handleNotificationClick = () => {
@@ -128,9 +130,11 @@ const UserHome = () => {
         size="2x"
         style={{ float: "right", marginRight: "130px" }}
       />
-       {unseenRequestCount > 0 && (
-          <span className="notification-badge">{unseenRequestCount}</span>
-        )}
+      <Badge pill variant="danger"
+      onClick={handleNotificationClick}
+      style={{ float: "right", marginRight: "-10px" }}>
+      {unseenRequestCount > 0 && <span className="cart-count">{unseenRequestCount}</span>}
+      </Badge>
       
       <div className="sellers-home-container">
         <Logout />

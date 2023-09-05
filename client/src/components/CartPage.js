@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import AuthContext from "../context/AuthProvider";
-import CartContext from "../context/CartContext";
 import "../styles/CartPage.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -38,8 +37,6 @@ const CartPage = () => {
     (item) => item.isSuccessful === undefined
   );
    
-
-
   const totalPrice = filteredProductDetail.reduce(
     (total, item) => total + item.price * item.qty,
     0

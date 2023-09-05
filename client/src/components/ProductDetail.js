@@ -40,13 +40,11 @@ const ProductDetails = (props) => {
         alert("Error fetching cart items");
         return;
       }
-  
       const cartItemsData = await cartItemsResponse.json();
       const itemExistsInCart = cartItemsData.some(
         (item) =>
           item.productID === productDetail._id && item.isSuccessful === undefined
       );
-  
       if (itemExistsInCart) {
         alert("Item is already in your cart.");
         navigate("/CartPage")
@@ -80,7 +78,7 @@ const ProductDetails = (props) => {
       console.error(error);
     }
   };
-  
+
   
   useEffect(() => {
     const fetchData = async () => {
