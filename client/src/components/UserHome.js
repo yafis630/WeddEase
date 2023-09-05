@@ -165,12 +165,11 @@ const UserHome = () => {
       ) : null}  
     </div>
   ))}
-</Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => setShowModal(false)}>
+        Close
+         </Button>
         </Modal.Footer>
       </Modal>
       <Footer />
