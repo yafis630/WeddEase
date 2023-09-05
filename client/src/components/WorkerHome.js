@@ -234,7 +234,7 @@ const WorkerHome = () => {
         <Logout />
 
         <div className="calendar-container">
-          <h4>Select Unavailable Dates</h4>
+          <h4 className="select-dates">Select Unavailable Dates</h4>
           <div className="calendar-wrapper">
             <Calendar
               className="react-calendar"

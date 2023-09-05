@@ -35,7 +35,7 @@ const UserHome = () => {
           if (response.ok) {
             const data = await response.json();
             const userItems = data.map((user) => (
-              <div className="worker-home" key={user.id}>
+              <div className="user-home" key={user.id}>
                 <h3>Name</h3>
                 <p>{user.name}</p>
                 <h3>Email</h3>
@@ -132,11 +132,11 @@ const UserHome = () => {
           <span className="notification-badge">{unseenRequestCount}</span>
         )}
       
-      <div className="seller-home-container">
+      <div className="sellers-home-container">
         <Logout />
         <div className="worker-display">{userList}</div>
-        <Button variant="success" className="update-product-button" href="/OrderPage">
-          Orders
+        <Button variant="info" className="order-button" href="/OrderPage">
+          My Orders
         </Button>
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>

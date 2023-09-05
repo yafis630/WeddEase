@@ -12,16 +12,24 @@ import { useNavigate } from "react-router-dom";
 const ProductDetails = (props) => {
   const navigate = useNavigate();
   const { productID } = useParams();
-  const { auth } = useContext(AuthContext);
+  const { auth, role } = useContext(AuthContext);
   const [productDetail, setProductDetail] = useState();
   const [productDetail2, setProductDetail2] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState(1); 
   const [outOfStock, setOutOfStock] = useState(false); 
+  
+ 
 
   const handleAddToCart = async () => {
     if (selectedQuantity <= 0) {
       return;
     }
+    if (role !== "user") {
+      alert("Please login as a User to continue.");
+      return;
+    }
+  
+  
     try {
       const itemToAdd = {
         qty: selectedQuantity,

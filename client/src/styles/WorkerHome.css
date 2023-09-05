@@ -65,6 +65,20 @@
   margin-left: 36px;
 }
 
+.user-home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 320px; /* Take full width on smaller screens */
+  max-width: 490px; /* Limit maximum width for larger screens */
+  margin: 10px;
+  margin-left: 36px;
+}
+
 .seller-home {
   display: flex;
   flex-direction: column;
@@ -164,7 +178,7 @@
 .calendar-container {
   margin: 20px 5px;
   margin-left: 30px;
-  margin-bottom: 221px;
+  margin-bottom: 331px;
   text-align: center;
   color: rgb(26, 18, 141);
   padding-left:50px ;
@@ -174,12 +188,19 @@
 /* Styling for the Calendar */
 .calendar-wrapper {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  height: 300px;
+  
   margin: 0 auto;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.select-dates{
+  font-size: 30px;
+  color:white;
 }
 
 .react-calendar {
@@ -200,6 +221,10 @@
   }
 
   .worker-home {
+    max-width: none;
+    align-items: center; /* Remove max-width for smaller screens */
+  }
+  .user-home {
     max-width: none;
     align-items: center; /* Remove max-width for smaller screens */
   }
