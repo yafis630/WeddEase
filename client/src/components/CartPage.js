@@ -13,8 +13,6 @@ const CartPage = () => {
   const [productDetail, setProductDetail] = useState([]);
   const { auth } = useContext(AuthContext);
 
-  const { cartItems, setCustomValue } = useContext(CartContext);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,12 +37,8 @@ const CartPage = () => {
   const filteredProductDetail = productDetail.filter(
     (item) => item.isSuccessful === undefined
   );
-    console.log(filteredProductDetail)
-  // Count the items in the cart
-  const count = filteredProductDetail.length;
+   
 
-  // Update the count in your CartContext
-  //setCustomValue(count);
 
   const totalPrice = filteredProductDetail.reduce(
     (total, item) => total + item.price * item.qty,

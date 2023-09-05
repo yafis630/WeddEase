@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext ,useEffect} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/forms.css";
@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
-
+import CartContext from "../context/CartContext";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -25,7 +25,8 @@ const LoginForm = () => {
     recaptchaValue: "",
   });
   const [loading, setLoading] = useState(false);
-  const { setAuth, setIsAuth, setRole } = useContext(AuthContext);
+  const { setAuth, setIsAuth, setRole,auth } = useContext(AuthContext);
+  const { updateCartCount } = useContext(CartContext); 
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -59,6 +60,30 @@ const LoginForm = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (auth) {
+      // Fetch cart count only if auth is available
+      fetchCartCount();
+    }
+  }, [auth]);
+
+  const fetchCartCount = async () => {
+    console.log(auth)
+    try {
+      const response = await fetch(
+        `http://localhost:8080/wedease/cartedItems`,
+        { headers: { Authentication: `Bearer ${auth}` } }
+      );
+      const data = await response.json();
+      if (data.success) {
+        const cartCount = data.length;
+        updateCartCount(cartCount);
+      }
+    } catch (error) {
+      console.error('Error fetching cart count', error);
+    }
+  };
+  
   
 
   const handleSubmit = async  e => {
@@ -81,6 +106,8 @@ const LoginForm = () => {
       setAuth(accessToken);
       setIsAuth(true);
       setRole(role);
+      fetchCartCount();
+      
       navigate('/CategoryButtons');
     } else {
       alert("invalid usename and password");

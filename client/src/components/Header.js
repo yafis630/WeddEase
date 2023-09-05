@@ -5,7 +5,8 @@ import { faHome, faList, faInfoCircle, faAddressBook, faShoppingCart, faUser } f
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
 import AuthContext from "../context/AuthProvider";
-import CartContext from "../context/CartContext";
+import {useCartCount} from "../context/CartContext";
+
 
 
 function Header() {
@@ -18,7 +19,7 @@ function Header() {
     else {
        flag = (isAuth  === "true"? true:false);
     }
-    const { customVariable } = useContext(CartContext);
+    const { cartCount } = useCartCount();
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -68,7 +69,8 @@ function Header() {
                         <NavLink to="/CartPage" className="cart-button">
                             <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /> 
                             <Badge pill variant="danger">
-                                {customVariable}
+                                
+                                {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                             </Badge>
                             Cart
                         </NavLink>

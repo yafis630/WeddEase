@@ -75,10 +75,13 @@ const ProductDetails = (props) => {
     fetchData();
   }, []);
 
+
+
   const handleBuyNow = async () => {
     if (selectedQuantity <= 0) {
       return;
     }
+  
     try {
       const itemToAdd = {
         qty: selectedQuantity,
@@ -116,7 +119,6 @@ const ProductDetails = (props) => {
         const newFilteredProductDetail = data.filter(
           (item) => item.productID === itemToAdd.productID
         );
-  
         const totalAmount = selectedQuantity * productDetail.price;
   
         navigate("/PaymentGatewayPage", {
@@ -133,8 +135,6 @@ const ProductDetails = (props) => {
     }
   };
   
-  
-
   return (
     <div>
     <div className="body"> <Header /></div>

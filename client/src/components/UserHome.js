@@ -71,7 +71,7 @@ const UserHome = () => {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          const unseenCount = data.filter((update) => !update.isSeen).length;
+          const unseenCount = data.filter((update) => !update.isSeen && update.isAccepted).length;
           setUnseenRequestCount(unseenCount);
           setUpdates(data);
         } else {
@@ -107,7 +107,7 @@ const UserHome = () => {
           return update;
         });
         setUpdates(updatedUpdates);
-        const unseenCount = updatedUpdates.filter((update) => !update.isSeen).length;
+        const unseenCount = updatedUpdates.filter((update) => !update.isSeen  && update.isAccepted).length;
         setUnseenRequestCount(unseenCount);
       } else {
         console.error("Error acknowledging update.");
@@ -144,27 +144,29 @@ const UserHome = () => {
           <Modal.Title>Updates</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {updates.map((update, index) => (
-            <div key={index}>
-              {update.isAccepted !== undefined ? (
-                update.isAccepted ? (
-                  <p>{update.workersName} has accepted your request and will contact you soon</p>
-                  
-                )  : (
-                  <p>{update.workersName} has rejected your request</p>
-                )
-              ) : null}
-               {!update.isSeen && ( 
-               <div>
-               <Button variant="info" onClick={() => acknowledgeUpdate(update._id)}>
-               OK
+  {updates.map((update, index) => (
+    <div key={index}>
+      {update.isAccepted !== undefined ? (
+        <div>
+          {update.isAccepted ? (
+            <p>{update.workersName} has accepted your request and will contact you soon</p>
+          ) : (
+            <p>{update.workersName} has rejected your request</p>
+          )}
+          {!update.isSeen && (
+            <div>
+              <Button variant="info" onClick={() => acknowledgeUpdate(update._id)}>
+                OK
               </Button>
-              </div>
-                )}
-                <hr /> 
             </div>
-          ))}
-        </Modal.Body>
+          )}
+          <hr/>
+        </div>
+      ) : null}  
+    </div>
+  ))}
+</Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
