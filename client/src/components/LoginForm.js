@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext ,useEffect} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/forms.css";
@@ -14,7 +14,6 @@ import {
 } from "reactstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import AuthContext from "../context/AuthProvider";
-
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const LoginForm = () => {
       setLoading(false);
     }
   };
-  
+
 
   const handleSubmit = async  e => {
     e.preventDefault();
@@ -81,6 +80,7 @@ const LoginForm = () => {
       setAuth(accessToken);
       setIsAuth(true);
       setRole(role);
+      
       navigate('/CategoryButtons');
     } else {
       alert("invalid usename and password");

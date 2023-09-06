@@ -22,7 +22,6 @@ import SellerRegistration from "./SellerRegistration";
 import SellerLogin from "./SellerLogin";
 import SellerHome from "./SellerHome";
 import { AuthProvider } from "../context/AuthProvider";
-import { CartProvider} from "../context/CartContext";
 import UploadProduct from "./UploadProduct";
 import ShoppingServices from "./ShoppingServices";
 import CatelogSeller from "./CatelogSeller";
@@ -43,7 +42,6 @@ function App() {
   return (
     <div>
       <AuthProvider>
-        <CartProvider>
         <Routes>
           <Route path="/" element={<Main />} exact />
           <Route path="/SellerButtons" element={<SellerButtons />} exact />
@@ -108,7 +106,6 @@ function App() {
 
         
         </Routes>
-        </CartProvider>
       </AuthProvider>
     </div>
   );

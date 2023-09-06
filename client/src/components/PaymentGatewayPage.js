@@ -37,13 +37,12 @@ const PaymentForm = () => {
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
   
-
+    console.log(totalAmount)
     const handlePayment  = async (event) => {
       event.preventDefault();
       setIsPaymentProcessing(true);
     
       try {
-        // Continue with the payment confirmation logic
         const response = await fetch('http://localhost:8080/wedease/payment', {
           method: 'POST',
           headers: {
@@ -57,8 +56,8 @@ const PaymentForm = () => {
         });
     
         const { clientSecret } = await response.json();
-
-        // Confirm the payment using the Stripe Card Element
+        console.log(totalAmount)
+    
         const result = await stripe.confirmCardPayment(clientSecret, {
           payment_method: {
             card: elements.getElement(CardNumberElement),
@@ -117,7 +116,6 @@ const PaymentForm = () => {
     
       setIsPaymentProcessing(false);
     };
-    
     
     const sendPaymentStatusToBackend = async (isSuccessful) => {
       try {

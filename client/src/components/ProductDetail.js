@@ -19,28 +19,47 @@ const ProductDetails = (props) => {
   const [outOfStock, setOutOfStock] = useState(false); 
   
  
-
   const handleAddToCart = async () => {
     if (selectedQuantity <= 0) {
       return;
     }
     if (role !== "user") {
-      alert("Please login as a User to continue.");
+      alert("Please login as a User to continue...");
       return;
     }
-  
-  
     try {
+      const cartItemsResponse = await fetch(
+        "http://localhost:8080/wedease/cartedItems",
+        {
+          headers: {
+            Authentication: `Bearer ${auth}`,
+          },
+        }
+      );
+      if (!cartItemsResponse.ok) {
+        alert("Error fetching cart items");
+        return;
+      }
+      const cartItemsData = await cartItemsResponse.json();
+      const itemExistsInCart = cartItemsData.some(
+        (item) =>
+          item.productID === productDetail._id && item.isSuccessful === undefined
+      );
+      if (itemExistsInCart) {
+        alert("Item is already in your cart.");
+        navigate("/CartPage")
+        return;
+      }
       const itemToAdd = {
         qty: selectedQuantity,
         name: productDetail.name,
         price: productDetail.price,
         usertoken: auth,
-        sellerEmail:productDetail.sellerEmail,
-        productID:productDetail._id,
+        sellerEmail: productDetail.sellerEmail,
+        productID: productDetail._id,
         imagePaths: productDetail.imagePaths || [],
       };
-
+  
       const response = await fetch("http://localhost:8080/wedease/carted", {
         method: "POST",
         headers: {
@@ -49,7 +68,7 @@ const ProductDetails = (props) => {
         },
         body: JSON.stringify(itemToAdd),
       });
-
+  
       if (response.ok) {
         navigate("/CartPage");
       } else {
@@ -59,6 +78,8 @@ const ProductDetails = (props) => {
       console.error(error);
     }
   };
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,10 +104,12 @@ const ProductDetails = (props) => {
     fetchData();
   }, []);
 
+
   const handleBuyNow = async () => {
     if (selectedQuantity <= 0) {
       return;
     }
+  
     try {
       const itemToAdd = {
         qty: selectedQuantity,
@@ -124,7 +147,6 @@ const ProductDetails = (props) => {
         const newFilteredProductDetail = data.filter(
           (item) => item.productID === itemToAdd.productID
         );
-  
         const totalAmount = selectedQuantity * productDetail.price;
   
         navigate("/PaymentGatewayPage", {
@@ -141,8 +163,6 @@ const ProductDetails = (props) => {
     }
   };
   
-  
-
   return (
     <div>
     <div className="body"> <Header /></div>

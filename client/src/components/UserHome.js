@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal,Badge } from "react-bootstrap";
 import "../styles/WorkerHome.css";
 import Header from "./Header";
 import AuthContext from "../context/AuthProvider";
@@ -71,7 +71,7 @@ const UserHome = () => {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          const unseenCount = data.filter((update) => !update.isSeen).length;
+          const unseenCount = data.filter((update) => !update.isSeen && update.isAccepted).length;
           setUnseenRequestCount(unseenCount);
           setUpdates(data);
         } else {
@@ -82,6 +82,8 @@ const UserHome = () => {
       }
     };
     fetchUpdates();
+    const interval = setInterval(fetchUpdates, 400); 
+    return () => clearInterval(interval);
   }, []);
 
   const handleNotificationClick = () => {
@@ -107,7 +109,7 @@ const UserHome = () => {
           return update;
         });
         setUpdates(updatedUpdates);
-        const unseenCount = updatedUpdates.filter((update) => !update.isSeen).length;
+        const unseenCount = updatedUpdates.filter((update) => !update.isSeen  && update.isAccepted).length;
         setUnseenRequestCount(unseenCount);
       } else {
         console.error("Error acknowledging update.");
@@ -128,9 +130,11 @@ const UserHome = () => {
         size="2x"
         style={{ float: "right", marginRight: "130px" }}
       />
-       {unseenRequestCount > 0 && (
-          <span className="notification-badge">{unseenRequestCount}</span>
-        )}
+      <Badge pill variant="danger"
+      onClick={handleNotificationClick}
+      style={{ float: "right", marginRight: "-10px" }}>
+      {unseenRequestCount > 0 && <span className="cart-count">{unseenRequestCount}</span>}
+      </Badge>
       
       <div className="sellers-home-container">
         <Logout />
@@ -144,31 +148,32 @@ const UserHome = () => {
           <Modal.Title>Updates</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {updates.map((update, index) => (
-            <div key={index}>
-              {update.isAccepted !== undefined ? (
-                update.isAccepted ? (
-                  <p>{update.workersName} has accepted your request and will contact you soon</p>
-                  
-                )  : (
-                  <p>{update.workersName} has rejected your request</p>
-                )
-              ) : null}
-               {!update.isSeen && ( 
-               <div>
-               <Button variant="info" onClick={() => acknowledgeUpdate(update._id)}>
-               OK
+  {updates.map((update, index) => (
+    <div key={index}>
+      {update.isAccepted !== undefined ? (
+        <div>
+          {update.isAccepted ? (
+            <p>{update.workersName} has accepted your request and will contact you soon</p>
+          ) : (
+            <p>{update.workersName} has rejected your request</p>
+          )}
+          {!update.isSeen && (
+            <div>
+              <Button variant="info" onClick={() => acknowledgeUpdate(update._id)}>
+                OK
               </Button>
-              </div>
-                )}
-                <hr /> 
             </div>
-          ))}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
+          )}
+          <hr/>
+        </div>
+      ) : null}  
+    </div>
+  ))}
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => setShowModal(false)}>
+        Close
+         </Button>
         </Modal.Footer>
       </Modal>
       <Footer />
