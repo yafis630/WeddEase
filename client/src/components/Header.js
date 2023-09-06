@@ -22,7 +22,7 @@ function Header() {
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" variant="dark">
-                <Navbar.Brand href="/" className="brand-logo">
+                <Navbar.Brand href="/" className="brand-logo text-shadow-pop-bl">
                     WeddEase
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

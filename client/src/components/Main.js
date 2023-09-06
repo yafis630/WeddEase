@@ -24,7 +24,7 @@ function Main() {
       <div className="body">
         
         <><Header /></>
-        <Container fluid className="background-image">
+        <Container fluid className="background-image scale-in-center">
                    
           {!flag && (
         <>

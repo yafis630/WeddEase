@@ -9,13 +9,13 @@ import Footer from './Footer';
 
 const CategoryButtons = () => {
   return (
-    <div className="back-img">
+    <div className="back-img ">
       <Header />
       <div className='content-container' >
          <h2 className="welcome-text">Welcome</h2>
           <h5>Please choose the service you want to avail</h5>
 
-          <div className="button-container">
+          <div className="button-container roll-in-left">
           
             <Link to="/ShoppingServices">
               <Card className="button-card">
