@@ -193,7 +193,7 @@ const WorkerHome = () => {
        icon={faBell}
        onClick={handleNotificationClick}
        size="2x"
-       style={{ float: "right", marginRight: "130px" }}
+       style={{ float: "right", marginRight: "140px" }}
 >
     </FontAwesomeIcon>
 
