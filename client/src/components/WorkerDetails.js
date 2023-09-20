@@ -50,7 +50,7 @@ const WorkerDetails = () => {
                     imagePath
                   ).substring(8)}`}
                   alt={`Image ${index}`}
-                  className="worker-image"
+                  className="worker-image-details"
                 />
               ))}
             </div>

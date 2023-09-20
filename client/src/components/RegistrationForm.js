@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import {  Route } from "react-router-dom";
+import {  Route, Link } from "react-router-dom";
 import {
   Container,
   Form,
@@ -225,7 +225,7 @@ try{
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
                 checked={agreedToTerms}
               />{" "}
-              I agree to the terms and conditions
+               I agree to the <Link to="/terms">Terms and Conditions</Link>
             </Label>
           </FormGroup>
         <Button color="primary" block className="submit-button">

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import '../styles/CategoryButtons.css'; // Import the CSS file for custom styling
+import '../styles/CategoryButtons.css'; 
 import ShoppingButton from '../assets/shopping.png';
 import HiringButton from '../assets/hiring.png';
 import Footer from './Footer';

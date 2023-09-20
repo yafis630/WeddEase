@@ -328,7 +328,7 @@ const WorkerRegistration = () => {
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
                 checked={agreedToTerms}
               />{" "}
-              I agree to the terms and conditions
+               I agree to the <Link to="/terms">Terms and Conditions</Link>
             </Label>
           </FormGroup>
           <Button color="primary" block className="submit-button">

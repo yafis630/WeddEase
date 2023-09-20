@@ -150,7 +150,7 @@ const WorkerProfile = () => {
               </Link>
 
               <Button color="primary" size="lg" variant="info" onClick={() => Handle(worker)}>
-                Hire
+                Hire/Book
               </Button>
             </div>
           ))

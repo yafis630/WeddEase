@@ -93,7 +93,7 @@ const CartPage = () => {
                   <div className="cart-item-details">
                     <h3>{item.name}</h3>
                     <div >
-                      <span>₹{item.price}</span><br /> {/* Display price in Indian Rupees */}
+                      <span>₹{item.price}</span><br /> 
                       <span>Qty: {item.qty}</span>
                     </div>
                     <br />
@@ -106,7 +106,7 @@ const CartPage = () => {
             </div>
             <div className="cart-total">
               <span>Total:</span>
-              <span>₹{totalPrice}</span> {/* Display total price in Indian Rupees */}
+              <span>₹{totalPrice}</span> 
             </div>
             <Button className="buy-now-button" color="danger" onClick={handleBuyNow}>
               Buy Now
